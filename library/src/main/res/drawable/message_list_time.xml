@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shape xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <solid android:color="@color/message_list_time_bg_color" />
+
+    <corners android:radius="@dimen/message_list_time_border_radius" />
+
+    <padding
+        android:top="@dimen/message_list_time_padding_vertical"
+        android:bottom="@dimen/message_list_time_padding_vertical"
+        android:left="@dimen/message_list_time_padding_horizontal"
+        android:right="@dimen/message_list_time_padding_horizontal"/>
+
+</shape>

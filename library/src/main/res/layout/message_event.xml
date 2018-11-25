@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:tools="http://schemas.android.com/tools"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:gravity="center"
+              android:paddingLeft="@dimen/message_list_message_padding_horizontal"
+              android:paddingRight="@dimen/message_list_message_padding_horizontal">
+
+    <TextView
+        android:id="@+id/eventView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/message_list_event_text_size"
+        android:lineSpacingExtra="@dimen/message_list_event_line_spacing"
+        android:textColor="@color/message_list_event_text_color"
+        android:textColorLink="@color/message_list_link_text_color"
+        android:background="@drawable/message_list_event"
+        tools:text="XX 邀请 123、456、789、ABC、DEF 加入了群聊"/>
+
+</LinearLayout>

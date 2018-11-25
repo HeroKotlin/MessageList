@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- 列表背景色 -->
+    <color name="message_list_bg_color">#f0f0f0</color>
+
+    <!-- 头像 -->
+    <color name="message_list_user_avatar_border_color">#CCC</color>
+
+    <!-- 昵称 -->
+    <color name="message_list_left_user_name_text_color">#999</color>
+    <color name="message_list_right_user_name_text_color">#999</color>
+
+    <!-- 语音消息的时长 -->
+    <color name="message_list_left_audio_message_duration_text_color">#AAA</color>
+    <color name="message_list_left_audio_message_unit_text_color">#AAA</color>
+
+    <color name="message_list_right_audio_message_duration_text_color">#AAA</color>
+    <color name="message_list_right_audio_message_unit_text_color">#AAA</color>
+
+    <!-- 视频消息的时长 -->
+    <color name="message_list_video_message_border_color">#88CCCCCC</color>
+    <color name="message_list_left_video_message_duration_text_color">#FFF</color>
+    <color name="message_list_left_video_message_duration_shadow_color">#BB000000</color>
+    <color name="message_list_right_video_message_duration_text_color">#FFF</color>
+    <color name="message_list_right_video_message_duration_shadow_color">#BB000000</color>
+
+    <!-- 文本消息 -->
+    <color name="message_list_left_text_message_text_color">#333</color>
+    <color name="message_list_right_text_message_text_color">#333</color>
+
+    <!-- 图片消息 -->
+    <color name="message_list_image_message_border_color">#88CCCCCC</color>
+
+    <!-- 事件消息 -->
+    <color name="message_list_event_bg_color">#C6C6C6</color>
+    <color name="message_list_event_text_color">#FFF</color>
+
+    <!-- 时间 -->
+    <color name="message_list_time_bg_color">#20000000</color>
+    <color name="message_list_time_text_color">#FFF</color>
+
+    <!-- 文本链接 -->
+    <color name="message_list_link_text_color">#197BDC</color>
+
+    <!-- spinner -->
+    <color name="message_list_spinner_color">#999</color>
+
+    <!-- 名片消息 -->
+    <color name="message_list_left_card_message_title_text_color">#333</color>
+    <color name="message_list_left_card_message_desc_text_color">#999</color>
+    <color name="message_list_left_card_message_type_text_color">#999</color>
+    <color name="message_list_left_card_message_divider_color">#ccc</color>
+
+    <color name="message_list_right_card_message_title_text_color">#333</color>
+    <color name="message_list_right_card_message_desc_text_color">#999</color>
+    <color name="message_list_right_card_message_type_text_color">#999</color>
+    <color name="message_list_right_card_message_divider_color">#ccc</color>
+
+    <!-- 文章消息 -->
+    <color name="message_list_left_post_message_title_text_color">#333</color>
+    <color name="message_list_left_post_message_desc_text_color">#999</color>
+    <color name="message_list_left_post_message_brand_text_color">#999</color>
+    <color name="message_list_left_post_message_divider_color">#ccc</color>
+
+    <color name="message_list_right_post_message_title_text_color">#333</color>
+    <color name="message_list_right_post_message_desc_text_color">#999</color>
+    <color name="message_list_right_post_message_brand_text_color">#999</color>
+    <color name="message_list_right_post_message_divider_color">#ccc</color>
+
+</resources>

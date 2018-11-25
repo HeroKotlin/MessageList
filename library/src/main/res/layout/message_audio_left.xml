@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:tools="http://schemas.android.com/tools"
+                xmlns:app="http://schemas.android.com/apk/res-auto"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingLeft="@dimen/message_list_message_padding_horizontal"
+                android:paddingRight="@dimen/message_list_message_padding_horizontal">
+
+    <TextView
+        android:id="@+id/timeView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="@dimen/message_list_message_margin_top"
+        tools:text="12:12"
+        android:textSize="@dimen/message_list_time_text_size"
+        android:textColor="@color/message_list_time_text_color"
+        android:background="@drawable/message_list_time"/>
+
+    <com.github.herokotlin.messagelist.view.RoundImageView
+        android:id="@+id/avatarView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/timeView"
+        android:layout_alignParentLeft="true"/>
+
+    <TextView
+        android:id="@+id/nameView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/timeView"
+        android:layout_toRightOf="@id/avatarView"
+        android:layout_marginLeft="@dimen/message_list_left_user_name_margin_left"
+        android:layout_marginBottom="@dimen/message_list_left_user_name_margin_bottom"
+        android:maxLines="1"
+        android:textSize="@dimen/message_list_left_user_name_text_size"
+        android:textColor="@color/message_list_left_user_name_text_color"
+        tools:text="musicode"/>
+
+    <RelativeLayout
+        android:id="@+id/bubbleView"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/message_list_left_audio_message_bubble_height"
+        android:layout_below="@id/nameView"
+        android:layout_toRightOf="@id/avatarView"
+        android:layout_marginLeft="@dimen/message_list_left_audio_message_margin_left"
+        android:paddingTop="@dimen/message_list_zero"
+        android:paddingBottom="@dimen/message_list_zero"
+        android:paddingLeft="@dimen/message_list_left_audio_message_wave_margin_left"
+        android:paddingRight="@dimen/message_list_zero"
+        android:background="@drawable/message_list_bubble_left_state">
+
+        <ImageView
+            android:id="@+id/animationView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_alignParentLeft="true"
+            android:src="@drawable/message_list_wave_left"/>
+
+        <com.github.ybq.android.spinkit.SpinKitView
+            android:id="@+id/loadingView"
+            android:layout_width="@dimen/message_list_audio_message_loading_size"
+            android:layout_height="@dimen/message_list_audio_message_loading_size"
+            android:layout_centerVertical="true"
+            android:layout_alignParentLeft="true"
+            android:visibility="gone"
+            app:SpinKit_Color="@color/message_list_spinner_color"
+            style="@style/SpinKitView.FadingCircle"/>
+
+    </RelativeLayout>
+
+
+    <TextView
+        android:id="@+id/durationView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@id/bubbleView"
+        android:layout_alignBottom="@id/bubbleView"
+        android:layout_marginLeft="@dimen/message_list_audio_message_duration_spacing"
+        android:layout_marginBottom="@dimen/message_list_audio_message_duration_bottom"
+        tools:text="10"
+        android:textSize="@dimen/message_list_left_audio_message_duration_text_size"
+        android:textColor="@color/message_list_left_audio_message_duration_text_color"/>
+
+    <TextView
+        android:id="@+id/unitView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@id/durationView"
+        android:layout_alignBottom="@id/bubbleView"
+        android:layout_marginLeft="@dimen/message_list_audio_message_unit_spacing"
+        android:layout_marginBottom="@dimen/message_list_audio_message_unit_bottom"
+        android:text="''"
+        android:textSize="@dimen/message_list_left_audio_message_unit_text_size"
+        android:textColor="@color/message_list_left_audio_message_unit_text_color"/>
+
+    <com.github.ybq.android.spinkit.SpinKitView
+        android:id="@+id/spinnerView"
+        android:layout_width="@dimen/message_list_spinner_size"
+        android:layout_height="@dimen/message_list_spinner_size"
+        android:layout_toRightOf="@id/bubbleView"
+        android:layout_alignBottom="@id/bubbleView"
+        android:layout_marginLeft="@dimen/message_list_left_status_view_margin_left"
+        android:layout_marginBottom="@dimen/message_list_left_status_view_margin_bottom"
+        app:SpinKit_Color="@color/message_list_spinner_color"
+        style="@style/SpinKitView.FadingCircle"/>
+
+    <ImageView
+        android:id="@+id/failureView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@id/bubbleView"
+        android:layout_alignBottom="@id/bubbleView"
+        android:layout_marginLeft="@dimen/message_list_left_status_view_margin_left"
+        android:layout_marginBottom="@dimen/message_list_left_status_view_margin_bottom"
+        android:background="@drawable/message_list_failure"/>
+
+</RelativeLayout>
