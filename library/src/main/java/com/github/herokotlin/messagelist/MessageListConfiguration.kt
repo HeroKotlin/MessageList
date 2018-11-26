@@ -1,7 +1,10 @@
 package com.github.herokotlin.messagelist
 
 import android.content.Context
+import android.graphics.Color
 import android.support.v4.content.ContextCompat
+import android.text.Spannable
+import android.text.SpannableString
 import android.widget.ImageView
 import android.widget.TextView
 import com.github.herokotlin.messagelist.model.Message
@@ -143,16 +146,15 @@ abstract class MessageListConfiguration(val context: Context) {
      */
     var postMessageThumbnailBorderRadius = 0f
 
+    /**
+     * 文本消息的链接颜色
+     */
+    var textMessageLinkColor = Color.RED
 
     /**
      * 格式化文本内容
      */
-    abstract fun formatText(textView: TextView, text: CharSequence)
-
-    /**
-     * 格式化消息内容
-     */
-    abstract fun formatEvent(textView: TextView, event: CharSequence)
+    abstract fun formatText(textView: TextView, text: SpannableString)
 
     /**
      * 是否是显示在右边的消息

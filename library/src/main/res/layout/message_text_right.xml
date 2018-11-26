@@ -52,10 +52,10 @@
         android:paddingRight="@dimen/message_list_right_text_message_padding_right"
         android:textIsSelectable="true"
         android:textColor="@color/message_list_right_text_message_text_color"
-        android:textColorLink="@color/message_list_link_text_color"
         android:textSize="@dimen/message_list_right_text_message_text_size"
         android:lineSpacingExtra="@dimen/message_list_right_text_message_line_spacing"
         tools:text="this is a test, ahahahahahahahahahahahhahahhahaha"
+        android:textColorHighlight="@color/message_list_text_message_tint_color"
         android:background="@drawable/message_list_bubble_active_normal"/>
 
     <com.github.ybq.android.spinkit.SpinKitView

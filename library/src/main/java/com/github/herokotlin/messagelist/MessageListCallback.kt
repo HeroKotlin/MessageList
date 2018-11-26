@@ -28,6 +28,10 @@ interface MessageListCallback {
 
     }
 
+    fun onLinkClick(link: String) {
+
+    }
+
     fun onLoadMore() {
 
     }

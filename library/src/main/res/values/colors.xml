@@ -25,6 +25,7 @@
     <color name="message_list_right_video_message_duration_shadow_color">#BB000000</color>
 
     <!-- 文本消息 -->
+    <color name="message_list_text_message_tint_color">#FFDBC0</color>
     <color name="message_list_left_text_message_text_color">#333</color>
     <color name="message_list_right_text_message_text_color">#333</color>
 
@@ -38,9 +39,6 @@
     <!-- 时间 -->
     <color name="message_list_time_bg_color">#20000000</color>
     <color name="message_list_time_text_color">#FFF</color>
-
-    <!-- 文本链接 -->
-    <color name="message_list_link_text_color">#197BDC</color>
 
     <!-- spinner -->
     <color name="message_list_spinner_color">#999</color>

@@ -1,14 +1,12 @@
 package com.github.herokotlin.messagelist.holder
 
 import android.view.View
-import com.github.herokotlin.messagelist.MessageListCallback
-import com.github.herokotlin.messagelist.MessageListConfiguration
 import com.github.herokotlin.messagelist.model.PostMessage
 import kotlinx.android.synthetic.main.message_post_left.view.*
 
 class PostMessageViewHolder(view: View, val isRightMessage: Boolean): MessageViewHolder(view) {
 
-    override fun create(configuration: MessageListConfiguration, callback: MessageListCallback) {
+    override fun create() {
         with (itemView) {
 
             val isUserNameVisible = configuration.leftUserNameVisible && !isRightMessage || configuration.rightUserNameVisible && isRightMessage
@@ -61,7 +59,7 @@ class PostMessageViewHolder(view: View, val isRightMessage: Boolean): MessageVie
 
     }
 
-    override fun update(configuration: MessageListConfiguration) {
+    override fun update() {
 
         val postMessage = message as PostMessage
 
@@ -70,8 +68,8 @@ class PostMessageViewHolder(view: View, val isRightMessage: Boolean): MessageVie
             configuration.loadImage(avatarView, postMessage.user.avatar)
             configuration.loadImage(thumbnailView, postMessage.thumbnail)
 
-            updateImageSize(configuration, avatarView, configuration.userAvatarWidth, configuration.userAvatarHeight, configuration.userAvatarBorderWidth, configuration.userAvatarBorderColor, configuration.userAvatarBorderRadius)
-            updateImageSize(configuration, thumbnailView, configuration.postMessageThumbnailWidth, configuration.postMessageThumbnailHeight, 0f, 0, configuration.postMessageThumbnailBorderRadius)
+            updateImageSize(avatarView, configuration.userAvatarWidth, configuration.userAvatarHeight, configuration.userAvatarBorderWidth, configuration.userAvatarBorderColor, configuration.userAvatarBorderRadius)
+            updateImageSize(thumbnailView, configuration.postMessageThumbnailWidth, configuration.postMessageThumbnailHeight, 0f, 0, configuration.postMessageThumbnailBorderRadius)
 
             nameView.text = postMessage.user.name
 

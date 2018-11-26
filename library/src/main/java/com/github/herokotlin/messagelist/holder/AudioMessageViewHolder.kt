@@ -2,8 +2,6 @@ package com.github.herokotlin.messagelist.holder
 
 import android.graphics.drawable.AnimationDrawable
 import android.view.View
-import com.github.herokotlin.messagelist.MessageListCallback
-import com.github.herokotlin.messagelist.MessageListConfiguration
 import com.github.herokotlin.messagelist.enum.MessageStatus
 import com.github.herokotlin.messagelist.model.AudioMessage
 import com.github.herokotlin.messagelist.util.AudioPlayer
@@ -14,7 +12,7 @@ class AudioMessageViewHolder(view: View, val isRightMessage: Boolean): MessageVi
 
     var url = ""
 
-    override fun create(configuration: MessageListConfiguration, callback: MessageListCallback) {
+    override fun create() {
         with (itemView) {
 
             val isUserNameVisible = configuration.leftUserNameVisible && !isRightMessage || configuration.rightUserNameVisible && isRightMessage
@@ -90,7 +88,7 @@ class AudioMessageViewHolder(view: View, val isRightMessage: Boolean): MessageVi
 
     }
 
-    override fun update(configuration: MessageListConfiguration) {
+    override fun update() {
 
         val audioMessage = message as AudioMessage
 
@@ -98,11 +96,11 @@ class AudioMessageViewHolder(view: View, val isRightMessage: Boolean): MessageVi
 
             configuration.loadImage(avatarView, audioMessage.user.avatar)
 
-            updateImageSize(configuration, avatarView, configuration.userAvatarWidth, configuration.userAvatarHeight, configuration.userAvatarBorderWidth, configuration.userAvatarBorderColor, configuration.userAvatarBorderRadius)
+            updateImageSize(avatarView, configuration.userAvatarWidth, configuration.userAvatarHeight, configuration.userAvatarBorderWidth, configuration.userAvatarBorderColor, configuration.userAvatarBorderRadius)
 
             nameView.text = audioMessage.user.name
 
-            updateContentSize(configuration, audioMessage.duration)
+            updateContentSize(audioMessage.duration)
 
             if (audioMessage.status == MessageStatus.SEND_SUCCESS) {
                 durationView.text = audioMessage.duration.toString()
@@ -129,11 +127,11 @@ class AudioMessageViewHolder(view: View, val isRightMessage: Boolean): MessageVi
         }
     }
 
-    private fun updateContentSize(configuration: MessageListConfiguration, duration: Int) {
+    private fun updateContentSize(duration: Int) {
 
         val durationRatio = duration.toFloat() / configuration.audioMessageMaxDuration
 
-        val maxWidth = configuration.audioMessageMaxRatio * getContentMaxWidth(configuration)
+        val maxWidth = configuration.audioMessageMaxRatio * getContentMaxWidth()
         val minWidth = dp2px(configuration.audioMessageBubbleMinWidth)
 
         var bubbleWidth = maxWidth * durationRatio

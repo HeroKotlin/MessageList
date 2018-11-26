@@ -1,14 +1,13 @@
 package com.github.herokotlin.messagelist.holder
 
+import android.text.method.LinkMovementMethod
 import android.view.View
-import com.github.herokotlin.messagelist.MessageListCallback
-import com.github.herokotlin.messagelist.MessageListConfiguration
 import com.github.herokotlin.messagelist.model.TextMessage
 import kotlinx.android.synthetic.main.message_text_left.view.*
 
 class TextMessageViewHolder(view: View, val isRightMessage: Boolean): MessageViewHolder(view) {
 
-    override fun create(configuration: MessageListConfiguration, callback: MessageListCallback) {
+    override fun create() {
         with (itemView) {
 
             val isUserNameVisible = configuration.leftUserNameVisible && !isRightMessage || configuration.rightUserNameVisible && isRightMessage
@@ -23,6 +22,11 @@ class TextMessageViewHolder(view: View, val isRightMessage: Boolean): MessageVie
             else {
                 nameView.visibility = View.GONE
             }
+
+            textView.maxWidth = getContentMaxWidth().toInt()
+
+            // 一定要加这句，否则 LinkSpan 的 onClick 不执行
+            textView.movementMethod = LinkMovementMethod.getInstance()
 
             setOnClickListener {
                 message?.let {
@@ -64,15 +68,16 @@ class TextMessageViewHolder(view: View, val isRightMessage: Boolean): MessageVie
         }
     }
 
-    override fun update(configuration: MessageListConfiguration) {
+    override fun update() {
         val textMessage = message as TextMessage
         with (itemView) {
 
             configuration.loadImage(avatarView, textMessage.user.avatar)
-            updateImageSize(configuration, avatarView, configuration.userAvatarWidth, configuration.userAvatarHeight, configuration.userAvatarBorderWidth, configuration.userAvatarBorderColor, configuration.userAvatarBorderRadius)
+            updateImageSize(avatarView, configuration.userAvatarWidth, configuration.userAvatarHeight, configuration.userAvatarBorderWidth, configuration.userAvatarBorderColor, configuration.userAvatarBorderRadius)
 
-            textView.maxWidth = getContentMaxWidth(configuration).toInt()
-            configuration.formatText(textView, textMessage.text)
+            val spannable = formatLinks(textMessage.text, configuration.textMessageLinkColor)
+            configuration.formatText(textView, spannable)
+            textView.text = spannable
 
             nameView.text = textMessage.user.name
 

@@ -1,14 +1,12 @@
 package com.github.herokotlin.messagelist.holder
 
 import android.view.View
-import com.github.herokotlin.messagelist.MessageListCallback
-import com.github.herokotlin.messagelist.MessageListConfiguration
 import com.github.herokotlin.messagelist.model.VideoMessage
 import kotlinx.android.synthetic.main.message_video_left.view.*
 
 class VideoMessageViewHolder(view: View, val isRightMessage: Boolean): MessageViewHolder(view) {
 
-    override fun create(configuration: MessageListConfiguration, callback: MessageListCallback) {
+    override fun create() {
         with (itemView) {
 
             val isUserNameVisible = configuration.leftUserNameVisible && !isRightMessage || configuration.rightUserNameVisible && isRightMessage
@@ -64,14 +62,14 @@ class VideoMessageViewHolder(view: View, val isRightMessage: Boolean): MessageVi
         }
     }
 
-    override fun update(configuration: MessageListConfiguration) {
+    override fun update() {
 
         val videoMessage = message as VideoMessage
 
         with (itemView) {
 
             configuration.loadImage(avatarView, videoMessage.user.avatar)
-            updateImageSize(configuration, avatarView, configuration.userAvatarWidth, configuration.userAvatarHeight, configuration.userAvatarBorderWidth, configuration.userAvatarBorderColor, configuration.userAvatarBorderRadius)
+            updateImageSize(avatarView, configuration.userAvatarWidth, configuration.userAvatarHeight, configuration.userAvatarBorderWidth, configuration.userAvatarBorderColor, configuration.userAvatarBorderRadius)
 
             nameView.text = videoMessage.user.name
 
@@ -81,7 +79,7 @@ class VideoMessageViewHolder(view: View, val isRightMessage: Boolean): MessageVi
             showStatusView(spinnerView, failureView)
 
             configuration.loadImage(thumbnailView, videoMessage.thumbnail)
-            updateImageSize(configuration, thumbnailView, videoMessage.width, videoMessage.height, configuration.videoMessageBorderWidth, configuration.videoMessageBorderColor, configuration.videoMessageBorderRadius)
+            updateImageSize(thumbnailView, videoMessage.width, videoMessage.height, configuration.videoMessageBorderWidth, configuration.videoMessageBorderColor, configuration.videoMessageBorderRadius)
 
         }
     }

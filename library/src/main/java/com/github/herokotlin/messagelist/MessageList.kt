@@ -9,6 +9,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.widget.LinearLayout
 import com.github.herokotlin.messagelist.model.Message
+import com.github.herokotlin.messagelist.util.AudioPlayer
 import kotlinx.android.synthetic.main.message_list.view.*
 
 class MessageList : LinearLayout {
@@ -44,6 +45,11 @@ class MessageList : LinearLayout {
         init()
     }
 
+    override fun onDetachedFromWindow() {
+        super.onDetachedFromWindow()
+        AudioPlayer.stop()
+    }
+
     private fun init() {
         LayoutInflater.from(context).inflate(R.layout.message_list, this)
 
@@ -65,6 +71,11 @@ class MessageList : LinearLayout {
     fun init(configuration: MessageListConfiguration) {
         adapter = MessageListAdapter(configuration, callback)
         recyclerView.adapter = adapter
+    }
+
+    fun loadMoreComplete(hasMoreMessage: Boolean) {
+        this.hasMoreMessage = hasMoreMessage
+        refreshLayout.isRefreshing = false
     }
 
     fun scrollToBottom(animated: Boolean) {
@@ -103,11 +114,6 @@ class MessageList : LinearLayout {
 
     fun update(message: Message) {
         adapter.update(message)
-    }
-
-    fun loadMoreComplete(hasMoreMessage: Boolean) {
-        this.hasMoreMessage = hasMoreMessage
-        refreshLayout.isRefreshing = false
     }
 
     inner class MessageDecoration : RecyclerView.ItemDecoration() {
