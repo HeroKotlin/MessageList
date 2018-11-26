@@ -149,7 +149,7 @@ abstract class MessageListConfiguration(val context: Context) {
     /**
      * 文本消息的链接颜色
      */
-    var textMessageLinkColor = Color.RED
+    var textMessageLinkColor = Color.parseColor("#FF7A04")
 
     /**
      * 格式化文本内容

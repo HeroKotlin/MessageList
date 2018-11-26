@@ -1,6 +1,5 @@
 package com.github.herokotlin.messagelist.holder
 
-import android.text.method.LinkMovementMethod
 import android.view.View
 import com.github.herokotlin.messagelist.model.TextMessage
 import kotlinx.android.synthetic.main.message_text_left.view.*
@@ -25,8 +24,7 @@ class TextMessageViewHolder(view: View, val isRightMessage: Boolean): MessageVie
 
             textView.maxWidth = getContentMaxWidth().toInt()
 
-            // 一定要加这句，否则 LinkSpan 的 onClick 不执行
-            textView.movementMethod = LinkMovementMethod.getInstance()
+            setLinkClickListener(textView)
 
             setOnClickListener {
                 message?.let {
