@@ -13,6 +13,7 @@
         android:layout_height="wrap_content"
         android:textSize="@dimen/message_list_event_text_size"
         android:lineSpacingExtra="@dimen/message_list_event_line_spacing"
+        android:justificationMode="inter_word"
         android:textColor="@color/message_list_event_text_color"
         android:background="@drawable/message_list_event"
         tools:text="XX 邀请 123、456、789、ABC、DEF 加入了群聊"/>
