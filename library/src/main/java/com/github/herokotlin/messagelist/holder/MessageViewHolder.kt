@@ -3,10 +3,8 @@ package com.github.herokotlin.messagelist.holder
 import android.support.v7.widget.RecyclerView
 import android.text.SpannableString
 import android.text.Spanned
-import android.text.style.ClickableSpan
 import android.text.style.ForegroundColorSpan
 import android.util.TypedValue
-import android.view.MotionEvent
 import android.view.View
 import android.widget.TextView
 import com.github.herokotlin.messagelist.MessageListCallback
@@ -83,41 +81,6 @@ abstract class MessageViewHolder(view: View): RecyclerView.ViewHolder(view) {
 
     protected fun dp2px(value: Int): Int {
         return TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, value.toFloat(), itemView.resources.displayMetrics).toInt()
-    }
-
-    protected fun setLinkClickListener(textView: TextView) {
-
-        textView.setOnTouchListener { view, event ->
-
-            val action = event.action
-
-            val text = textView.text
-
-            if (text is SpannableString && action == MotionEvent.ACTION_UP) {
-
-                var x = event.x.toInt()
-                var y = event.y.toInt()
-
-                x -= textView.totalPaddingLeft
-                y -= textView.totalPaddingTop
-
-                x += textView.scrollX
-                y += textView.scrollY
-
-                val layout = textView.layout
-                val line = layout.getLineForVertical(y)
-                val off = layout.getOffsetForHorizontal(line, x.toFloat())
-
-                var link = text.getSpans(off, off, ClickableSpan::class.java)
-                if (link.isNotEmpty()) {
-                    link[0].onClick(textView)
-                    true
-                }
-            }
-
-            false
-        }
-
     }
 
     protected fun formatLinks(text: String, linkColor: Int): SpannableString {

@@ -10,7 +10,7 @@ object linkMovementMethod: BaseMovementMethod() {
 
     private var linkSpan: LinkSpan? = null
 
-    private fun getLinkSpan(widget: TextView, text: Spannable, event: MotionEvent): LinkSpan? {
+    fun getLinkSpan(widget: TextView, text: Spannable, event: MotionEvent): LinkSpan? {
 
         var x = event.x.toInt()
         var y = event.y.toInt()

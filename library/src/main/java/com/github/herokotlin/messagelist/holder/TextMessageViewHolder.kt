@@ -1,7 +1,10 @@
 package com.github.herokotlin.messagelist.holder
 
+import android.text.Spannable
+import android.view.MotionEvent
 import android.view.View
 import com.github.herokotlin.messagelist.model.TextMessage
+import com.github.herokotlin.messagelist.view.linkMovementMethod
 import kotlinx.android.synthetic.main.message_text_left.view.*
 
 class TextMessageViewHolder(view: View, val isRightMessage: Boolean): MessageViewHolder(view) {
@@ -24,8 +27,6 @@ class TextMessageViewHolder(view: View, val isRightMessage: Boolean): MessageVie
 
             textView.maxWidth = getContentMaxWidth().toInt()
 
-            setLinkClickListener(textView)
-
             setOnClickListener {
                 message?.let {
                     callback.onListClick()
@@ -42,6 +43,20 @@ class TextMessageViewHolder(view: View, val isRightMessage: Boolean): MessageVie
                 message?.let {
                     callback.onUserNameClick(it)
                 }
+            }
+
+            textView.setOnTouchListener { _, event ->
+
+                val text = textView.text
+
+                if (text is Spannable && event.action == MotionEvent.ACTION_UP) {
+                    val linkSpan = linkMovementMethod.getLinkSpan(textView, text, event)
+                    if (linkSpan != null) {
+                        linkSpan.onClick(textView)
+                    }
+                }
+
+                false
             }
 
             textView.setOnClickListener {

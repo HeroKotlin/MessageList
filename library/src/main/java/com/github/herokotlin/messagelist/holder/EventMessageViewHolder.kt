@@ -2,6 +2,7 @@ package com.github.herokotlin.messagelist.holder
 
 import android.view.View
 import com.github.herokotlin.messagelist.model.EventMessage
+import com.github.herokotlin.messagelist.view.linkMovementMethod
 import kotlinx.android.synthetic.main.message_event.view.*
 
 class EventMessageViewHolder(view: View): MessageViewHolder(view) {
@@ -11,7 +12,7 @@ class EventMessageViewHolder(view: View): MessageViewHolder(view) {
 
             eventView.maxWidth = getContentMaxWidth().toInt()
 
-            setLinkClickListener(eventView)
+            eventView.movementMethod = linkMovementMethod
 
             setOnClickListener {
                 message?.let {
