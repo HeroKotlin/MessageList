@@ -14,10 +14,10 @@
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="@dimen/message_list_message_margin_top"
-        tools:text="12:12"
         android:textSize="@dimen/message_list_time_text_size"
         android:textColor="@color/message_list_time_text_color"
-        android:background="@drawable/message_list_time"/>
+        android:background="@drawable/message_list_time"
+        tools:text="12:12"/>
 
     <com.github.herokotlin.messagelist.view.RoundImageView
         android:id="@+id/avatarView"
