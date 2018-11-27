@@ -19,7 +19,7 @@ import java.util.regex.Pattern
 abstract class MessageViewHolder(view: View): RecyclerView.ViewHolder(view) {
 
     companion object {
-        val LINK_PATTERN = Pattern.compile("\\[\\w+:[^]]+\\]")
+        private val LINK_PATTERN = Pattern.compile("\\[\\w+:[^]]+\\]")
     }
 
     private var isReady = false
