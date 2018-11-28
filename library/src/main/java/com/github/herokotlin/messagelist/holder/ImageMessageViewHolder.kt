@@ -13,6 +13,7 @@ class ImageMessageViewHolder(view: View, val isRightMessage: Boolean): MessageVi
             val isUserNameVisible = configuration.leftUserNameVisible && !isRightMessage || configuration.rightUserNameVisible && isRightMessage
 
             if (isUserNameVisible) {
+                nameView.maxWidth = getContentMaxWidth().toInt()
                 nameView.setOnClickListener {
                     message?.let {
                         callback.onUserNameClick(it)

@@ -12,6 +12,7 @@ class CardMessageViewHolder(view: View, val isRightMessage: Boolean): MessageVie
             val isUserNameVisible = configuration.leftUserNameVisible && !isRightMessage || configuration.rightUserNameVisible && isRightMessage
 
             if (isUserNameVisible) {
+                nameView.maxWidth = getContentMaxWidth().toInt()
                 nameView.setOnClickListener {
                     message?.let {
                         callback.onUserNameClick(it)

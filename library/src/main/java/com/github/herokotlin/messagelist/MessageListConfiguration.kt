@@ -44,7 +44,7 @@ abstract class MessageListConfiguration(val context: Context) {
     /**
      * 左侧用户名称是否显示
      */
-    var leftUserNameVisible = false
+    var leftUserNameVisible = true
 
     /**
      * 左侧用户名称与头像的距离
@@ -54,7 +54,7 @@ abstract class MessageListConfiguration(val context: Context) {
     /**
      * 右侧用户名称是否显示
      */
-    var rightUserNameVisible = false
+    var rightUserNameVisible = true
 
     /**
      * 右侧用户名称与头像的距离

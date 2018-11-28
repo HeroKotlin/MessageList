@@ -12,9 +12,11 @@ class TextMessageViewHolder(view: View, val isRightMessage: Boolean): MessageVie
     override fun create() {
         with (itemView) {
 
+            val contentMaxWidth = getContentMaxWidth().toInt()
             val isUserNameVisible = configuration.leftUserNameVisible && !isRightMessage || configuration.rightUserNameVisible && isRightMessage
 
             if (isUserNameVisible) {
+                nameView.maxWidth = contentMaxWidth
                 nameView.setOnClickListener {
                     message?.let {
                         callback.onUserNameClick(it)
@@ -25,7 +27,7 @@ class TextMessageViewHolder(view: View, val isRightMessage: Boolean): MessageVie
                 nameView.visibility = View.GONE
             }
 
-            textView.maxWidth = getContentMaxWidth().toInt()
+            textView.maxWidth = contentMaxWidth
 
             setOnClickListener {
                 message?.let {

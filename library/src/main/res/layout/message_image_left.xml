@@ -34,7 +34,9 @@
         android:layout_toRightOf="@id/avatarView"
         android:layout_marginLeft="@dimen/message_list_left_user_name_margin_left"
         android:layout_marginBottom="@dimen/message_list_left_user_name_margin_bottom"
+        android:gravity="left"
         android:maxLines="1"
+        android:ellipsize="end"
         android:textSize="@dimen/message_list_left_user_name_text_size"
         android:textColor="@color/message_list_left_user_name_text_color"
         tools:text="musicode"/>
