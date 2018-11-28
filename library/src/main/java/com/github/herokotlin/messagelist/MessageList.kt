@@ -2,6 +2,8 @@ package com.github.herokotlin.messagelist
 
 import android.content.Context
 import android.graphics.Rect
+import android.hardware.SensorManager
+import android.media.AudioManager
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.util.AttributeSet
@@ -47,7 +49,7 @@ class MessageList : LinearLayout {
 
     override fun onDetachedFromWindow() {
         super.onDetachedFromWindow()
-        AudioPlayer.stop()
+        AudioPlayer.destroy()
     }
 
     private fun init() {
@@ -66,6 +68,11 @@ class MessageList : LinearLayout {
         }
 
         hasMoreMessage = false
+
+        val audioManager = context.getSystemService(Context.AUDIO_SERVICE) as AudioManager
+        val sensorManager = context.getSystemService(Context.SENSOR_SERVICE) as SensorManager
+
+        AudioPlayer.init(audioManager, sensorManager)
     }
 
     fun init(configuration: MessageListConfiguration) {
