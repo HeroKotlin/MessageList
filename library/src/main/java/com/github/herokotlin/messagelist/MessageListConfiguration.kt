@@ -147,9 +147,9 @@ abstract class MessageListConfiguration(val context: Context) {
     var postMessageThumbnailBorderRadius = 0f
 
     /**
-     * 文本消息的链接颜色
+     * 链接颜色
      */
-    var textMessageLinkColor = Color.parseColor("#FF7A04")
+    var linkTextColor = Color.parseColor("#1690E5")
 
     /**
      * 格式化文本内容

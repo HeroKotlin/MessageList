@@ -27,7 +27,7 @@ class EventMessageViewHolder(view: View): MessageViewHolder(view) {
         val eventMessage = message as EventMessage
         with (itemView) {
 
-            val spannable = formatLinks(eventMessage.event, configuration.textMessageLinkColor)
+            val spannable = formatLinks(eventMessage.event, configuration.linkTextColor)
             configuration.formatText(eventView, spannable)
             eventView.text = spannable
 

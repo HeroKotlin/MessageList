@@ -90,7 +90,7 @@ class TextMessageViewHolder(view: View, val isRightMessage: Boolean): MessageVie
             configuration.loadImage(avatarView, textMessage.user.avatar)
             updateImageSize(avatarView, configuration.userAvatarWidth, configuration.userAvatarHeight, configuration.userAvatarBorderWidth, configuration.userAvatarBorderColor, configuration.userAvatarBorderRadius)
 
-            val spannable = formatLinks(textMessage.text, configuration.textMessageLinkColor)
+            val spannable = formatLinks(textMessage.text, configuration.linkTextColor)
             configuration.formatText(textView, spannable)
             textView.text = spannable
 
