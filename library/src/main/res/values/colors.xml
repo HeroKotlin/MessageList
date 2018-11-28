@@ -31,7 +31,7 @@
     <color name="message_list_image_message_border_color">#88CCCCCC</color>
 
     <!-- 事件消息 -->
-    <color name="message_list_event_bg_color">#C6C6C6</color>
+    <color name="message_list_event_bg_color">#20000000</color>
     <color name="message_list_event_text_color">#FFF</color>
 
     <!-- 时间 -->
