@@ -8,6 +8,7 @@ import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.util.AttributeSet
 import android.view.LayoutInflater
+import android.view.MotionEvent
 import android.view.View
 import android.widget.LinearLayout
 import com.github.herokotlin.messagelist.model.Message
@@ -60,8 +61,11 @@ class MessageList : LinearLayout {
             MessageDecoration()
         )
 
-        setOnClickListener {
-            callback.onListClick()
+        recyclerView.setOnTouchListener { _, event ->
+            if (event.actionMasked == MotionEvent.ACTION_UP) {
+                callback.onListClick()
+            }
+            false
         }
         refreshLayout.setOnRefreshListener {
             callback.onLoadMore()
@@ -86,12 +90,13 @@ class MessageList : LinearLayout {
     }
 
     fun scrollToBottom(animated: Boolean) {
-        val position = recyclerView.adapter.itemCount - 1
-        if (animated) {
-            recyclerView.smoothScrollToPosition(position)
-        }
-        else {
-            recyclerView.scrollToPosition(position)
+        val position = recyclerView.adapter.itemCount
+        if (position > 0) {
+            if (animated) {
+                recyclerView.smoothScrollToPosition(position)
+            } else {
+                recyclerView.scrollToPosition(position)
+            }
         }
     }
 

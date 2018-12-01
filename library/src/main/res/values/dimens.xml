@@ -39,6 +39,7 @@
 
 
 
+    <dimen name="message_list_left_text_message_min_width">50dp</dimen>
     <dimen name="message_list_left_text_message_margin_left">5dp</dimen>
     <dimen name="message_list_left_text_message_text_size">15sp</dimen>
     <dimen name="message_list_left_text_message_line_spacing">2dp</dimen>
@@ -47,6 +48,7 @@
     <dimen name="message_list_left_text_message_padding_top">10dp</dimen>
     <dimen name="message_list_left_text_message_padding_bottom">10dp</dimen>
 
+    <dimen name="message_list_right_text_message_min_width">50dp</dimen>
     <dimen name="message_list_right_text_message_margin_right">5dp</dimen>
     <dimen name="message_list_right_text_message_text_size">15sp</dimen>
     <dimen name="message_list_right_text_message_line_spacing">2dp</dimen>
