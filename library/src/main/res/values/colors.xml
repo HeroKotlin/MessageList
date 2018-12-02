@@ -44,12 +44,12 @@
     <!-- 名片消息 -->
     <color name="message_list_left_card_message_title_text_color">#333</color>
     <color name="message_list_left_card_message_desc_text_color">#999</color>
-    <color name="message_list_left_card_message_type_text_color">#999</color>
+    <color name="message_list_left_card_message_label_text_color">#999</color>
     <color name="message_list_left_card_message_divider_color">#ccc</color>
 
     <color name="message_list_right_card_message_title_text_color">#333</color>
     <color name="message_list_right_card_message_desc_text_color">#999</color>
-    <color name="message_list_right_card_message_type_text_color">#999</color>
+    <color name="message_list_right_card_message_label_text_color">#999</color>
     <color name="message_list_right_card_message_divider_color">#ccc</color>
 
     <!-- 文章消息 -->

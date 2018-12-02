@@ -10,6 +10,6 @@ data class PostMessage(
     var thumbnail: String,
     var title: String,
     var desc: String,
-    var brand: String,
+    var label: String,
     var link: String
 ): Message

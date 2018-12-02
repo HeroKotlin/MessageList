@@ -10,6 +10,6 @@ data class CardMessage(
     var thumbnail: String,
     var title: String,
     var desc: String,
-    var type: String,
+    var label: String,
     var link: String
 ): Message

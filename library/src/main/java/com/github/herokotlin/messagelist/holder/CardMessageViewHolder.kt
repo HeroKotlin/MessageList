@@ -76,7 +76,7 @@ class CardMessageViewHolder(view: View, val isRightMessage: Boolean): MessageVie
 
             titleView.text = cardMessage.title
             descView.text = cardMessage.desc
-            typeView.text = cardMessage.type
+            labelView.text = cardMessage.label
 
             showTimeView(timeView, cardMessage.time)
             showStatusView(spinnerView, failureView)

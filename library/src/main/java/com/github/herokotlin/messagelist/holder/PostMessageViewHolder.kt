@@ -76,7 +76,7 @@ class PostMessageViewHolder(view: View, val isRightMessage: Boolean): MessageVie
 
             titleView.text = postMessage.title
             descView.text = postMessage.desc
-            brandView.text = postMessage.brand
+            labelView.text = postMessage.label
 
             showTimeView(timeView, postMessage.time)
             showStatusView(spinnerView, failureView)

@@ -105,16 +105,16 @@
             android:background="@color/message_list_right_card_message_divider_color"/>
 
         <TextView
-            android:id="@+id/typeView"
+            android:id="@+id/labelView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/dividerView"
             android:layout_alignParentLeft="true"
-            android:layout_marginTop="@dimen/message_list_right_card_message_type_margin_top"
-            android:layout_marginBottom="@dimen/message_list_right_card_message_type_margin_bottom"
-            android:layout_marginLeft="@dimen/message_list_right_card_message_type_margin_left"
-            android:textSize="@dimen/message_list_right_card_message_type_text_size"
-            android:textColor="@color/message_list_right_card_message_type_text_color"
+            android:layout_marginTop="@dimen/message_list_right_card_message_label_margin_top"
+            android:layout_marginBottom="@dimen/message_list_right_card_message_label_margin_bottom"
+            android:layout_marginLeft="@dimen/message_list_right_card_message_label_margin_left"
+            android:textSize="@dimen/message_list_right_card_message_label_text_size"
+            android:textColor="@color/message_list_right_card_message_label_text_color"
             tools:text="musicode"/>
 
     </RelativeLayout>

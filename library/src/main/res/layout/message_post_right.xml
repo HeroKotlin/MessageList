@@ -108,7 +108,7 @@
             android:background="@color/message_list_right_post_message_divider_color"/>
 
         <TextView
-            android:id="@+id/brandView"
+            android:id="@+id/labelView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/dividerView"
