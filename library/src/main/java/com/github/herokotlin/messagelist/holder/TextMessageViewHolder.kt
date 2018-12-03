@@ -18,9 +18,7 @@ class TextMessageViewHolder(view: View, val isRightMessage: Boolean): MessageVie
             if (isUserNameVisible) {
                 nameView.maxWidth = contentMaxWidth
                 nameView.setOnClickListener {
-                    message?.let {
-                        callback.onUserNameClick(it)
-                    }
+                    callback.onUserNameClick(message)
                 }
             }
             else {
@@ -30,21 +28,15 @@ class TextMessageViewHolder(view: View, val isRightMessage: Boolean): MessageVie
             textView.maxWidth = contentMaxWidth
 
             setOnClickListener {
-                message?.let {
-                    callback.onListClick()
-                }
+                callback.onListClick()
             }
 
             avatarView.setOnClickListener {
-                message?.let {
-                    callback.onUserAvatarClick(it)
-                }
+                callback.onUserAvatarClick(message)
             }
 
             nameView.setOnClickListener {
-                message?.let {
-                    callback.onUserNameClick(it)
-                }
+                callback.onUserNameClick(message)
             }
 
             textView.setOnTouchListener { _, event ->
@@ -62,22 +54,16 @@ class TextMessageViewHolder(view: View, val isRightMessage: Boolean): MessageVie
             }
 
             textView.setOnClickListener {
-                message?.let {
-                    callback.onContentClick(it)
-                }
+                callback.onContentClick(message)
             }
 
             textView.setOnLongClickListener {
-                message?.let {
-                    callback.onContentLongPress(it)
-                }
+                callback.onContentLongPress(message)
                 true
             }
 
             failureView.setOnClickListener {
-                message?.let {
-                    callback.onFailureClick(it)
-                }
+                callback.onFailureClick(message)
             }
 
         }

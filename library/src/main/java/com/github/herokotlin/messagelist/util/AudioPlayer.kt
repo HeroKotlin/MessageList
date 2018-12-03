@@ -11,6 +11,7 @@ import java.io.IOException
 
 object AudioPlayer: SensorEventListener {
 
+    private var id = ""
     private var url = ""
 
     private val player = MediaPlayer()
@@ -32,7 +33,7 @@ object AudioPlayer: SensorEventListener {
         player.setOnPreparedListener {
             player.start()
             listeners.forEach {
-                it.onPlay(url)
+                it.onPlay(id)
             }
         }
         player.setOnErrorListener { _, _, _ ->
@@ -51,7 +52,7 @@ object AudioPlayer: SensorEventListener {
         sensorManager.unregisterListener(this)
     }
 
-    fun play(url: String) {
+    fun play(id: String, url: String) {
 
         stop()
 
@@ -59,8 +60,9 @@ object AudioPlayer: SensorEventListener {
             player.setDataSource(url)
             player.prepareAsync()
             listeners.forEach {
-                it.onLoad(url)
+                it.onLoad(id)
             }
+            this.id = id
             this.url = url
         }
         catch (e: IllegalArgumentException) {
@@ -74,7 +76,7 @@ object AudioPlayer: SensorEventListener {
 
     fun stop() {
 
-        if (url.isBlank()) {
+        if (id.isBlank()) {
             return
         }
 
@@ -83,20 +85,21 @@ object AudioPlayer: SensorEventListener {
         }
 
         listeners.forEach {
-            it.onStop(url)
+            it.onStop(id)
         }
 
         player.reset()
 
+        id = ""
         url = ""
 
         useSpeaker()
 
     }
 
-    fun isPlaying(url: String): Boolean {
+    fun isPlaying(id: String): Boolean {
 
-        return this.url.isNotBlank() && this.url == url
+        return this.id.isNotBlank() && this.id == id
 
     }
 

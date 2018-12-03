@@ -10,8 +10,6 @@ import kotlinx.android.synthetic.main.message_audio_left.view.*
 
 class AudioMessageViewHolder(view: View, val isRightMessage: Boolean): MessageViewHolder(view) {
 
-    var url = ""
-
     override fun create() {
         with (itemView) {
 
@@ -20,9 +18,7 @@ class AudioMessageViewHolder(view: View, val isRightMessage: Boolean): MessageVi
             if (isUserNameVisible) {
                 nameView.maxWidth = getContentMaxWidth().toInt()
                 nameView.setOnClickListener {
-                    message?.let {
-                        callback.onUserNameClick(it)
-                    }
+                    callback.onUserNameClick(message)
                 }
             }
             else {
@@ -30,57 +26,48 @@ class AudioMessageViewHolder(view: View, val isRightMessage: Boolean): MessageVi
             }
 
             setOnClickListener {
-                message?.let {
-                    callback.onListClick()
-                }
+                callback.onListClick()
             }
 
             avatarView.setOnClickListener {
-                message?.let {
-                    callback.onUserAvatarClick(it)
-                }
+                callback.onUserAvatarClick(message)
             }
 
             bubbleView.setOnClickListener {
-                message?.let {
-                    if (AudioPlayer.isPlaying(url)) {
-                        AudioPlayer.stop()
-                    }
-                    else {
-                        AudioPlayer.play(url)
-                    }
+                if (AudioPlayer.isPlaying(message.id)) {
+                    AudioPlayer.stop()
+                }
+                else {
+                    val audioMessage = message as AudioMessage
+                    AudioPlayer.play(audioMessage.id, audioMessage.url)
                 }
             }
 
             bubbleView.setOnLongClickListener {
-                message?.let {
-                    callback.onContentLongPress(it)
-                }
+                callback.onContentLongPress(message)
                 true
             }
 
             failureView.setOnClickListener {
-                message?.let {
-                    callback.onFailureClick(it)
-                }
+                callback.onFailureClick(message)
             }
 
         }
 
         AudioPlayer.addListener(object : AudioPlayerCallback {
-            override fun onLoad(url: String) {
+            override fun onLoad(id: String) {
                 showLoading()
             }
 
-            override fun onPlay(url: String) {
-                if (url == this@AudioMessageViewHolder.url) {
+            override fun onPlay(id: String) {
+                if (id == message.id) {
                     hideLoading()
                     playAnimation()
                 }
             }
 
-            override fun onStop(url: String) {
-                if (url == this@AudioMessageViewHolder.url) {
+            override fun onStop(id: String) {
+                if (id == message.id) {
                     hideLoading()
                     stopAnimation()
                 }
@@ -117,9 +104,7 @@ class AudioMessageViewHolder(view: View, val isRightMessage: Boolean): MessageVi
             showTimeView(timeView, audioMessage.time)
             showStatusView(spinnerView, failureView)
 
-            url = audioMessage.url
-
-            if (AudioPlayer.isPlaying(url)) {
+            if (AudioPlayer.isPlaying(message.id)) {
                 playAnimation()
             }
             else {

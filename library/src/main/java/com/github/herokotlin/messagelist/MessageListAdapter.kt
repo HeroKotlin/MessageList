@@ -171,10 +171,10 @@ class MessageListAdapter(private val configuration: MessageListConfiguration, pr
         }
     }
 
-    fun update(message: Message) {
+    fun update(messageId: String, message: Message) {
         var messageIndex = -1
         messageList.forEachIndexed { index, item ->
-            if (message.id == item.id) {
+            if (messageId == item.id) {
                 messageIndex = index
             }
         }

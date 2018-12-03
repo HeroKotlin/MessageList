@@ -15,9 +15,7 @@ class EventMessageViewHolder(view: View): MessageViewHolder(view) {
             eventView.movementMethod = linkMovementMethod
 
             setOnClickListener {
-                message?.let {
-                    callback.onListClick()
-                }
+                callback.onListClick()
             }
 
         }

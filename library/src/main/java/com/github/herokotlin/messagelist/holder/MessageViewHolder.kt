@@ -24,7 +24,7 @@ abstract class MessageViewHolder(view: View): RecyclerView.ViewHolder(view) {
 
     private var isReady = false
 
-    var message: Message? = null
+    lateinit var message: Message
 
     lateinit var configuration: MessageListConfiguration
     lateinit var callback: MessageListCallback
@@ -59,7 +59,7 @@ abstract class MessageViewHolder(view: View): RecyclerView.ViewHolder(view) {
     }
 
     protected fun showStatusView(spinnerView: View, failureView: View) {
-        when (message?.status) {
+        when (message.status) {
             MessageStatus.SEND_ING -> {
                 spinnerView.visibility = View.VISIBLE
                 failureView.visibility = View.GONE

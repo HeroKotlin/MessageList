@@ -84,6 +84,10 @@ class MessageList : LinearLayout {
         recyclerView.adapter = adapter
     }
 
+    fun stopAudio() {
+        AudioPlayer.stop()
+    }
+
     fun loadMoreComplete(hasMoreMessage: Boolean) {
         this.hasMoreMessage = hasMoreMessage
         refreshLayout.isRefreshing = false
@@ -124,8 +128,8 @@ class MessageList : LinearLayout {
         adapter.removeAll()
     }
 
-    fun update(message: Message) {
-        adapter.update(message)
+    fun update(messageId: String, message: Message) {
+        adapter.update(messageId, message)
     }
 
     inner class MessageDecoration : RecyclerView.ItemDecoration() {

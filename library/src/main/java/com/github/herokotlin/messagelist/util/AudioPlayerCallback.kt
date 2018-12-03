@@ -2,10 +2,10 @@ package com.github.herokotlin.messagelist.util
 
 interface AudioPlayerCallback {
 
-    fun onLoad(url: String)
+    fun onLoad(id: String)
 
-    fun onPlay(url: String)
+    fun onPlay(id: String)
 
-    fun onStop(url: String)
+    fun onStop(id: String)
 
 }

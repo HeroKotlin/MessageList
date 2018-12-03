@@ -14,9 +14,7 @@ class PostMessageViewHolder(view: View, val isRightMessage: Boolean): MessageVie
             if (isUserNameVisible) {
                 nameView.maxWidth = getContentMaxWidth().toInt()
                 nameView.setOnClickListener {
-                    message?.let {
-                        callback.onUserNameClick(it)
-                    }
+                    callback.onUserNameClick(message)
                 }
             }
             else {
@@ -26,34 +24,24 @@ class PostMessageViewHolder(view: View, val isRightMessage: Boolean): MessageVie
             bubbleView.layoutParams.width = dp2px(configuration.postMessageBubbleWidth)
 
             setOnClickListener {
-                message?.let {
-                    callback.onListClick()
-                }
+                callback.onListClick()
             }
 
             avatarView.setOnClickListener {
-                message?.let {
-                    callback.onUserAvatarClick(it)
-                }
+                callback.onUserAvatarClick(message)
             }
 
             bubbleView.setOnClickListener {
-                message?.let {
-                    callback.onContentClick(it)
-                }
+                callback.onContentClick(message)
             }
 
             bubbleView.setOnLongClickListener {
-                message?.let {
-                    callback.onContentLongPress(it)
-                }
+                callback.onContentLongPress(message)
                 true
             }
 
             failureView.setOnClickListener {
-                message?.let {
-                    callback.onFailureClick(it)
-                }
+                callback.onFailureClick(message)
             }
 
         }
