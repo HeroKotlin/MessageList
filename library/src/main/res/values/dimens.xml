@@ -100,16 +100,16 @@
     <dimen name="message_list_left_video_message_margin_left">10dp</dimen>
     <dimen name="message_list_left_video_message_duration_text_size">12sp</dimen>
 
-    <dimen name="message_list_left_video_message_duration_shadow_radius">14</dimen>
-    <dimen name="message_list_left_video_message_duration_shadow_offset_x">0</dimen>
-    <dimen name="message_list_left_video_message_duration_shadow_offset_y">0</dimen>
+    <item name="message_list_left_video_message_duration_shadow_radius" type="dimen" format="float">14</item>
+    <item name="message_list_left_video_message_duration_shadow_offset_x" type="dimen" format="float">0</item>
+    <item name="message_list_left_video_message_duration_shadow_offset_y" type="dimen" format="float">0</item>
 
     <dimen name="message_list_right_video_message_margin_right">10dp</dimen>
     <dimen name="message_list_right_video_message_duration_text_size">12sp</dimen>
 
-    <dimen name="message_list_right_video_message_duration_shadow_radius">14</dimen>
-    <dimen name="message_list_right_video_message_duration_shadow_offset_x">0</dimen>
-    <dimen name="message_list_right_video_message_duration_shadow_offset_y">0</dimen>
+    <item name="message_list_right_video_message_duration_shadow_radius" type="dimen" format="float">14</item>
+    <item name="message_list_right_video_message_duration_shadow_offset_x" type="dimen" format="float">0</item>
+    <item name="message_list_right_video_message_duration_shadow_offset_y" type="dimen" format="float">0</item>
 
 
 
