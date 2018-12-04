@@ -8,8 +8,11 @@ import android.text.SpannableString
 import android.widget.ImageView
 import android.widget.TextView
 import com.github.herokotlin.messagelist.model.Message
+import com.github.herokotlin.messagelist.util.AudioPlayer
 
 abstract class MessageListConfiguration(val context: Context) {
+
+    var audioPlayer = AudioPlayer()
 
     /**
      * 消息的水平内间距

@@ -9,7 +9,7 @@ import android.media.MediaPlayer
 import android.os.Build
 import java.io.IOException
 
-object AudioPlayer: SensorEventListener {
+class AudioPlayer: SensorEventListener {
 
     private var id = ""
     private var url = ""

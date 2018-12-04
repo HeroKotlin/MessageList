@@ -17,7 +17,9 @@ import kotlinx.android.synthetic.main.message_list.view.*
 
 class MessageList : LinearLayout {
 
-    var callback = object: MessageListCallback {}
+    lateinit var callback: MessageListCallback
+
+    lateinit var configuration: MessageListConfiguration
 
     var hasMoreMessage = false
 
@@ -50,7 +52,7 @@ class MessageList : LinearLayout {
 
     override fun onDetachedFromWindow() {
         super.onDetachedFromWindow()
-        AudioPlayer.destroy()
+        configuration.audioPlayer.destroy()
     }
 
     private fun init() {
@@ -73,19 +75,25 @@ class MessageList : LinearLayout {
 
         hasMoreMessage = false
 
+    }
+
+    fun init(configuration: MessageListConfiguration, callback: MessageListCallback) {
+
         val audioManager = context.getSystemService(Context.AUDIO_SERVICE) as AudioManager
         val sensorManager = context.getSystemService(Context.SENSOR_SERVICE) as SensorManager
 
-        AudioPlayer.init(audioManager, sensorManager)
-    }
+        configuration.audioPlayer.init(audioManager, sensorManager)
 
-    fun init(configuration: MessageListConfiguration) {
+        this.configuration = configuration
+        this.callback = callback
+
         adapter = MessageListAdapter(configuration, callback)
         recyclerView.adapter = adapter
+
     }
 
     fun stopAudio() {
-        AudioPlayer.stop()
+        configuration.audioPlayer.stop()
     }
 
     fun loadMoreComplete(hasMoreMessage: Boolean) {

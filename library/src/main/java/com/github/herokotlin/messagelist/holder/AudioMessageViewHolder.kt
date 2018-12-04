@@ -34,12 +34,13 @@ class AudioMessageViewHolder(view: View, val isRightMessage: Boolean): MessageVi
             }
 
             bubbleView.setOnClickListener {
-                if (AudioPlayer.isPlaying(message.id)) {
-                    AudioPlayer.stop()
+                val player = configuration.audioPlayer
+                if (player.isPlaying(message.id)) {
+                    player.stop()
                 }
                 else {
                     val audioMessage = message as AudioMessage
-                    AudioPlayer.play(audioMessage.id, audioMessage.url)
+                    player.play(audioMessage.id, audioMessage.url)
                 }
             }
 
@@ -54,9 +55,11 @@ class AudioMessageViewHolder(view: View, val isRightMessage: Boolean): MessageVi
 
         }
 
-        AudioPlayer.addListener(object : AudioPlayerCallback {
+        configuration.audioPlayer.addListener(object : AudioPlayerCallback {
             override fun onLoad(id: String) {
-                showLoading()
+                if (id == message.id) {
+                    showLoading()
+                }
             }
 
             override fun onPlay(id: String) {
@@ -104,7 +107,7 @@ class AudioMessageViewHolder(view: View, val isRightMessage: Boolean): MessageVi
             showTimeView(timeView, audioMessage.time)
             showStatusView(spinnerView, failureView)
 
-            if (AudioPlayer.isPlaying(message.id)) {
+            if (configuration.audioPlayer.isPlaying(message.id)) {
                 playAnimation()
             }
             else {
