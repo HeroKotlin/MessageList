@@ -62,6 +62,7 @@ class AudioPlayer: SensorEventListener {
             listeners.forEach {
                 it.onLoad(id)
             }
+            useSpeaker()
             this.id = id
             this.url = url
         }
@@ -126,7 +127,7 @@ class AudioPlayer: SensorEventListener {
         }
     }
 
-    fun useSpeaker() {
+    private fun useSpeaker() {
 
         audioManager.isSpeakerphoneOn = true
         audioManager.mode = AudioManager.MODE_NORMAL
@@ -136,7 +137,7 @@ class AudioPlayer: SensorEventListener {
 
     }
 
-    fun useEar() {
+    private fun useEar() {
 
         audioManager.isSpeakerphoneOn = false
 
