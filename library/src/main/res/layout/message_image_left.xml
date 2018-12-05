@@ -47,7 +47,8 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/nameView"
         android:layout_toRightOf="@id/avatarView"
-        android:layout_marginLeft="@dimen/message_list_left_image_message_margin_left"/>
+        android:layout_marginLeft="@dimen/message_list_left_image_message_margin_left"
+        android:scaleType="center"/>
 
     <com.github.ybq.android.spinkit.SpinKitView
         android:id="@+id/spinnerView"

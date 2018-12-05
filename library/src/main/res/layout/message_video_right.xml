@@ -48,7 +48,7 @@
         android:layout_below="@id/nameView"
         android:layout_toLeftOf="@id/avatarView"
         android:layout_marginRight="@dimen/message_list_right_user_name_margin_right"
-        tools:src="@drawable/message_list_play"/>
+        android:scaleType="center"/>
 
     <ImageView
         android:id="@+id/playView"
