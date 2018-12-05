@@ -136,9 +136,8 @@ class MessageListAdapter(private val configuration: MessageListConfiguration, pr
     }
 
     fun append(messages: List<Message>) {
-        val index = itemCount
-        messageList.addAll(index, messages)
-        notifyItemRangeInserted(index, messages.size)
+        messageList.addAll(itemCount, messages)
+        notifyDataSetChanged()
     }
 
     fun prepend(message: Message) {
@@ -147,7 +146,7 @@ class MessageListAdapter(private val configuration: MessageListConfiguration, pr
 
     fun prepend(messages: List<Message>) {
         messageList.addAll(0, messages)
-        notifyItemRangeInserted(0, messages.size)
+        notifyDataSetChanged()
     }
 
     fun remove(messageId: String) {
@@ -159,7 +158,7 @@ class MessageListAdapter(private val configuration: MessageListConfiguration, pr
         }
         if (messageIndex >= 0) {
             messageList.removeAt(messageIndex)
-            notifyItemRemoved(messageIndex)
+            notifyDataSetChanged()
         }
     }
 
@@ -167,7 +166,7 @@ class MessageListAdapter(private val configuration: MessageListConfiguration, pr
         val count = messageList.count()
         if (count > 0) {
             messageList.removeAll { true }
-            notifyItemRangeRemoved(0, count)
+            notifyDataSetChanged()
         }
     }
 
@@ -180,7 +179,7 @@ class MessageListAdapter(private val configuration: MessageListConfiguration, pr
         }
         if (messageIndex >= 0) {
             messageList[messageIndex] = message
-            notifyItemChanged(messageIndex)
+            notifyDataSetChanged()
         }
     }
 
