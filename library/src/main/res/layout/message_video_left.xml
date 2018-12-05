@@ -48,7 +48,7 @@
         android:layout_below="@id/nameView"
         android:layout_toRightOf="@id/avatarView"
         android:layout_marginLeft="@dimen/message_list_left_video_message_margin_left"
-        android:scaleType="center"/>
+        android:scaleType="centerCrop"/>
 
     <ImageView
         android:id="@+id/playView"
