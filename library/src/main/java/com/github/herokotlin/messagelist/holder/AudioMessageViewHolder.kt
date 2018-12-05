@@ -4,7 +4,6 @@ import android.graphics.drawable.AnimationDrawable
 import android.view.View
 import com.github.herokotlin.messagelist.enum.MessageStatus
 import com.github.herokotlin.messagelist.model.AudioMessage
-import com.github.herokotlin.messagelist.util.AudioPlayer
 import com.github.herokotlin.messagelist.util.AudioPlayerCallback
 import kotlinx.android.synthetic.main.message_audio_left.view.*
 
