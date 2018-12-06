@@ -105,9 +105,10 @@ class MessageList : LinearLayout {
         val position = recyclerView.adapter.itemCount
         if (position > 0) {
             if (animated) {
-                recyclerView.smoothScrollToPosition(position)
-            } else {
-                recyclerView.scrollToPosition(position)
+                recyclerView.smoothScrollToPosition(position - 1)
+            }
+            else {
+                recyclerView.scrollToPosition(position - 1)
             }
         }
     }
