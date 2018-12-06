@@ -19,7 +19,7 @@ import java.util.regex.Pattern
 abstract class MessageViewHolder(view: View): RecyclerView.ViewHolder(view) {
 
     companion object {
-        private val LINK_PATTERN = Pattern.compile("\\[\\w+:[^]]+\\]")
+        private val LINK_PATTERN = Pattern.compile("\\[[^:]+:[^]]+\\]")
     }
 
     private var isReady = false
@@ -83,7 +83,7 @@ abstract class MessageViewHolder(view: View): RecyclerView.ViewHolder(view) {
         return TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, value.toFloat(), itemView.resources.displayMetrics).toInt()
     }
 
-    protected fun formatLinks(text: String, linkColor: Int): SpannableString {
+    protected fun formatLinks(text: String, linkColor: Int, onLinkClick: (String) -> Unit): SpannableString {
 
         val links = mutableListOf<LinkToken>()
         var index = 0
@@ -100,17 +100,19 @@ abstract class MessageViewHolder(view: View): RecyclerView.ViewHolder(view) {
 
                 newString += text.substring(index, start)
 
-                // 去掉左右 [ ] 后的链接
-                val link = group.substring(1, group.length - 1)
+                // 去掉左右 [ ]
+                val rawText = group.substring(1, group.length - 1)
 
-                // 文本
-                val subText = link.substring(link.indexOf(":") + 1)
+                val separatorIndex = rawText.indexOf(":")
+
+                val linkText = rawText.substring(0, separatorIndex)
+                val labelText = rawText.substring(separatorIndex + 1)
 
                 links.add(
-                    LinkToken(subText, link, newString.length)
+                    LinkToken(labelText, linkText, newString.length)
                 )
 
-                newString += subText
+                newString += labelText
 
                 index = end
 
@@ -126,7 +128,7 @@ abstract class MessageViewHolder(view: View): RecyclerView.ViewHolder(view) {
         for (item in links) {
             val start = item.position
             val end = item.position + item.text.length
-            spannable.setSpan(LinkSpan(item.link, callback), start, end, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
+            spannable.setSpan(LinkSpan(item.link, onLinkClick), start, end, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
             spannable.setSpan(ForegroundColorSpan(linkColor), start, end, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
         }
 

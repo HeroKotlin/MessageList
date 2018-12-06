@@ -1,13 +1,18 @@
 package com.github.herokotlin.messagelist.holder
 
-import android.text.Spannable
-import android.view.MotionEvent
 import android.view.View
 import com.github.herokotlin.messagelist.model.TextMessage
 import com.github.herokotlin.messagelist.view.linkMovementMethod
 import kotlinx.android.synthetic.main.message_text_left.view.*
 
 class TextMessageViewHolder(view: View, val isRightMessage: Boolean): MessageViewHolder(view) {
+
+    private var clickOnLink = false
+
+    private val onLinkClick = { link: String ->
+        clickOnLink = true
+        callback.onLinkClick(link)
+    }
 
     override fun create() {
         with (itemView) {
@@ -26,6 +31,7 @@ class TextMessageViewHolder(view: View, val isRightMessage: Boolean): MessageVie
             }
 
             textView.maxWidth = contentMaxWidth
+            textView.movementMethod = linkMovementMethod
 
             setOnClickListener {
                 callback.onListClick()
@@ -39,22 +45,13 @@ class TextMessageViewHolder(view: View, val isRightMessage: Boolean): MessageVie
                 callback.onUserNameClick(message)
             }
 
-            textView.setOnTouchListener { _, event ->
-
-                val text = textView.text
-
-                if (text is Spannable && event.action == MotionEvent.ACTION_UP) {
-                    val linkSpan = linkMovementMethod.getLinkSpan(textView, text, event)
-                    if (linkSpan != null) {
-                        linkSpan.onClick(textView)
-                    }
-                }
-
-                false
-            }
-
             textView.setOnClickListener {
-                callback.onContentClick(message)
+                if (clickOnLink) {
+                    clickOnLink = false
+                }
+                else {
+                    callback.onContentClick(message)
+                }
             }
 
             textView.setOnLongClickListener {
@@ -76,7 +73,7 @@ class TextMessageViewHolder(view: View, val isRightMessage: Boolean): MessageVie
             configuration.loadImage(avatarView, textMessage.user.avatar)
             updateImageSize(avatarView, configuration.userAvatarWidth, configuration.userAvatarHeight, configuration.userAvatarBorderWidth, configuration.userAvatarBorderColor, configuration.userAvatarBorderRadius)
 
-            val spannable = formatLinks(textMessage.text, configuration.linkTextColor)
+            val spannable = formatLinks(textMessage.text, configuration.linkTextColor, onLinkClick)
             configuration.formatText(textView, spannable)
             textView.text = spannable
 

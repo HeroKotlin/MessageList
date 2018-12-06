@@ -52,7 +52,6 @@
         android:paddingBottom="@dimen/message_list_right_text_message_padding_bottom"
         android:paddingLeft="@dimen/message_list_right_text_message_padding_left"
         android:paddingRight="@dimen/message_list_right_text_message_padding_right"
-        android:textIsSelectable="true"
         android:justificationMode="inter_word"
         android:minWidth="@dimen/message_list_right_text_message_min_width"
         android:textColor="@color/message_list_right_text_message_text_color"

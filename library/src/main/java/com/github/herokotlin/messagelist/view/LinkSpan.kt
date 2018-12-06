@@ -6,14 +6,14 @@ import android.text.style.ClickableSpan
 import android.view.View
 import com.github.herokotlin.messagelist.MessageListCallback
 
-class LinkSpan(val link: String, val callback: MessageListCallback): ClickableSpan() {
+class LinkSpan(val link: String, val onClick: (String) -> Unit): ClickableSpan() {
 
     var isPressed = false
 
-    var bgColorPressed = Color.parseColor("#15000000")
+    private val bgColorPressed = Color.parseColor("#15000000")
 
     override fun onClick(widget: View?) {
-        callback.onLinkClick(link)
+        onClick(link)
     }
 
     override fun updateDrawState(ds: TextPaint?) {
