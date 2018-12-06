@@ -114,19 +114,26 @@ class MessageList : LinearLayout {
     }
 
     fun append(message: Message) {
-        adapter.append(message)
+        adapter.append(listOf(message))
     }
 
     fun append(messages: List<Message>) {
-        adapter.append(messages)
+        if (messages.isNotEmpty()) {
+            adapter.append(messages)
+        }
     }
 
     fun prepend(message: Message) {
-        adapter.prepend(message)
+        adapter.prepend(listOf(message))
     }
 
     fun prepend(messages: List<Message>) {
-        adapter.prepend(messages)
+        val size = messages.size
+        if (size > 0) {
+            adapter.prepend(messages)
+            // 定位在新增的最后一个
+            recyclerView.scrollToPosition(size - 1)
+        }
     }
 
     fun remove(messageId: String) {

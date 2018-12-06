@@ -131,17 +131,9 @@ class MessageListAdapter(private val configuration: MessageListConfiguration, pr
         }
     }
 
-    fun append(message: Message) {
-        append(listOf(message))
-    }
-
     fun append(messages: List<Message>) {
         messageList.addAll(itemCount, messages)
         notifyDataSetChanged()
-    }
-
-    fun prepend(message: Message) {
-        prepend(listOf(message))
     }
 
     fun prepend(messages: List<Message>) {
