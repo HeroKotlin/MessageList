@@ -17,7 +17,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:scaleType="centerInside"
         android:src="@drawable/message_list_menu_arrow"/>
 
 </LinearLayout>

@@ -53,7 +53,7 @@ abstract class MessageViewHolder(view: View): RecyclerView.ViewHolder(view) {
     }
 
     open var onContentLongPress = { view: View? ->
-        if (view != null) {
+        if (view != null && menuItems.count() > 0) {
             val menu = MenuWindow()
 
             val contentView = LayoutInflater.from(itemView.context).inflate(R.layout.message_list_menu, null) as LinearLayout

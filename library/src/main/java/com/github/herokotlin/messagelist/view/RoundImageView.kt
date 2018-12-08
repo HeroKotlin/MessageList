@@ -61,9 +61,6 @@ class RoundImageView : ImageView {
         if (drawable != null) {
             intrinsicWidth = drawable.intrinsicWidth
             intrinsicHeight = drawable.intrinsicHeight
-            if (intrinsicHeight == 506 || intrinsicHeight == 279) {
-                Log.d("messagelist", "update: $intrinsicWidth  $intrinsicHeight ")
-            }
         }
 
     }
@@ -94,10 +91,6 @@ class RoundImageView : ImageView {
 
         val scale = Math.max(widthScale, heightScale)
 
-        if (imageHeight.toInt() == 277) {
-            Log.d("messagelist", "create $intrinsicWidth $imageWidth ${drawable.intrinsicWidth}  -  $intrinsicHeight  $imageHeight  ${drawable.intrinsicHeight}   -   $scale")
-        }
-
         drawable.setBounds(0, 0, (intrinsicWidth * scale).toInt(), (intrinsicHeight * scale).toInt())
 
         drawable.draw(canvas)
@@ -113,18 +106,12 @@ class RoundImageView : ImageView {
 
         super.invalidate()
 
-        if (imageHeight.toInt() == 277) {
-            Log.d("messagelist", "invalidate")
-        }
-
     }
 
     override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
 
         setMeasuredDimension(viewWidth.toInt(), viewHeight.toInt())
-        if (imageHeight.toInt() == 277) {
-            Log.d("messagelist", "onMeasure")
-        }
+
     }
 
     override fun onDraw(canvas: Canvas) {
@@ -132,9 +119,7 @@ class RoundImageView : ImageView {
         if (drawable == null) {
             return
         }
-        if (imageHeight.toInt() == 277) {
-            Log.d("messagelist", "onDraw")
-        }
+
         paint.style = Paint.Style.FILL
 
         if (viewBorderColor != 0) {
