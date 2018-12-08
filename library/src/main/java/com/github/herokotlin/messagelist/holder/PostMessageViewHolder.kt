@@ -24,7 +24,6 @@ class PostMessageViewHolder(view: View, val isRightMessage: Boolean): MessageVie
             avatarView.setOnClickListener(onUserAvatarClick)
 
             bubbleView.setOnClickListener(onContentClick)
-
             bubbleView.setOnLongClickListener(onContentLongPress)
 
             failureView.setOnClickListener(onFailureClick)

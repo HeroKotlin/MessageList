@@ -22,7 +22,6 @@ class VideoMessageViewHolder(view: View, val isRightMessage: Boolean): MessageVi
             avatarView.setOnClickListener(onUserAvatarClick)
 
             playView.setOnClickListener(onContentClick)
-
             playView.setOnLongClickListener(onContentLongPress)
 
             failureView.setOnClickListener(onFailureClick)

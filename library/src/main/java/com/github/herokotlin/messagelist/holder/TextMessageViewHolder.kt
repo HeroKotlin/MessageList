@@ -8,20 +8,8 @@ import kotlinx.android.synthetic.main.message_text_left.view.*
 
 class TextMessageViewHolder(view: View, val isRightMessage: Boolean): MessageViewHolder(view) {
 
-    private var clickOnLink = false
-
     private val onLinkClick = { link: String ->
-        clickOnLink = true
         callback.onLinkClick(link)
-    }
-
-    override var onContentClick = { _: View? ->
-        if (clickOnLink) {
-            clickOnLink = false
-        }
-        else {
-            callback.onContentClick(message)
-        }
     }
 
     override fun create() {
@@ -47,12 +35,14 @@ class TextMessageViewHolder(view: View, val isRightMessage: Boolean): MessageVie
 
             textView.maxWidth = contentMaxWidth
             textView.movementMethod = linkMovementMethod
+            textView.isClickable = false
+            textView.isFocusable = false
+            textView.isLongClickable = false
 
             avatarView.setOnClickListener(onUserAvatarClick)
 
-            textView.setOnClickListener(onContentClick)
-
-            textView.setOnLongClickListener(onContentLongPress)
+            bubbleView.setOnClickListener(onContentClick)
+            bubbleView.setOnLongClickListener(onContentLongPress)
 
             failureView.setOnClickListener(onFailureClick)
 

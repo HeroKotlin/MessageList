@@ -41,32 +41,40 @@
         android:textColor="@color/message_list_left_user_name_text_color"
         tools:text="musicode"/>
 
-    <TextView
-        android:id="@+id/textView"
+    <FrameLayout
+        android:id="@+id/bubbleView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/nameView"
         android:layout_toRightOf="@id/avatarView"
         android:layout_marginLeft="@dimen/message_list_left_text_message_margin_left"
-        android:paddingTop="@dimen/message_list_left_text_message_padding_top"
-        android:paddingBottom="@dimen/message_list_left_text_message_padding_bottom"
-        android:paddingLeft="@dimen/message_list_left_text_message_padding_left"
-        android:paddingRight="@dimen/message_list_left_text_message_padding_right"
-        android:justificationMode="inter_word"
-        android:minWidth="@dimen/message_list_left_text_message_min_width"
-        android:textColor="@color/message_list_left_text_message_text_color"
-        android:textSize="@dimen/message_list_left_text_message_text_size"
-        android:lineSpacingExtra="@dimen/message_list_left_text_message_line_spacing"
-        android:textColorHighlight="@color/message_list_text_message_tint_color"
         android:background="@drawable/message_list_bubble_left_state"
-        tools:text="this is a test"/>
+        android:padding="0dp">
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingTop="@dimen/message_list_left_text_message_padding_top"
+            android:paddingBottom="@dimen/message_list_left_text_message_padding_bottom"
+            android:paddingLeft="@dimen/message_list_left_text_message_padding_left"
+            android:paddingRight="@dimen/message_list_left_text_message_padding_right"
+            android:justificationMode="inter_word"
+            android:minWidth="@dimen/message_list_left_text_message_min_width"
+            android:textColor="@color/message_list_left_text_message_text_color"
+            android:textSize="@dimen/message_list_left_text_message_text_size"
+            android:lineSpacingExtra="@dimen/message_list_left_text_message_line_spacing"
+            android:textColorHighlight="@color/message_list_text_message_tint_color"
+            tools:text="this is a test"/>
+
+    </FrameLayout>
 
     <com.github.ybq.android.spinkit.SpinKitView
         android:id="@+id/spinnerView"
         android:layout_width="@dimen/message_list_spinner_size"
         android:layout_height="@dimen/message_list_spinner_size"
-        android:layout_toRightOf="@id/textView"
-        android:layout_alignBottom="@id/textView"
+        android:layout_toRightOf="@id/bubbleView"
+        android:layout_alignBottom="@id/bubbleView"
         android:layout_marginLeft="@dimen/message_list_left_status_view_margin_left"
         android:layout_marginBottom="@dimen/message_list_left_status_view_margin_bottom"
         app:SpinKit_Color="@color/message_list_spinner_color"
@@ -76,8 +84,8 @@
         android:id="@+id/failureView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_toRightOf="@id/textView"
-        android:layout_alignBottom="@id/textView"
+        android:layout_toRightOf="@id/bubbleView"
+        android:layout_alignBottom="@id/bubbleView"
         android:layout_marginLeft="@dimen/message_list_left_status_view_margin_left"
         android:layout_marginBottom="@dimen/message_list_left_status_view_margin_bottom"
         android:background="@drawable/message_list_failure"/>

@@ -23,7 +23,6 @@ class ImageMessageViewHolder(view: View, val isRightMessage: Boolean): MessageVi
             avatarView.setOnClickListener(onUserAvatarClick)
 
             imageView.setOnClickListener(onContentClick)
-
             imageView.setOnLongClickListener(onContentLongPress)
 
             failureView.setOnClickListener(onFailureClick)

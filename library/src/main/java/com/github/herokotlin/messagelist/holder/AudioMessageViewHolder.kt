@@ -36,7 +36,6 @@ class AudioMessageViewHolder(view: View, val isRightMessage: Boolean): MessageVi
             avatarView.setOnClickListener(onUserAvatarClick)
 
             bubbleView.setOnClickListener(onContentClick)
-
             bubbleView.setOnLongClickListener(onContentLongPress)
 
             failureView.setOnClickListener(onFailureClick)
