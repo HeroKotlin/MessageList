@@ -13,15 +13,8 @@ class EventMessageViewHolder(view: View): MessageViewHolder(view) {
 
     override fun create() {
         with (itemView) {
-
             eventView.maxWidth = getContentMaxWidth().toInt()
-
             eventView.movementMethod = linkMovementMethod
-
-            setOnClickListener {
-                callback.onListClick()
-            }
-
         }
     }
 

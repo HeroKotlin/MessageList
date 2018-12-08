@@ -21,10 +21,6 @@ class VideoMessageViewHolder(view: View, val isRightMessage: Boolean): MessageVi
                 nameView.visibility = View.GONE
             }
 
-            setOnClickListener {
-                callback.onListClick()
-            }
-
             avatarView.setOnClickListener {
                 callback.onUserAvatarClick(message)
             }

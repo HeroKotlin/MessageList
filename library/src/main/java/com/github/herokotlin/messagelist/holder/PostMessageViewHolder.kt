@@ -23,10 +23,6 @@ class PostMessageViewHolder(view: View, val isRightMessage: Boolean): MessageVie
 
             bubbleView.layoutParams.width = dp2px(configuration.postMessageBubbleWidth)
 
-            setOnClickListener {
-                callback.onListClick()
-            }
-
             avatarView.setOnClickListener {
                 callback.onUserAvatarClick(message)
             }
