@@ -37,14 +37,7 @@ abstract class MessageViewHolder(view: View): RecyclerView.ViewHolder(view) {
     lateinit var configuration: MessageListConfiguration
     lateinit var callback: MessageListCallback
 
-    open var menuItems = listOf<MenuItem>(
-            MenuItem("复制1") {
-                Log.d("messageList", "复制啦1")
-            },
-            MenuItem("复制2") {
-                Log.d("messageList", "复制啦2")
-            }
-    )
+    open var menuItems = mutableListOf<MenuItem>()
 
     open var onUserAvatarClick = { _: View? ->
         callback.onUserAvatarClick(message)

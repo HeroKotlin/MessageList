@@ -155,6 +155,11 @@ abstract class MessageListConfiguration(val context: Context) {
     var linkTextColor = Color.parseColor("#1690E5")
 
     /**
+     * 菜单文本
+     */
+    var menuItemCopy = "复制"
+
+    /**
      * 格式化文本内容
      */
     abstract fun formatText(textView: TextView, text: SpannableString)

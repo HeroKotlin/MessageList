@@ -20,6 +20,10 @@ interface MessageListCallback {
 
     }
 
+    fun onCopyClick(message: Message) {
+
+    }
+
     fun onFailureClick(message: Message) {
 
     }

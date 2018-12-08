@@ -1,6 +1,7 @@
 package com.github.herokotlin.messagelist.holder
 
 import android.view.View
+import com.github.herokotlin.messagelist.model.MenuItem
 import com.github.herokotlin.messagelist.model.TextMessage
 import com.github.herokotlin.messagelist.view.linkMovementMethod
 import kotlinx.android.synthetic.main.message_text_left.view.*
@@ -24,6 +25,13 @@ class TextMessageViewHolder(view: View, val isRightMessage: Boolean): MessageVie
     }
 
     override fun create() {
+
+        menuItems.add(
+            MenuItem(configuration.menuItemCopy) {
+                callback.onCopyClick(message)
+            }
+        )
+
         with (itemView) {
 
             val contentMaxWidth = getContentMaxWidth().toInt()
