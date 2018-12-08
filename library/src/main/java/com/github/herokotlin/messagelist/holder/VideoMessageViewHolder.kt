@@ -13,34 +13,19 @@ class VideoMessageViewHolder(view: View, val isRightMessage: Boolean): MessageVi
 
             if (isUserNameVisible) {
                 nameView.maxWidth = getContentMaxWidth().toInt()
-                nameView.setOnClickListener {
-                    callback.onUserNameClick(message)
-                }
+                nameView.setOnClickListener(onUserNameClick)
             }
             else {
                 nameView.visibility = View.GONE
             }
 
-            avatarView.setOnClickListener {
-                callback.onUserAvatarClick(message)
-            }
+            avatarView.setOnClickListener(onUserAvatarClick)
 
-            nameView.setOnClickListener {
-                callback.onUserNameClick(message)
-            }
+            playView.setOnClickListener(onContentClick)
 
-            playView.setOnClickListener {
-                callback.onContentClick(message)
-            }
+            playView.setOnLongClickListener(onContentLongPress)
 
-            playView.setOnLongClickListener {
-                callback.onContentLongPress(message)
-                true
-            }
-
-            failureView.setOnClickListener {
-                callback.onFailureClick(message)
-            }
+            failureView.setOnClickListener(onFailureClick)
 
         }
     }

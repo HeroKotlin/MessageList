@@ -13,9 +13,7 @@ class CardMessageViewHolder(view: View, val isRightMessage: Boolean): MessageVie
 
             if (isUserNameVisible) {
                 nameView.maxWidth = getContentMaxWidth().toInt()
-                nameView.setOnClickListener {
-                    callback.onUserNameClick(message)
-                }
+                nameView.setOnClickListener(onUserNameClick)
             }
             else {
                 nameView.visibility = View.GONE
@@ -23,22 +21,13 @@ class CardMessageViewHolder(view: View, val isRightMessage: Boolean): MessageVie
 
             bubbleView.layoutParams.width = dp2px(configuration.cardMessageBubbleWidth)
 
-            avatarView.setOnClickListener {
-                callback.onUserAvatarClick(message)
-            }
+            avatarView.setOnClickListener(onUserAvatarClick)
 
-            bubbleView.setOnClickListener {
-                callback.onContentClick(message)
-            }
+            bubbleView.setOnClickListener(onContentClick)
 
-            bubbleView.setOnLongClickListener {
-                callback.onContentLongPress(message)
-                true
-            }
+            bubbleView.setOnLongClickListener(onContentLongPress)
 
-            failureView.setOnClickListener {
-                callback.onFailureClick(message)
-            }
+            failureView.setOnClickListener(onFailureClick)
 
         }
 

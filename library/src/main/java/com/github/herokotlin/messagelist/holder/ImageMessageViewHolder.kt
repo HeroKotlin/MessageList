@@ -14,34 +14,19 @@ class ImageMessageViewHolder(view: View, val isRightMessage: Boolean): MessageVi
 
             if (isUserNameVisible) {
                 nameView.maxWidth = getContentMaxWidth().toInt()
-                nameView.setOnClickListener {
-                    callback.onUserNameClick(message)
-                }
+                nameView.setOnClickListener(onUserNameClick)
             }
             else {
                 nameView.visibility = View.GONE
             }
 
-            avatarView.setOnClickListener {
-                callback.onUserAvatarClick(message)
-            }
+            avatarView.setOnClickListener(onUserAvatarClick)
 
-            nameView.setOnClickListener {
-                callback.onUserNameClick(message)
-            }
+            imageView.setOnClickListener(onContentClick)
 
-            imageView.setOnClickListener {
-                callback.onContentClick(message)
-            }
+            imageView.setOnLongClickListener(onContentLongPress)
 
-            imageView.setOnLongClickListener {
-                callback.onContentLongPress(message)
-                true
-            }
-
-            failureView.setOnClickListener {
-                callback.onFailureClick(message)
-            }
+            failureView.setOnClickListener(onFailureClick)
 
         }
     }

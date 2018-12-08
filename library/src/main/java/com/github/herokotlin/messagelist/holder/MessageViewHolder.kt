@@ -29,6 +29,27 @@ abstract class MessageViewHolder(view: View): RecyclerView.ViewHolder(view) {
     lateinit var configuration: MessageListConfiguration
     lateinit var callback: MessageListCallback
 
+    open var onUserAvatarClick = { _: View? ->
+        callback.onUserAvatarClick(message)
+    }
+
+    open var onUserNameClick = { _: View? ->
+        callback.onUserNameClick(message)
+    }
+
+    open var onContentClick = { _: View? ->
+        callback.onContentClick(message)
+    }
+
+    open var onContentLongPress = { _: View? ->
+        callback.onContentLongPress(message)
+        true
+    }
+
+    open var onFailureClick = { _: View? ->
+        callback.onFailureClick(message)
+    }
+
     open fun bind(configuration: MessageListConfiguration, callback: MessageListCallback, message: Message) {
 
         this.message = message

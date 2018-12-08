@@ -14,6 +14,15 @@ class TextMessageViewHolder(view: View, val isRightMessage: Boolean): MessageVie
         callback.onLinkClick(link)
     }
 
+    override var onContentClick = { _: View? ->
+        if (clickOnLink) {
+            clickOnLink = false
+        }
+        else {
+            callback.onContentClick(message)
+        }
+    }
+
     override fun create() {
         with (itemView) {
 
@@ -22,9 +31,7 @@ class TextMessageViewHolder(view: View, val isRightMessage: Boolean): MessageVie
 
             if (isUserNameVisible) {
                 nameView.maxWidth = contentMaxWidth
-                nameView.setOnClickListener {
-                    callback.onUserNameClick(message)
-                }
+                nameView.setOnClickListener(onUserNameClick)
             }
             else {
                 nameView.visibility = View.GONE
@@ -33,31 +40,13 @@ class TextMessageViewHolder(view: View, val isRightMessage: Boolean): MessageVie
             textView.maxWidth = contentMaxWidth
             textView.movementMethod = linkMovementMethod
 
-            avatarView.setOnClickListener {
-                callback.onUserAvatarClick(message)
-            }
+            avatarView.setOnClickListener(onUserAvatarClick)
 
-            nameView.setOnClickListener {
-                callback.onUserNameClick(message)
-            }
+            textView.setOnClickListener(onContentClick)
 
-            textView.setOnClickListener {
-                if (clickOnLink) {
-                    clickOnLink = false
-                }
-                else {
-                    callback.onContentClick(message)
-                }
-            }
+            textView.setOnLongClickListener(onContentLongPress)
 
-            textView.setOnLongClickListener {
-                callback.onContentLongPress(message)
-                true
-            }
-
-            failureView.setOnClickListener {
-                callback.onFailureClick(message)
-            }
+            failureView.setOnClickListener(onFailureClick)
 
         }
     }
