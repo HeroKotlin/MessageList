@@ -45,6 +45,9 @@ object linkMovementMethod: BaseMovementMethod() {
                     span.isPressed = true
                     Selection.setSelection(text, text.getSpanStart(span), text.getSpanEnd(span))
                 }
+                else {
+                    widget.isPressed = true
+                }
                 linkSpan = span
                 linkSpan != null
             }
@@ -68,6 +71,9 @@ object linkMovementMethod: BaseMovementMethod() {
                     linkSpan = null
                     Selection.removeSelection(text)
                 }
+                else {
+                    widget.isPressed = false
+                }
                 result
             }
 
@@ -76,6 +82,9 @@ object linkMovementMethod: BaseMovementMethod() {
                     linkSpan?.isPressed = false
                     linkSpan = null
                     Selection.removeSelection(text)
+                }
+                else {
+                    widget.isPressed = false
                 }
                 false
             }

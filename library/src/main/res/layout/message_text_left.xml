@@ -58,7 +58,7 @@
         android:textSize="@dimen/message_list_left_text_message_text_size"
         android:lineSpacingExtra="@dimen/message_list_left_text_message_line_spacing"
         android:textColorHighlight="@color/message_list_text_message_tint_color"
-        android:background="@drawable/message_list_bubble_left_normal"
+        android:background="@drawable/message_list_bubble_left_state"
         tools:text="this is a test"/>
 
     <com.github.ybq.android.spinkit.SpinKitView

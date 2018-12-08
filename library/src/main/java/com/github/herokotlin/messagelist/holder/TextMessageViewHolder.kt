@@ -1,6 +1,9 @@
 package com.github.herokotlin.messagelist.holder
 
+import android.util.Log
+import android.view.MotionEvent
 import android.view.View
+import com.github.herokotlin.messagelist.R
 import com.github.herokotlin.messagelist.model.TextMessage
 import com.github.herokotlin.messagelist.view.linkMovementMethod
 import kotlinx.android.synthetic.main.message_text_left.view.*

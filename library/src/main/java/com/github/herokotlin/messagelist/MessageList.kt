@@ -12,7 +12,6 @@ import android.view.MotionEvent
 import android.view.View
 import android.widget.LinearLayout
 import com.github.herokotlin.messagelist.model.Message
-import com.github.herokotlin.messagelist.util.AudioPlayer
 import kotlinx.android.synthetic.main.message_list.view.*
 
 class MessageList : LinearLayout {
