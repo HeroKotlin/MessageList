@@ -2,7 +2,10 @@ package com.github.herokotlin.messagelist.view
 
 import android.content.Context
 import android.graphics.*
+import android.graphics.drawable.Drawable
+import android.net.Uri
 import android.util.AttributeSet
+import android.util.Log
 import android.widget.ImageView
 import java.lang.ref.WeakReference
 
@@ -14,6 +17,9 @@ class RoundImageView : ImageView {
     private var viewBorderWidth = 0f
     private var viewBorderColor = Color.BLACK
     private var viewBorderRadius = 0f
+
+    private var intrinsicWidth = 0
+    private var intrinsicHeight = 0
 
     private var imageWidth = 0f
     private var imageHeight = 0f
@@ -34,6 +40,33 @@ class RoundImageView : ImageView {
     constructor(context: Context, attrs: AttributeSet) : super(context, attrs)
 
     constructor(context: Context, attrs: AttributeSet, defStyle: Int) : super(context, attrs, defStyle)
+
+    override fun setImageResource(resId: Int) {
+        super.setImageResource(resId)
+        updateImage()
+    }
+
+    override fun setImageDrawable(drawable: Drawable?) {
+        super.setImageDrawable(drawable)
+        updateImage()
+    }
+
+    override fun setImageURI(uri: Uri?) {
+        super.setImageURI(uri)
+        updateImage()
+    }
+
+    private fun updateImage() {
+
+        if (drawable != null) {
+            intrinsicWidth = drawable.intrinsicWidth
+            intrinsicHeight = drawable.intrinsicHeight
+            if (intrinsicHeight == 506 || intrinsicHeight == 279) {
+                Log.d("messagelist", "update: $intrinsicWidth  $intrinsicHeight ")
+            }
+        }
+
+    }
 
     private fun createMaskBitmap(): Bitmap {
 
@@ -56,7 +89,16 @@ class RoundImageView : ImageView {
 
         val canvas = Canvas(bitmap)
 
-        drawable.setBounds(0, 0, imageWidth.toInt(), imageHeight.toInt())
+        val widthScale = imageWidth / intrinsicWidth
+        val heightScale = imageHeight / intrinsicHeight
+
+        val scale = Math.max(widthScale, heightScale)
+
+        if (imageHeight.toInt() == 277) {
+            Log.d("messagelist", "create $intrinsicWidth $imageWidth ${drawable.intrinsicWidth}  -  $intrinsicHeight  $imageHeight  ${drawable.intrinsicHeight}   -   $scale")
+        }
+
+        drawable.setBounds(0, 0, (intrinsicWidth * scale).toInt(), (intrinsicHeight * scale).toInt())
 
         drawable.draw(canvas)
 
@@ -71,12 +113,18 @@ class RoundImageView : ImageView {
 
         super.invalidate()
 
+        if (imageHeight.toInt() == 277) {
+            Log.d("messagelist", "invalidate")
+        }
+
     }
 
     override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
 
         setMeasuredDimension(viewWidth.toInt(), viewHeight.toInt())
-
+        if (imageHeight.toInt() == 277) {
+            Log.d("messagelist", "onMeasure")
+        }
     }
 
     override fun onDraw(canvas: Canvas) {
@@ -84,7 +132,9 @@ class RoundImageView : ImageView {
         if (drawable == null) {
             return
         }
-
+        if (imageHeight.toInt() == 277) {
+            Log.d("messagelist", "onDraw")
+        }
         paint.style = Paint.Style.FILL
 
         if (viewBorderColor != 0) {
@@ -146,7 +196,9 @@ class RoundImageView : ImageView {
             imageHeight = height
         }
 
-        invalidate()
+        // 后续会调 setImageResource 之类的方法
+        // 它们会触发 invalidate
+        // 因此这里无需调 invalidate
 
     }
 
