@@ -64,8 +64,8 @@
     <color name="message_list_right_post_message_divider_color">#ccc</color>
 
     <!-- 菜单 -->
-    <color name="message_list_menu_item_bg_color_normal">#272727</color>
-    <color name="message_list_menu_item_bg_color_pressed">#050505</color>
+    <color name="message_list_menu_item_bg_color_normal">#4F5056</color>
+    <color name="message_list_menu_item_bg_color_pressed">#333333</color>
     <color name="message_list_menu_item_divider_color">#77FFFFFF</color>
     <color name="message_list_menu_item_text_color">#FFFFFF</color>
 

@@ -21,6 +21,7 @@ import com.github.herokotlin.messagelist.model.Message
 import com.github.herokotlin.messagelist.view.LinkSpan
 import com.github.herokotlin.messagelist.view.MenuWindow
 import com.github.herokotlin.messagelist.view.RoundImageView
+import kotlinx.android.synthetic.main.message_list_menu.view.*
 import kotlinx.android.synthetic.main.message_list_menu_item.view.*
 import java.util.regex.Pattern
 
@@ -73,7 +74,7 @@ abstract class MessageViewHolder(view: View): RecyclerView.ViewHolder(view) {
                     childView.dividerView.visibility = View.GONE
                 }
 
-                contentView.addView(childView)
+                contentView.listView.addView(childView)
 
             }
 
