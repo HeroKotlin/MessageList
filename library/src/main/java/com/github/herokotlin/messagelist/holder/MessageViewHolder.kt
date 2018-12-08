@@ -4,16 +4,24 @@ import android.support.v7.widget.RecyclerView
 import android.text.SpannableString
 import android.text.Spanned
 import android.text.style.ForegroundColorSpan
+import android.util.Log
 import android.util.TypedValue
+import android.view.LayoutInflater
 import android.view.View
+import android.widget.Button
+import android.widget.LinearLayout
 import android.widget.TextView
+import com.github.herokotlin.messagelist.R
 import com.github.herokotlin.messagelist.MessageListCallback
 import com.github.herokotlin.messagelist.MessageListConfiguration
 import com.github.herokotlin.messagelist.enum.MessageStatus
 import com.github.herokotlin.messagelist.model.LinkToken
+import com.github.herokotlin.messagelist.model.MenuItem
 import com.github.herokotlin.messagelist.model.Message
 import com.github.herokotlin.messagelist.view.LinkSpan
+import com.github.herokotlin.messagelist.view.MenuWindow
 import com.github.herokotlin.messagelist.view.RoundImageView
+import kotlinx.android.synthetic.main.message_list_menu_item.view.*
 import java.util.regex.Pattern
 
 abstract class MessageViewHolder(view: View): RecyclerView.ViewHolder(view) {
@@ -29,6 +37,15 @@ abstract class MessageViewHolder(view: View): RecyclerView.ViewHolder(view) {
     lateinit var configuration: MessageListConfiguration
     lateinit var callback: MessageListCallback
 
+    open var menuItems = listOf<MenuItem>(
+            MenuItem("复制1") {
+                Log.d("messageList", "复制啦1")
+            },
+            MenuItem("复制2") {
+                Log.d("messageList", "复制啦2")
+            }
+    )
+
     open var onUserAvatarClick = { _: View? ->
         callback.onUserAvatarClick(message)
     }
@@ -41,8 +58,35 @@ abstract class MessageViewHolder(view: View): RecyclerView.ViewHolder(view) {
         callback.onContentClick(message)
     }
 
-    open var onContentLongPress = { _: View? ->
-        callback.onContentLongPress(message)
+    open var onContentLongPress = { view: View? ->
+        if (view != null) {
+            val menu = MenuWindow()
+
+            val contentView = LayoutInflater.from(itemView.context).inflate(R.layout.message_list_menu, null) as LinearLayout
+
+            menuItems.forEachIndexed { index, menuItem ->
+
+                val childView = LayoutInflater.from(itemView.context).inflate(R.layout.message_list_menu_item, null)
+
+                with (childView.buttonView) {
+                    text = menuItem.text
+                    setOnClickListener {
+                        menu.hide()
+                        menuItem.onClick()
+                    }
+                }
+
+                if (index == 0) {
+                    childView.dividerView.visibility = View.GONE
+                }
+
+                contentView.addView(childView)
+
+            }
+
+            menu.show(view, contentView)
+
+        }
         true
     }
 

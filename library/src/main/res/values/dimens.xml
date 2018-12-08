@@ -213,4 +213,12 @@
 
     <dimen name="message_list_spinner_size">20dp</dimen>
 
+    <dimen name="message_list_menu_offset">10dp</dimen>
+    <dimen name="message_list_menu_border_radius">8dp</dimen>
+    <dimen name="message_list_menu_item_divider_width">1px</dimen>
+    <dimen name="message_list_menu_item_divider_height">18dp</dimen>
+    <dimen name="message_list_menu_item_text_size">14sp</dimen>
+    <dimen name="message_list_menu_item_padding_vertical">10dp</dimen>
+    <dimen name="message_list_menu_item_padding_horizontal">16dp</dimen>
+
 </resources>

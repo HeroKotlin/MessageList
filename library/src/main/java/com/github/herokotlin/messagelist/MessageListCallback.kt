@@ -20,10 +20,6 @@ interface MessageListCallback {
 
     }
 
-    fun onContentLongPress(message: Message) {
-
-    }
-
     fun onFailureClick(message: Message) {
 
     }
