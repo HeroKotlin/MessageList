@@ -90,11 +90,11 @@ class RoundImageView : ImageView {
             // 如果只是少了一点点像素，直接缩放就行了
             // 反正也看不出来
             val ratio = width / height
-            if (imageWidth > width && imageWidth - width < 20) {
+            if (imageWidth > width) {
                 width = imageWidth
                 height = width / ratio
             }
-            if (imageHeight > height && imageHeight - height < 20) {
+            if (imageHeight > height) {
                 height = imageHeight
                 width = height * ratio
             }
@@ -153,15 +153,8 @@ class RoundImageView : ImageView {
             drawBitmap = WeakReference(bitmap)
         }
 
-        var left = viewBorderWidth
-        var top = viewBorderWidth
-
-        if (bitmap.width < imageWidth) {
-            left += (imageWidth - bitmap.width) / 2
-        }
-        if (bitmap.height < imageHeight) {
-            top += (imageHeight - bitmap.height) / 2
-        }
+        val left = viewBorderWidth + (imageWidth - bitmap.width) / 2
+        val top = viewBorderWidth + (imageHeight - bitmap.height) / 2
 
         canvas.drawBitmap(bitmap, left, top, paint)
 
