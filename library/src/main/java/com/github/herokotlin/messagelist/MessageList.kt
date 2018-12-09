@@ -23,8 +23,10 @@ class MessageList : LinearLayout {
     var hasMoreMessage = false
 
         set(value) {
-            field = value
-            refreshLayout.isEnabled = value
+            if (field != value) {
+                field = value
+                refreshLayout.isEnabled = value
+            }
         }
 
     private lateinit var adapter: MessageListAdapter
@@ -127,11 +129,8 @@ class MessageList : LinearLayout {
     }
 
     fun prepend(messages: List<Message>) {
-        val size = messages.size
-        if (size > 0) {
+        if (messages.isNotEmpty()) {
             adapter.prepend(messages)
-            // 定位在新增的最后一个
-            recyclerView.scrollToPosition(size - 1)
         }
     }
 
