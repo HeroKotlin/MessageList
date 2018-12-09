@@ -90,7 +90,7 @@ class RoundImageView : ImageView {
 
         // > 1 表示图片比较小，没必要缩放了
         if (widthScale < 1 || heightScale < 1) {
-            val scale = Math.min(widthScale, heightScale)
+            val scale = Math.max(widthScale, heightScale)
             width = (intrinsicWidth * scale).toInt()
             height = (intrinsicHeight * scale).toInt()
         }
@@ -148,19 +148,14 @@ class RoundImageView : ImageView {
         // 避免前面用了半透明颜色
         paint.color = Color.BLACK
 
+
+        val saved = canvas.saveLayer(null, null, Canvas.ALL_SAVE_FLAG)
+
         var bitmap = drawBitmap?.get()
         if (bitmap == null || bitmap.isRecycled) {
             bitmap = createDrawBitmap()
             drawBitmap = WeakReference(bitmap)
         }
-
-        var mask = maskBitmap?.get()
-        if (mask == null || mask.isRecycled) {
-            mask = createMaskBitmap()
-            maskBitmap = WeakReference(mask)
-        }
-
-        val saved = canvas.saveLayer(null, null, Canvas.ALL_SAVE_FLAG)
 
         var left = viewBorderWidth
         var top = viewBorderWidth
@@ -176,7 +171,13 @@ class RoundImageView : ImageView {
 
         paint.xfermode = xfermode
 
-        canvas.drawBitmap(mask, viewBorderWidth, viewBorderWidth, paint)
+        bitmap = maskBitmap?.get()
+        if (bitmap == null || bitmap.isRecycled) {
+            bitmap = createMaskBitmap()
+            maskBitmap = WeakReference(bitmap)
+        }
+
+        canvas.drawBitmap(bitmap, viewBorderWidth, viewBorderWidth, paint)
 
         paint.xfermode = null
 
