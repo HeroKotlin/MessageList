@@ -5,7 +5,6 @@ import android.graphics.*
 import android.graphics.drawable.Drawable
 import android.net.Uri
 import android.util.AttributeSet
-import android.util.Log
 import android.widget.ImageView
 import java.lang.ref.WeakReference
 
@@ -82,32 +81,29 @@ class RoundImageView : ImageView {
 
     private fun createDrawBitmap(): Bitmap {
 
-        var width = imageWidth.toInt()
-        var height = imageHeight.toInt()
+        val scale = Math.min(imageWidth / intrinsicWidth, imageHeight / intrinsicHeight)
 
-        val widthScale = imageWidth / intrinsicWidth
-        val heightScale = imageHeight / intrinsicHeight
+        var width = intrinsicWidth * scale
+        var height = intrinsicHeight * scale
 
-        // > 1 表示图片比较小，没必要缩放了
-        if (widthScale < 1 || heightScale < 1) {
-            val scale = Math.max(widthScale, heightScale)
-            width = (intrinsicWidth * scale).toInt()
-            height = (intrinsicHeight * scale).toInt()
-        }
-        else {
-            // 小于 50 就算了
-            if (width - intrinsicWidth > 50) {
-                width = intrinsicWidth
+        if (height > 0) {
+            // 如果只是少了一点点像素，直接缩放就行了
+            // 反正也看不出来
+            val ratio = width / height
+            if (imageWidth > width && imageWidth - width < 20) {
+                width = imageWidth
+                height = width / ratio
             }
-            if (height - intrinsicHeight > 50) {
-                height = intrinsicHeight
+            if (imageHeight > height && imageHeight - height < 20) {
+                height = imageHeight
+                width = height * ratio
             }
         }
 
-        val bitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888)
+        val bitmap = Bitmap.createBitmap(width.toInt(), height.toInt(), Bitmap.Config.ARGB_8888)
         val canvas = Canvas(bitmap)
 
-        drawable.setBounds(0, 0, width, height)
+        drawable.setBounds(0, 0, width.toInt(), height.toInt())
         drawable.draw(canvas)
 
         return bitmap
