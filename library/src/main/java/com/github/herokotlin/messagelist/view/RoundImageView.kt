@@ -82,17 +82,32 @@ class RoundImageView : ImageView {
 
     private fun createDrawBitmap(): Bitmap {
 
-        val bitmap = Bitmap.createBitmap(imageWidth.toInt(), imageHeight.toInt(), Bitmap.Config.ARGB_8888)
-
-        val canvas = Canvas(bitmap)
+        var width = imageWidth.toInt()
+        var height = imageHeight.toInt()
 
         val widthScale = imageWidth / intrinsicWidth
         val heightScale = imageHeight / intrinsicHeight
 
-        val scale = Math.max(widthScale, heightScale)
+        // > 1 表示图片比较小，没必要缩放了
+        if (widthScale < 1 || heightScale < 1) {
+            val scale = Math.min(widthScale, heightScale)
+            width = (intrinsicWidth * scale).toInt()
+            height = (intrinsicHeight * scale).toInt()
+        }
+        else {
+            // 小于 50 就算了
+            if (width - intrinsicWidth > 50) {
+                width = intrinsicWidth
+            }
+            if (height - intrinsicHeight > 50) {
+                height = intrinsicHeight
+            }
+        }
 
-        drawable.setBounds(0, 0, (intrinsicWidth * scale).toInt(), (intrinsicHeight * scale).toInt())
+        val bitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888)
+        val canvas = Canvas(bitmap)
 
+        drawable.setBounds(0, 0, width, height)
         drawable.draw(canvas)
 
         return bitmap
@@ -133,27 +148,35 @@ class RoundImageView : ImageView {
         // 避免前面用了半透明颜色
         paint.color = Color.BLACK
 
-        val saved = canvas.saveLayer(null, null, Canvas.ALL_SAVE_FLAG)
-
         var bitmap = drawBitmap?.get()
         if (bitmap == null || bitmap.isRecycled) {
             bitmap = createDrawBitmap()
             drawBitmap = WeakReference(bitmap)
         }
 
-        canvas.drawBitmap(bitmap, viewBorderWidth, viewBorderWidth, paint)
+        var mask = maskBitmap?.get()
+        if (mask == null || mask.isRecycled) {
+            mask = createMaskBitmap()
+            maskBitmap = WeakReference(mask)
+        }
 
+        val saved = canvas.saveLayer(null, null, Canvas.ALL_SAVE_FLAG)
+
+        var left = viewBorderWidth
+        var top = viewBorderWidth
+
+        if (bitmap.width < imageWidth) {
+            left += (imageWidth - bitmap.width) / 2
+        }
+        if (bitmap.height < imageHeight) {
+            top += (imageHeight - bitmap.height) / 2
+        }
+
+        canvas.drawBitmap(bitmap, left, top, paint)
 
         paint.xfermode = xfermode
 
-
-        bitmap = maskBitmap?.get()
-        if (bitmap == null || bitmap.isRecycled) {
-            bitmap = createMaskBitmap()
-            maskBitmap = WeakReference(bitmap)
-        }
-        canvas.drawBitmap(bitmap, viewBorderWidth, viewBorderWidth, paint)
-
+        canvas.drawBitmap(mask, viewBorderWidth, viewBorderWidth, paint)
 
         paint.xfermode = null
 
