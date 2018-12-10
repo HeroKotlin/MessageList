@@ -132,9 +132,8 @@ class MessageListAdapter(private val configuration: MessageListConfiguration, pr
     }
 
     fun append(messages: List<Message>) {
-        val count = itemCount
-        messageList.addAll(count, messages)
-        notifyItemRangeInserted(count, messages.count())
+        messageList.addAll(itemCount, messages)
+        notifyDataSetChanged()
     }
 
     fun prepend(messages: List<Message>) {
