@@ -11,12 +11,12 @@
 
     <dimen name="message_list_event_text_size">11sp</dimen>
     <dimen name="message_list_event_line_spacing">1dp</dimen>
-    <dimen name="message_list_event_border_radius">4dp</dimen>
+    <dimen name="message_list_event_border_radius">5dp</dimen>
     <dimen name="message_list_event_padding_horizontal">5dp</dimen>
     <dimen name="message_list_event_padding_vertical">3dp</dimen>
 
     <dimen name="message_list_time_text_size">11sp</dimen>
-    <dimen name="message_list_time_border_radius">4dp</dimen>
+    <dimen name="message_list_time_border_radius">5dp</dimen>
     <dimen name="message_list_time_padding_horizontal">5dp</dimen>
     <dimen name="message_list_time_padding_vertical">3dp</dimen>
 

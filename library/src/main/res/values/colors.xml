@@ -9,11 +9,11 @@
     <color name="message_list_right_user_name_text_color">#999</color>
 
     <!-- 语音消息的时长 -->
-    <color name="message_list_left_audio_message_duration_text_color">#AAA</color>
-    <color name="message_list_left_audio_message_unit_text_color">#AAA</color>
+    <color name="message_list_left_audio_message_duration_text_color">#979797</color>
+    <color name="message_list_left_audio_message_unit_text_color">#979797</color>
 
-    <color name="message_list_right_audio_message_duration_text_color">#AAA</color>
-    <color name="message_list_right_audio_message_unit_text_color">#AAA</color>
+    <color name="message_list_right_audio_message_duration_text_color">#979797</color>
+    <color name="message_list_right_audio_message_unit_text_color">#979797</color>
 
     <!-- 视频消息的时长 -->
     <color name="message_list_video_message_border_color">#88CCCCCC</color>
@@ -31,11 +31,11 @@
     <color name="message_list_image_message_border_color">#88CCCCCC</color>
 
     <!-- 事件消息 -->
-    <color name="message_list_event_bg_color">#30000000</color>
+    <color name="message_list_event_bg_color">#21000000</color>
     <color name="message_list_event_text_color">#FFF</color>
 
     <!-- 时间 -->
-    <color name="message_list_time_bg_color">#30000000</color>
+    <color name="message_list_time_bg_color">#21000000</color>
     <color name="message_list_time_text_color">#FFF</color>
 
     <!-- spinner -->
