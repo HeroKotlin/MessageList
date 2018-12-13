@@ -44,12 +44,10 @@ class AudioPlayer: SensorEventListener {
             stop()
         }
 
-        sensorManager.registerListener(this, sensor, SensorManager.SENSOR_DELAY_NORMAL)
     }
 
     fun destroy() {
         stop()
-        sensorManager.unregisterListener(this)
     }
 
     fun play(id: String, url: String) {
@@ -57,14 +55,19 @@ class AudioPlayer: SensorEventListener {
         stop()
 
         try {
+
             player.setDataSource(url)
             player.prepareAsync()
             listeners.forEach {
                 it.onLoad(id)
             }
-            useSpeaker()
+
             this.id = id
             this.url = url
+
+            useSpeaker()
+            sensorManager.registerListener(this, sensor, SensorManager.SENSOR_DELAY_NORMAL)
+
         }
         catch (e: IllegalArgumentException) {
 
@@ -95,6 +98,8 @@ class AudioPlayer: SensorEventListener {
         url = ""
 
         useSpeaker()
+
+        sensorManager.unregisterListener(this)
 
     }
 
@@ -130,10 +135,15 @@ class AudioPlayer: SensorEventListener {
     private fun useSpeaker() {
 
         audioManager.isSpeakerphoneOn = true
+
         audioManager.mode = AudioManager.MODE_NORMAL
 
         // 设置音量，解决有些机型切换后没声音或者声音突然变大的问题
-        audioManager.setStreamVolume(AudioManager.STREAM_MUSIC, audioManager.getStreamVolume(AudioManager.STREAM_MUSIC), AudioManager.FX_KEY_CLICK)
+        audioManager.setStreamVolume(
+            AudioManager.STREAM_MUSIC,
+            audioManager.getStreamVolume(AudioManager.STREAM_MUSIC),
+            AudioManager.FX_KEY_CLICK
+        )
 
     }
 
@@ -144,13 +154,20 @@ class AudioPlayer: SensorEventListener {
         // 5.0 以上
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             audioManager.mode = AudioManager.MODE_IN_COMMUNICATION
+            audioManager.setStreamVolume(
+                AudioManager.MODE_IN_COMMUNICATION,
+                audioManager.getStreamMaxVolume(AudioManager.MODE_IN_COMMUNICATION),
+                0
+            )
         }
         else {
             audioManager.mode = AudioManager.MODE_IN_CALL
+            audioManager.setStreamVolume(
+                AudioManager.STREAM_VOICE_CALL,
+                audioManager.getStreamMaxVolume(AudioManager.STREAM_VOICE_CALL),
+                AudioManager.FX_KEY_CLICK
+            )
         }
-
-        // 设置音量，解决有些机型切换后没声音或者声音突然变大的问题
-        audioManager.setStreamVolume(AudioManager.STREAM_VOICE_CALL, audioManager.getStreamMaxVolume(AudioManager.STREAM_VOICE_CALL), AudioManager.FX_KEY_CLICK)
 
     }
 
