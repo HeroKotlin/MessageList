@@ -43,7 +43,7 @@ internal class MenuWindow: PopupWindow() {
             measureSpec(width),
             measureSpec(height)
         )
-        val offsetX = Math.abs(contentView.measuredWidth - view.width) / 2
+        val offsetX = (view.width - contentView.measuredWidth) / 2
         val offsetY = -(contentView.measuredHeight + view.height + offset)
         PopupWindowCompat.showAsDropDown(this, view, offsetX, offsetY, Gravity.START)
     }
