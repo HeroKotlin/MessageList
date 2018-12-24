@@ -9,7 +9,7 @@ import android.util.AttributeSet
 import android.widget.ImageView
 import java.lang.ref.WeakReference
 
-class RoundImageView : ImageView {
+internal class RoundImageView : ImageView {
 
     private var viewWidth = 1f
     private var viewHeight = 1f

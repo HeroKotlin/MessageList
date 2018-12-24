@@ -6,11 +6,11 @@ import android.text.method.BaseMovementMethod
 import android.view.MotionEvent
 import android.widget.TextView
 
-internal object linkMovementMethod: BaseMovementMethod() {
+internal object LinkMovementMethod: BaseMovementMethod() {
 
     private var linkSpan: LinkSpan? = null
 
-    fun getLinkSpan(widget: TextView, text: Spannable, event: MotionEvent): LinkSpan? {
+    private fun getLinkSpan(widget: TextView, text: Spannable, event: MotionEvent): LinkSpan? {
 
         var x = event.x.toInt()
         var y = event.y.toInt()

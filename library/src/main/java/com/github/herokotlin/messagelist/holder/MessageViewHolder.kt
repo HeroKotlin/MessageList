@@ -23,7 +23,7 @@ import kotlinx.android.synthetic.main.message_list_menu.view.*
 import kotlinx.android.synthetic.main.message_list_menu_item.view.*
 import java.util.regex.Pattern
 
-abstract class MessageViewHolder(view: View): RecyclerView.ViewHolder(view) {
+internal abstract class MessageViewHolder(view: View): RecyclerView.ViewHolder(view) {
 
     companion object {
         private val LINK_PATTERN = Pattern.compile("\\[[^:]+:[^]]+\\]")

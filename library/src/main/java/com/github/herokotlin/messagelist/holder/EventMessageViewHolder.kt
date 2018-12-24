@@ -2,7 +2,7 @@ package com.github.herokotlin.messagelist.holder
 
 import android.view.View
 import com.github.herokotlin.messagelist.model.EventMessage
-import com.github.herokotlin.messagelist.view.linkMovementMethod
+import com.github.herokotlin.messagelist.view.LinkMovementMethod
 import kotlinx.android.synthetic.main.message_event.view.*
 
 internal class EventMessageViewHolder(view: View): MessageViewHolder(view) {
@@ -14,7 +14,7 @@ internal class EventMessageViewHolder(view: View): MessageViewHolder(view) {
     override fun create() {
         with (itemView) {
             eventView.maxWidth = getContentMaxWidth().toInt()
-            eventView.movementMethod = linkMovementMethod
+            eventView.movementMethod = LinkMovementMethod
         }
     }
 

@@ -3,7 +3,7 @@ package com.github.herokotlin.messagelist.holder
 import android.view.View
 import com.github.herokotlin.messagelist.model.MenuItem
 import com.github.herokotlin.messagelist.model.TextMessage
-import com.github.herokotlin.messagelist.view.linkMovementMethod
+import com.github.herokotlin.messagelist.view.LinkMovementMethod
 import kotlinx.android.synthetic.main.message_text_left.view.*
 
 internal class TextMessageViewHolder(view: View, val isRightMessage: Boolean): MessageViewHolder(view) {
@@ -38,7 +38,7 @@ internal class TextMessageViewHolder(view: View, val isRightMessage: Boolean): M
             }
 
             textView.maxWidth = contentMaxWidth
-            textView.movementMethod = linkMovementMethod
+            textView.movementMethod = LinkMovementMethod
             textView.isClickable = false
             textView.isFocusable = false
             textView.isLongClickable = false
