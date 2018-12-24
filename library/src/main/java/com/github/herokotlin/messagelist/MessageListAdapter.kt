@@ -6,7 +6,7 @@ import android.view.ViewGroup
 import com.github.herokotlin.messagelist.holder.*
 import com.github.herokotlin.messagelist.model.*
 
-class MessageListAdapter(private val configuration: MessageListConfiguration, private val callback: MessageListCallback): RecyclerView.Adapter<MessageViewHolder>() {
+internal class MessageListAdapter(private val configuration: MessageListConfiguration, private val callback: MessageListCallback): RecyclerView.Adapter<MessageViewHolder>() {
 
     companion object {
 

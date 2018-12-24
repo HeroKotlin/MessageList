@@ -12,7 +12,7 @@ import com.github.herokotlin.messagelist.util.AudioPlayer
 
 abstract class MessageListConfiguration(val context: Context) {
 
-    var audioPlayer = AudioPlayer()
+    internal var audioPlayer = AudioPlayer()
 
     /**
      * 消息的水平内间距
@@ -158,6 +158,8 @@ abstract class MessageListConfiguration(val context: Context) {
      * 菜单文本
      */
     var menuItemCopy = "复制"
+
+    var menuItemShare = "转发"
 
     /**
      * 格式化文本内容

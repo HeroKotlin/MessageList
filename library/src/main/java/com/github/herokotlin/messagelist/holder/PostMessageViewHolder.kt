@@ -1,10 +1,19 @@
 package com.github.herokotlin.messagelist.holder
 
 import android.view.View
+import com.github.herokotlin.messagelist.model.MenuItem
 import com.github.herokotlin.messagelist.model.PostMessage
 import kotlinx.android.synthetic.main.message_post_left.view.*
 
-class PostMessageViewHolder(view: View, val isRightMessage: Boolean): MessageViewHolder(view) {
+internal class PostMessageViewHolder(view: View, val isRightMessage: Boolean): MessageViewHolder(view) {
+
+    override val menuItems: List<MenuItem> by lazy {
+        createMenuItems(
+            MenuItem(configuration.menuItemShare) {
+                callback.onShareClick(message)
+            }
+        )
+    }
 
     override fun create() {
         with (itemView) {

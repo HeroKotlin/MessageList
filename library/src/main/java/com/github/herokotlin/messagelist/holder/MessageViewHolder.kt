@@ -4,11 +4,9 @@ import android.support.v7.widget.RecyclerView
 import android.text.SpannableString
 import android.text.Spanned
 import android.text.style.ForegroundColorSpan
-import android.util.Log
 import android.util.TypedValue
 import android.view.LayoutInflater
 import android.view.View
-import android.widget.Button
 import android.widget.LinearLayout
 import android.widget.TextView
 import com.github.herokotlin.messagelist.R
@@ -38,21 +36,22 @@ abstract class MessageViewHolder(view: View): RecyclerView.ViewHolder(view) {
     lateinit var configuration: MessageListConfiguration
     lateinit var callback: MessageListCallback
 
-    open var menuItems = mutableListOf<MenuItem>()
+    open val menuItems = listOf<MenuItem>()
 
-    open var onUserAvatarClick = { _: View? ->
+
+    open val onUserAvatarClick = { _: View? ->
         callback.onUserAvatarClick(message)
     }
 
-    open var onUserNameClick = { _: View? ->
+    open val onUserNameClick = { _: View? ->
         callback.onUserNameClick(message)
     }
 
-    open var onContentClick = { _: View? ->
+    open val onContentClick = { _: View? ->
         callback.onContentClick(message)
     }
 
-    open var onContentLongPress = { view: View? ->
+    open val onContentLongPress = { view: View? ->
         if (view != null && menuItems.count() > 0) {
             val menu = MenuWindow()
 
@@ -84,7 +83,7 @@ abstract class MessageViewHolder(view: View): RecyclerView.ViewHolder(view) {
         true
     }
 
-    open var onFailureClick = { _: View? ->
+    open val onFailureClick = { _: View? ->
         callback.onFailureClick(message)
     }
 
@@ -224,6 +223,10 @@ abstract class MessageViewHolder(view: View): RecyclerView.ViewHolder(view) {
 
         return screenWidth - 2 * (configuration.messagePaddingHorizontal + dp2px(configuration.userAvatarWidth.toFloat())) - configuration.leftUserNameMarginLeft - configuration.rightUserNameMarginRight
 
+    }
+
+    protected fun createMenuItems(vararg menuItems: MenuItem): List<MenuItem> {
+        return menuItems.filter { it.text.isNotBlank() }
     }
 
     abstract fun create()

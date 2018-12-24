@@ -4,6 +4,7 @@ import android.content.Context
 import android.graphics.*
 import android.graphics.drawable.Drawable
 import android.net.Uri
+import android.os.Build
 import android.util.AttributeSet
 import android.widget.ImageView
 import java.lang.ref.WeakReference
@@ -144,8 +145,12 @@ class RoundImageView : ImageView {
         // 避免前面用了半透明颜色
         paint.color = Color.BLACK
 
-
-        val saved = canvas.saveLayer(null, null, Canvas.ALL_SAVE_FLAG)
+        val saved = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            canvas.saveLayer(null, null)
+        }
+        else {
+            canvas.saveLayer(null, null, Canvas.ALL_SAVE_FLAG)
+        }
 
         var bitmap = drawBitmap?.get()
         if (bitmap == null || bitmap.isRecycled) {

@@ -24,6 +24,10 @@ interface MessageListCallback {
 
     }
 
+    fun onShareClick(message: Message) {
+
+    }
+
     fun onFailureClick(message: Message) {
 
     }

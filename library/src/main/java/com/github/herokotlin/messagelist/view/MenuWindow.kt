@@ -8,7 +8,7 @@ import android.view.ViewGroup
 import android.widget.PopupWindow
 import com.github.herokotlin.messagelist.R
 
-class MenuWindow: PopupWindow() {
+internal class MenuWindow: PopupWindow() {
 
     init {
         width = ViewGroup.LayoutParams.WRAP_CONTENT

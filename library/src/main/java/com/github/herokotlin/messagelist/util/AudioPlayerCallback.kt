@@ -1,6 +1,6 @@
 package com.github.herokotlin.messagelist.util
 
-interface AudioPlayerCallback {
+internal interface AudioPlayerCallback {
 
     fun onLoad(id: String)
 

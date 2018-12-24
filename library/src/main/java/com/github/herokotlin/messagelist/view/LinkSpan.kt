@@ -6,7 +6,7 @@ import android.text.style.ClickableSpan
 import android.view.View
 import com.github.herokotlin.messagelist.MessageListCallback
 
-class LinkSpan(val link: String, val onClick: (String) -> Unit): ClickableSpan() {
+internal class LinkSpan(val link: String, val onClick: (String) -> Unit): ClickableSpan() {
 
     var isPressed = false
 

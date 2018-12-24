@@ -6,20 +6,24 @@ import com.github.herokotlin.messagelist.model.TextMessage
 import com.github.herokotlin.messagelist.view.linkMovementMethod
 import kotlinx.android.synthetic.main.message_text_left.view.*
 
-class TextMessageViewHolder(view: View, val isRightMessage: Boolean): MessageViewHolder(view) {
+internal class TextMessageViewHolder(view: View, val isRightMessage: Boolean): MessageViewHolder(view) {
+
+    override val menuItems: List<MenuItem> by lazy {
+        createMenuItems(
+            MenuItem(configuration.menuItemCopy) {
+                callback.onCopyClick(message)
+            },
+            MenuItem(configuration.menuItemShare) {
+                callback.onShareClick(message)
+            }
+        )
+    }
 
     private val onLinkClick = { link: String ->
         callback.onLinkClick(link)
     }
 
     override fun create() {
-
-        menuItems.add(
-            MenuItem(configuration.menuItemCopy) {
-                callback.onCopyClick(message)
-            }
-        )
-
         with (itemView) {
 
             val contentMaxWidth = getContentMaxWidth().toInt()

@@ -5,7 +5,7 @@ import com.github.herokotlin.messagelist.model.EventMessage
 import com.github.herokotlin.messagelist.view.linkMovementMethod
 import kotlinx.android.synthetic.main.message_event.view.*
 
-class EventMessageViewHolder(view: View): MessageViewHolder(view) {
+internal class EventMessageViewHolder(view: View): MessageViewHolder(view) {
 
     private val onLinkClick = { link: String ->
         callback.onLinkClick(link)

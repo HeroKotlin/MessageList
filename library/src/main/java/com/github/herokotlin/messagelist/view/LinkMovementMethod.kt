@@ -6,7 +6,7 @@ import android.text.method.BaseMovementMethod
 import android.view.MotionEvent
 import android.widget.TextView
 
-object linkMovementMethod: BaseMovementMethod() {
+internal object linkMovementMethod: BaseMovementMethod() {
 
     private var linkSpan: LinkSpan? = null
 
