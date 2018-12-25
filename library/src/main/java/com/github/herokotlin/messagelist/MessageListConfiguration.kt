@@ -117,12 +117,12 @@ abstract class MessageListConfiguration(val context: Context) {
     /**
      * 名片消息的缩略图宽度
      */
-    var cardMessageThumbnailWidth = 42
+    var cardMessageThumbnailWidth = 40
 
     /**
      * 名片消息的缩略图高度
      */
-    var cardMessageThumbnailHeight = 42
+    var cardMessageThumbnailHeight = 40
 
     /**
      * 名片消息的缩略图圆角
@@ -137,12 +137,12 @@ abstract class MessageListConfiguration(val context: Context) {
     /**
      * 文章消息的缩略图宽度
      */
-    var postMessageThumbnailWidth = 36
+    var postMessageThumbnailWidth = 38
 
     /**
      * 文章消息的缩略图高度
      */
-    var postMessageThumbnailHeight = 36
+    var postMessageThumbnailHeight = 38
 
     /**
      * 文章消息的缩略图圆角

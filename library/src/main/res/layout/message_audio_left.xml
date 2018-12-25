@@ -48,10 +48,10 @@
         android:layout_below="@id/nameView"
         android:layout_toRightOf="@id/avatarView"
         android:layout_marginLeft="@dimen/message_list_left_audio_message_margin_left"
-        android:paddingTop="@dimen/message_list_zero"
-        android:paddingBottom="@dimen/message_list_zero"
+        android:paddingTop="0dp"
+        android:paddingBottom="0dp"
         android:paddingLeft="@dimen/message_list_left_audio_message_wave_margin_left"
-        android:paddingRight="@dimen/message_list_zero"
+        android:paddingRight="0dp"
         android:background="@drawable/message_list_bubble_left_state">
 
         <ImageView

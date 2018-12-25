@@ -6,25 +6,24 @@
 
     <dimen name="message_list_message_padding_horizontal">14dp</dimen>
 
-    <dimen name="message_list_zero">0px</dimen>
     <dimen name="message_list_user_avatar_border_width">0px</dimen>
 
-    <dimen name="message_list_event_text_size">11sp</dimen>
+    <dimen name="message_list_event_text_size">11dp</dimen>
     <dimen name="message_list_event_line_spacing">1dp</dimen>
     <dimen name="message_list_event_border_radius">5dp</dimen>
     <dimen name="message_list_event_padding_horizontal">5dp</dimen>
     <dimen name="message_list_event_padding_vertical">3dp</dimen>
 
-    <dimen name="message_list_time_text_size">11sp</dimen>
+    <dimen name="message_list_time_text_size">11dp</dimen>
     <dimen name="message_list_time_border_radius">5dp</dimen>
     <dimen name="message_list_time_padding_horizontal">5dp</dimen>
     <dimen name="message_list_time_padding_vertical">3dp</dimen>
 
-    <dimen name="message_list_left_user_name_text_size">12sp</dimen>
+    <dimen name="message_list_left_user_name_text_size">12dp</dimen>
     <dimen name="message_list_left_user_name_margin_left">10dp</dimen>
     <dimen name="message_list_left_user_name_margin_bottom">3dp</dimen>
 
-    <dimen name="message_list_right_user_name_text_size">12sp</dimen>
+    <dimen name="message_list_right_user_name_text_size">12dp</dimen>
     <dimen name="message_list_right_user_name_margin_right">10dp</dimen>
     <dimen name="message_list_right_user_name_margin_bottom">3dp</dimen>
 
@@ -41,7 +40,7 @@
 
     <dimen name="message_list_left_text_message_min_width">50dp</dimen>
     <dimen name="message_list_left_text_message_margin_left">5dp</dimen>
-    <dimen name="message_list_left_text_message_text_size">15sp</dimen>
+    <dimen name="message_list_left_text_message_text_size">15dp</dimen>
     <dimen name="message_list_left_text_message_line_spacing">2dp</dimen>
     <dimen name="message_list_left_text_message_padding_left">16dp</dimen>
     <dimen name="message_list_left_text_message_padding_right">10dp</dimen>
@@ -50,7 +49,7 @@
 
     <dimen name="message_list_right_text_message_min_width">50dp</dimen>
     <dimen name="message_list_right_text_message_margin_right">5dp</dimen>
-    <dimen name="message_list_right_text_message_text_size">15sp</dimen>
+    <dimen name="message_list_right_text_message_text_size">15dp</dimen>
     <dimen name="message_list_right_text_message_line_spacing">2dp</dimen>
     <dimen name="message_list_right_text_message_padding_left">10dp</dimen>
     <dimen name="message_list_right_text_message_padding_right">16dp</dimen>
@@ -72,21 +71,21 @@
 
     <dimen name="message_list_audio_message_duration_spacing">10dp</dimen>
     <dimen name="message_list_audio_message_duration_bottom">5dp</dimen>
-    <dimen name="message_list_audio_message_unit_spacing">2sp</dimen>
+    <dimen name="message_list_audio_message_unit_spacing">2dp</dimen>
     <dimen name="message_list_audio_message_unit_bottom">6dp</dimen>
     <dimen name="message_list_audio_message_loading_size">16dp</dimen>
 
     <dimen name="message_list_left_audio_message_bubble_height">40dp</dimen>
     <dimen name="message_list_left_audio_message_margin_left">5dp</dimen>
     <dimen name="message_list_left_audio_message_wave_margin_left">16dp</dimen>
-    <dimen name="message_list_left_audio_message_duration_text_size">14sp</dimen>
-    <dimen name="message_list_left_audio_message_unit_text_size">14sp</dimen>
+    <dimen name="message_list_left_audio_message_duration_text_size">14dp</dimen>
+    <dimen name="message_list_left_audio_message_unit_text_size">14dp</dimen>
 
     <dimen name="message_list_right_audio_message_bubble_height">40dp</dimen>
     <dimen name="message_list_right_audio_message_margin_right">5dp</dimen>
     <dimen name="message_list_right_audio_message_wave_margin_right">16dp</dimen>
-    <dimen name="message_list_right_audio_message_duration_text_size">14sp</dimen>
-    <dimen name="message_list_right_audio_message_unit_text_size">14sp</dimen>
+    <dimen name="message_list_right_audio_message_duration_text_size">14dp</dimen>
+    <dimen name="message_list_right_audio_message_unit_text_size">14dp</dimen>
 
 
 
@@ -98,14 +97,14 @@
     <dimen name="message_list_video_message_duration_margin_bottom">4dp</dimen>
 
     <dimen name="message_list_left_video_message_margin_left">10dp</dimen>
-    <dimen name="message_list_left_video_message_duration_text_size">12sp</dimen>
+    <dimen name="message_list_left_video_message_duration_text_size">12dp</dimen>
 
     <item name="message_list_left_video_message_duration_shadow_radius" type="dimen" format="float">14</item>
     <item name="message_list_left_video_message_duration_shadow_offset_x" type="dimen" format="float">0</item>
     <item name="message_list_left_video_message_duration_shadow_offset_y" type="dimen" format="float">0</item>
 
     <dimen name="message_list_right_video_message_margin_right">10dp</dimen>
-    <dimen name="message_list_right_video_message_duration_text_size">12sp</dimen>
+    <dimen name="message_list_right_video_message_duration_text_size">12dp</dimen>
 
     <item name="message_list_right_video_message_duration_shadow_radius" type="dimen" format="float">14</item>
     <item name="message_list_right_video_message_duration_shadow_offset_x" type="dimen" format="float">0</item>
@@ -124,11 +123,11 @@
     <dimen name="message_list_left_card_message_title_margin_top">13dp</dimen>
     <dimen name="message_list_left_card_message_title_margin_left">10dp</dimen>
     <dimen name="message_list_left_card_message_title_margin_right">10dp</dimen>
-    <dimen name="message_list_left_card_message_title_text_size">14sp</dimen>
+    <dimen name="message_list_left_card_message_title_text_size">14dp</dimen>
     <dimen name="message_list_left_card_message_desc_margin_top">4dp</dimen>
     <dimen name="message_list_left_card_message_desc_margin_left">10dp</dimen>
     <dimen name="message_list_left_card_message_desc_margin_right">10dp</dimen>
-    <dimen name="message_list_left_card_message_desc_text_size">12sp</dimen>
+    <dimen name="message_list_left_card_message_desc_text_size">12dp</dimen>
     <dimen name="message_list_left_card_message_divider_margin_top">10dp</dimen>
     <dimen name="message_list_left_card_message_divider_margin_left">5dp</dimen>
     <dimen name="message_list_left_card_message_divider_margin_right">0dp</dimen>
@@ -136,7 +135,7 @@
     <dimen name="message_list_left_card_message_label_margin_left">16dp</dimen>
     <dimen name="message_list_left_card_message_label_margin_top">3dp</dimen>
     <dimen name="message_list_left_card_message_label_margin_bottom">4dp</dimen>
-    <dimen name="message_list_left_card_message_label_text_size">10sp</dimen>
+    <dimen name="message_list_left_card_message_label_text_size">10dp</dimen>
 
     <dimen name="message_list_right_card_message_margin_right">5dp</dimen>
     <dimen name="message_list_right_card_message_thumbnail_margin_top">11dp</dimen>
@@ -144,11 +143,11 @@
     <dimen name="message_list_right_card_message_title_margin_top">13dp</dimen>
     <dimen name="message_list_right_card_message_title_margin_left">10dp</dimen>
     <dimen name="message_list_right_card_message_title_margin_right">16dp</dimen>
-    <dimen name="message_list_right_card_message_title_text_size">14sp</dimen>
+    <dimen name="message_list_right_card_message_title_text_size">14dp</dimen>
     <dimen name="message_list_right_card_message_desc_margin_top">4dp</dimen>
     <dimen name="message_list_right_card_message_desc_margin_left">10dp</dimen>
     <dimen name="message_list_right_card_message_desc_margin_right">16dp</dimen>
-    <dimen name="message_list_right_card_message_desc_text_size">12sp</dimen>
+    <dimen name="message_list_right_card_message_desc_text_size">12dp</dimen>
     <dimen name="message_list_right_card_message_divider_margin_top">10dp</dimen>
     <dimen name="message_list_right_card_message_divider_margin_left">0dp</dimen>
     <dimen name="message_list_right_card_message_divider_margin_right">5dp</dimen>
@@ -156,7 +155,7 @@
     <dimen name="message_list_right_card_message_label_margin_left">10dp</dimen>
     <dimen name="message_list_right_card_message_label_margin_top">3dp</dimen>
     <dimen name="message_list_right_card_message_label_margin_bottom">4dp</dimen>
-    <dimen name="message_list_right_card_message_label_text_size">10sp</dimen>
+    <dimen name="message_list_right_card_message_label_text_size">10dp</dimen>
 
 
 
@@ -169,11 +168,11 @@
     <dimen name="message_list_left_post_message_title_margin_top">9dp</dimen>
     <dimen name="message_list_left_post_message_title_margin_left">16dp</dimen>
     <dimen name="message_list_left_post_message_title_margin_right">10dp</dimen>
-    <dimen name="message_list_left_post_message_title_text_size">14sp</dimen>
+    <dimen name="message_list_left_post_message_title_text_size">14dp</dimen>
     <dimen name="message_list_left_post_message_title_line_spacing">1dp</dimen>
     <dimen name="message_list_left_post_message_desc_margin_top">3dp</dimen>
     <dimen name="message_list_left_post_message_desc_margin_left">16dp</dimen>
-    <dimen name="message_list_left_post_message_desc_text_size">12sp</dimen>
+    <dimen name="message_list_left_post_message_desc_text_size">12dp</dimen>
     <dimen name="message_list_left_post_message_desc_line_spacing">1dp</dimen>
     <dimen name="message_list_left_post_message_thumbnail_margin_top">6dp</dimen>
     <dimen name="message_list_left_post_message_thumbnail_margin_left">10dp</dimen>
@@ -184,18 +183,18 @@
     <dimen name="message_list_left_post_message_brand_margin_left">16dp</dimen>
     <dimen name="message_list_left_post_message_brand_margin_top">3dp</dimen>
     <dimen name="message_list_left_post_message_brand_margin_bottom">4dp</dimen>
-    <dimen name="message_list_left_post_message_brand_text_size">10sp</dimen>
+    <dimen name="message_list_left_post_message_brand_text_size">10dp</dimen>
 
 
     <dimen name="message_list_right_post_message_margin_right">5dp</dimen>
     <dimen name="message_list_right_post_message_title_margin_top">9dp</dimen>
     <dimen name="message_list_right_post_message_title_margin_left">10dp</dimen>
     <dimen name="message_list_right_post_message_title_margin_right">16dp</dimen>
-    <dimen name="message_list_right_post_message_title_text_size">14sp</dimen>
+    <dimen name="message_list_right_post_message_title_text_size">14dp</dimen>
     <dimen name="message_list_right_post_message_title_line_spacing">1dp</dimen>
     <dimen name="message_list_right_post_message_desc_margin_top">3dp</dimen>
     <dimen name="message_list_right_post_message_desc_margin_left">10dp</dimen>
-    <dimen name="message_list_right_post_message_desc_text_size">12sp</dimen>
+    <dimen name="message_list_right_post_message_desc_text_size">12dp</dimen>
     <dimen name="message_list_right_post_message_desc_line_spacing">1dp</dimen>
     <dimen name="message_list_right_post_message_thumbnail_margin_top">6dp</dimen>
     <dimen name="message_list_right_post_message_thumbnail_margin_left">10dp</dimen>
@@ -206,7 +205,7 @@
     <dimen name="message_list_right_post_message_brand_margin_left">10dp</dimen>
     <dimen name="message_list_right_post_message_brand_margin_top">3dp</dimen>
     <dimen name="message_list_right_post_message_brand_margin_bottom">4dp</dimen>
-    <dimen name="message_list_right_post_message_brand_text_size">10sp</dimen>
+    <dimen name="message_list_right_post_message_brand_text_size">10dp</dimen>
 
 
 
@@ -217,7 +216,7 @@
 
     <dimen name="message_list_menu_offset">5dp</dimen>
     <dimen name="message_list_menu_border_radius">8dp</dimen>
-    <dimen name="message_list_menu_item_text_size">14sp</dimen>
+    <dimen name="message_list_menu_item_text_size">14dp</dimen>
     <dimen name="message_list_menu_item_divider_width">1px</dimen>
     <dimen name="message_list_menu_item_divider_height">18dp</dimen>
     <dimen name="message_list_menu_item_padding_vertical">10dp</dimen>
