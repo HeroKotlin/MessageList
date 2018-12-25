@@ -18,19 +18,22 @@ internal class RoundImageView : ImageView {
     private var viewBorderRadius = 0f
 
     private val viewRect = RectF()
+    private val clipRect = RectF()
 
     private var imageWidth = 0f
     private var imageHeight = 0f
 
     private val paint = Paint(Paint.ANTI_ALIAS_FLAG)
 
-    private val xfermode = PorterDuffXfermode(PorterDuff.Mode.DST_IN)
+    private val xfermode = PorterDuffXfermode(PorterDuff.Mode.SRC_IN)
 
-    // 待绘制的图
-    private var drawBitmap: Bitmap? = null
+    private var drawableBitmap: Bitmap? = null
 
-    // 遮罩图
-    private var maskBitmap: Bitmap? = null
+    private var drawableCanvas: Canvas? = null
+
+    private var drawableWidth = 0
+
+    private var drawableHeight = 0
 
     constructor(context: Context) : super(context)
 
@@ -55,74 +58,51 @@ internal class RoundImageView : ImageView {
 
     override fun onSizeChanged(w: Int, h: Int, oldw: Int, oldh: Int) {
         super.onSizeChanged(w, h, oldw, oldh)
-        viewRect.right = w.toFloat()
-        viewRect.bottom = h.toFloat()
         updateBitmap()
     }
 
     private fun updateBitmap() {
 
-        maskBitmap = null
-        drawBitmap = null
+        drawableBitmap = null
 
         if (drawable != null) {
 
             val intrinsicWidth = drawable.intrinsicWidth.toFloat()
             val intrinsicHeight = drawable.intrinsicHeight.toFloat()
 
-            if (viewWidth > 0 && viewHeight > 0 && intrinsicWidth > 0 && intrinsicHeight > 0) {
-                maskBitmap = createMaskBitmap(imageWidth, imageHeight)
-                drawBitmap = createDrawBitmap(intrinsicWidth, intrinsicHeight)
+            if (viewWidth > 0 && viewHeight > 0 && imageWidth > 0 && imageHeight > 0 && intrinsicWidth > 0 && intrinsicHeight > 0) {
+
+                val scale = Math.min(imageWidth / intrinsicWidth, imageHeight / intrinsicHeight)
+
+                var width = intrinsicWidth * scale
+                var height = intrinsicHeight * scale
+
+                // 避免除 0
+                if (height > 0) {
+                    // 如果只是少了一点点像素，直接缩放就行了
+                    // 反正也看不出来
+                    val ratio = width / height
+                    if (imageWidth > width) {
+                        width = imageWidth
+                        height = width / ratio
+                    }
+                    if (imageHeight > height) {
+                        height = imageHeight
+                        width = height * ratio
+                    }
+                }
+
+                drawableWidth = width.toInt()
+                drawableHeight = height.toInt()
+
+                drawableBitmap = Bitmap.createBitmap(drawableWidth, drawableHeight, Bitmap.Config.ARGB_8888)
+                drawableCanvas = Canvas(drawableBitmap)
+
             }
 
         }
 
         invalidate()
-
-    }
-
-    private fun createMaskBitmap(width: Float, height: Float): Bitmap {
-
-        val bitmap = Bitmap.createBitmap(width.toInt(), height.toInt(), Bitmap.Config.ARGB_8888)
-        val canvas = Canvas(bitmap)
-        val paint = Paint(Paint.ANTI_ALIAS_FLAG)
-
-        paint.color = Color.BLACK
-        canvas.drawRoundRect(RectF(0f, 0f, width, height), viewBorderRadius, viewBorderRadius, paint)
-
-        return bitmap
-
-    }
-
-    private fun createDrawBitmap(intrinsicWidth: Float, intrinsicHeight: Float): Bitmap {
-
-        val scale = Math.min(imageWidth / intrinsicWidth, imageHeight / intrinsicHeight)
-
-        var width = intrinsicWidth * scale
-        var height = intrinsicHeight * scale
-
-        // 避免除 0
-        if (height > 0) {
-            // 如果只是少了一点点像素，直接缩放就行了
-            // 反正也看不出来
-            val ratio = width / height
-            if (imageWidth > width) {
-                width = imageWidth
-                height = width / ratio
-            }
-            if (imageHeight > height) {
-                height = imageHeight
-                width = height * ratio
-            }
-        }
-
-        val bitmap = Bitmap.createBitmap(width.toInt(), height.toInt(), Bitmap.Config.ARGB_8888)
-        val canvas = Canvas(bitmap)
-
-        drawable.setBounds(0, 0, width.toInt(), height.toInt())
-        drawable.draw(canvas)
-
-        return bitmap
 
     }
 
@@ -134,10 +114,10 @@ internal class RoundImageView : ImageView {
 
     override fun onDraw(canvas: Canvas) {
 
-        val maskImage = maskBitmap
-        val drawImage = drawBitmap
+        val cacheBitmap = drawableBitmap
+        val cacheCanvas = drawableCanvas
 
-        if (maskImage == null || drawImage == null) {
+        if (cacheBitmap == null || cacheCanvas == null) {
             return
         }
 
@@ -161,14 +141,23 @@ internal class RoundImageView : ImageView {
             canvas.saveLayer(null, null, Canvas.ALL_SAVE_FLAG)
         }
 
-        val left = viewBorderWidth + (imageWidth - drawImage.width) / 2
-        val top = viewBorderWidth + (imageHeight - drawImage.height) / 2
-
-        canvas.drawBitmap(drawBitmap, left, top, paint)
+        if (viewBorderWidth > 0) {
+            canvas.drawRoundRect(clipRect, viewBorderRadius, viewBorderRadius, paint)
+        }
+        else {
+            canvas.drawRect(clipRect, paint)
+        }
 
         paint.xfermode = xfermode
 
-        canvas.drawBitmap(maskBitmap, viewBorderWidth, viewBorderWidth, paint)
+        val left = viewBorderWidth + (imageWidth - drawableWidth) / 2
+        val top = viewBorderWidth + (imageHeight - drawableHeight) / 2
+
+        // gif 会不停的调 onDraw，因此只有在这里不停的 drawable.draw(cacheCanvas) 才会有动画
+        drawable.setBounds(0, 0, drawableWidth, drawableHeight)
+        drawable.draw(cacheCanvas)
+
+        canvas.drawBitmap(cacheBitmap, left, top, paint)
 
         paint.xfermode = null
 
@@ -192,6 +181,14 @@ internal class RoundImageView : ImageView {
             imageWidth = width
             imageHeight = height
         }
+
+        viewRect.right = width
+        viewRect.bottom = height
+
+        clipRect.left = viewBorderWidth
+        clipRect.top = viewBorderWidth
+        clipRect.right = width - viewBorderWidth
+        clipRect.bottom = height - viewBorderWidth
 
         // 后续会调 setImageResource 之类的方法
         // 它们会触发 invalidate
