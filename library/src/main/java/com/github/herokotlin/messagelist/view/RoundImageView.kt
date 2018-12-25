@@ -7,33 +7,30 @@ import android.net.Uri
 import android.os.Build
 import android.util.AttributeSet
 import android.widget.ImageView
-import java.lang.ref.WeakReference
 
 internal class RoundImageView : ImageView {
 
-    private var viewWidth = 1f
-    private var viewHeight = 1f
+    private var viewWidth = 0f
+    private var viewHeight = 0f
 
     private var viewBorderWidth = 0f
     private var viewBorderColor = Color.BLACK
     private var viewBorderRadius = 0f
 
-    private var intrinsicWidth = 0
-    private var intrinsicHeight = 0
+    private val viewRect = RectF()
 
     private var imageWidth = 0f
     private var imageHeight = 0f
 
     private val paint = Paint(Paint.ANTI_ALIAS_FLAG)
 
-    private val backgroundRect = RectF(0f, 0f, 0f, 0f)
-
     private val xfermode = PorterDuffXfermode(PorterDuff.Mode.DST_IN)
 
     // 待绘制的图
-    private var drawBitmap: WeakReference<Bitmap>? = null
+    private var drawBitmap: Bitmap? = null
+
     // 遮罩图
-    private var maskBitmap: WeakReference<Bitmap>? = null
+    private var maskBitmap: Bitmap? = null
 
     constructor(context: Context) : super(context)
 
@@ -43,50 +40,68 @@ internal class RoundImageView : ImageView {
 
     override fun setImageResource(resId: Int) {
         super.setImageResource(resId)
-        updateImage()
+        updateBitmap()
     }
 
     override fun setImageDrawable(drawable: Drawable?) {
         super.setImageDrawable(drawable)
-        updateImage()
+        updateBitmap()
     }
 
     override fun setImageURI(uri: Uri?) {
         super.setImageURI(uri)
-        updateImage()
+        updateBitmap()
     }
 
-    private fun updateImage() {
+    override fun onSizeChanged(w: Int, h: Int, oldw: Int, oldh: Int) {
+        super.onSizeChanged(w, h, oldw, oldh)
+        viewRect.right = w.toFloat()
+        viewRect.bottom = h.toFloat()
+        updateBitmap()
+    }
+
+    private fun updateBitmap() {
+
+        maskBitmap = null
+        drawBitmap = null
 
         if (drawable != null) {
-            intrinsicWidth = drawable.intrinsicWidth
-            intrinsicHeight = drawable.intrinsicHeight
+
+            val intrinsicWidth = drawable.intrinsicWidth.toFloat()
+            val intrinsicHeight = drawable.intrinsicHeight.toFloat()
+
+            if (viewWidth > 0 && viewHeight > 0 && intrinsicWidth > 0 && intrinsicHeight > 0) {
+                maskBitmap = createMaskBitmap(imageWidth, imageHeight)
+                drawBitmap = createDrawBitmap(intrinsicWidth, intrinsicHeight)
+            }
+
         }
+
+        invalidate()
 
     }
 
-    private fun createMaskBitmap(): Bitmap {
+    private fun createMaskBitmap(width: Float, height: Float): Bitmap {
 
-        val bitmap = Bitmap.createBitmap(imageWidth.toInt(), imageHeight.toInt(), Bitmap.Config.ARGB_8888)
-
+        val bitmap = Bitmap.createBitmap(width.toInt(), height.toInt(), Bitmap.Config.ARGB_8888)
         val canvas = Canvas(bitmap)
-
         val paint = Paint(Paint.ANTI_ALIAS_FLAG)
 
         paint.color = Color.BLACK
-
-        canvas.drawRoundRect(RectF(0f, 0f, imageWidth, imageHeight), viewBorderRadius, viewBorderRadius, paint)
+        canvas.drawRoundRect(RectF(0f, 0f, width, height), viewBorderRadius, viewBorderRadius, paint)
 
         return bitmap
+
     }
 
-    private fun createDrawBitmap(): Bitmap {
+    private fun createDrawBitmap(intrinsicWidth: Float, intrinsicHeight: Float): Bitmap {
 
         val scale = Math.min(imageWidth / intrinsicWidth, imageHeight / intrinsicHeight)
 
         var width = intrinsicWidth * scale
         var height = intrinsicHeight * scale
 
+        // 避免除 0
         if (height > 0) {
             // 如果只是少了一点点像素，直接缩放就行了
             // 反正也看不出来
@@ -111,15 +126,6 @@ internal class RoundImageView : ImageView {
 
     }
 
-    override fun invalidate() {
-
-        maskBitmap = null
-        drawBitmap = null
-
-        super.invalidate()
-
-    }
-
     override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
 
         setMeasuredDimension(viewWidth.toInt(), viewHeight.toInt())
@@ -128,7 +134,10 @@ internal class RoundImageView : ImageView {
 
     override fun onDraw(canvas: Canvas) {
 
-        if (drawable == null) {
+        val maskImage = maskBitmap
+        val drawImage = drawBitmap
+
+        if (maskImage == null || drawImage == null) {
             return
         }
 
@@ -139,7 +148,7 @@ internal class RoundImageView : ImageView {
         }
 
         if (viewBorderWidth > 0) {
-            canvas.drawRoundRect(backgroundRect, viewBorderRadius, viewBorderRadius, paint)
+            canvas.drawRoundRect(viewRect, viewBorderRadius, viewBorderRadius, paint)
         }
 
         // 避免前面用了半透明颜色
@@ -152,26 +161,14 @@ internal class RoundImageView : ImageView {
             canvas.saveLayer(null, null, Canvas.ALL_SAVE_FLAG)
         }
 
-        var bitmap = drawBitmap?.get()
-        if (bitmap == null || bitmap.isRecycled) {
-            bitmap = createDrawBitmap()
-            drawBitmap = WeakReference(bitmap)
-        }
+        val left = viewBorderWidth + (imageWidth - drawImage.width) / 2
+        val top = viewBorderWidth + (imageHeight - drawImage.height) / 2
 
-        val left = viewBorderWidth + (imageWidth - bitmap.width) / 2
-        val top = viewBorderWidth + (imageHeight - bitmap.height) / 2
-
-        canvas.drawBitmap(bitmap, left, top, paint)
+        canvas.drawBitmap(drawBitmap, left, top, paint)
 
         paint.xfermode = xfermode
 
-        bitmap = maskBitmap?.get()
-        if (bitmap == null || bitmap.isRecycled) {
-            bitmap = createMaskBitmap()
-            maskBitmap = WeakReference(bitmap)
-        }
-
-        canvas.drawBitmap(bitmap, viewBorderWidth, viewBorderWidth, paint)
+        canvas.drawBitmap(maskBitmap, viewBorderWidth, viewBorderWidth, paint)
 
         paint.xfermode = null
 
@@ -186,9 +183,6 @@ internal class RoundImageView : ImageView {
         viewBorderWidth = borderWidth
         viewBorderColor = borderColor
         viewBorderRadius = borderRadius
-
-        backgroundRect.right = width
-        backgroundRect.bottom = height
 
         if (viewBorderWidth > 0) {
             imageWidth = width - 2 * viewBorderWidth
