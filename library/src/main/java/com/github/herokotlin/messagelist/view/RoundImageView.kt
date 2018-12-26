@@ -141,7 +141,7 @@ internal class RoundImageView : ImageView {
             canvas.saveLayer(null, null, Canvas.ALL_SAVE_FLAG)
         }
 
-        if (viewBorderWidth > 0) {
+        if (viewBorderRadius > 0) {
             canvas.drawRoundRect(clipRect, viewBorderRadius, viewBorderRadius, paint)
         }
         else {
