@@ -45,7 +45,14 @@ internal class VideoMessageViewHolder(view: View, val isRightMessage: Boolean): 
         with (itemView) {
 
             configuration.loadImage(avatarView, videoMessage.user.avatar)
-            updateImageSize(avatarView, configuration.userAvatarWidth, configuration.userAvatarHeight, configuration.userAvatarBorderWidth, configuration.userAvatarBorderColor, configuration.userAvatarBorderRadius)
+            updateImageSize(avatarView,
+                configuration.userAvatarWidth,
+                configuration.userAvatarHeight,
+                configuration.userAvatarBorderWidth,
+                configuration.userAvatarBorderColor,
+                configuration.userAvatarBorderRadius,
+                configuration.userAvatarBgColor
+            )
 
             nameView.text = videoMessage.user.name
 
@@ -55,7 +62,14 @@ internal class VideoMessageViewHolder(view: View, val isRightMessage: Boolean): 
             showStatusView(spinnerView, failureView)
 
             configuration.loadImage(thumbnailView, videoMessage.thumbnail)
-            updateImageSize(thumbnailView, videoMessage.width, videoMessage.height, configuration.videoMessageBorderWidth, configuration.videoMessageBorderColor, configuration.videoMessageBorderRadius)
+            updateImageSize(thumbnailView,
+                videoMessage.width,
+                videoMessage.height,
+                configuration.videoMessageBorderWidth,
+                configuration.videoMessageBorderColor,
+                configuration.videoMessageBorderRadius,
+                configuration.videoMessageBgColor
+            )
 
         }
     }

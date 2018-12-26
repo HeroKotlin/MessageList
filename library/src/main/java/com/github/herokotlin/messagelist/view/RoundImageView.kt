@@ -17,6 +17,8 @@ internal class RoundImageView : ImageView {
     private var viewBorderColor = Color.BLACK
     private var viewBorderRadius = 0f
 
+    private var viewBgColor = Color.BLACK
+
     private val viewRect = RectF()
     private val clipRect = RectF()
 
@@ -65,12 +67,12 @@ internal class RoundImageView : ImageView {
 
         drawableBitmap = null
 
-        if (drawable != null) {
+        if (viewWidth > 0 && viewHeight > 0 && drawable != null) {
 
             val intrinsicWidth = drawable.intrinsicWidth.toFloat()
             val intrinsicHeight = drawable.intrinsicHeight.toFloat()
 
-            if (viewWidth > 0 && viewHeight > 0 && imageWidth > 0 && imageHeight > 0 && intrinsicWidth > 0 && intrinsicHeight > 0) {
+            if (imageWidth > 0 && imageHeight > 0 && intrinsicWidth > 0 && intrinsicHeight > 0) {
 
                 val scale = Math.min(imageWidth / intrinsicWidth, imageHeight / intrinsicHeight)
 
@@ -114,21 +116,36 @@ internal class RoundImageView : ImageView {
 
     override fun onDraw(canvas: Canvas) {
 
-        val cacheBitmap = drawableBitmap
-        val cacheCanvas = drawableCanvas
-
-        if (cacheBitmap == null || cacheCanvas == null) {
-            return
-        }
-
         paint.style = Paint.Style.FILL
 
-        if (viewBorderColor != 0) {
-            paint.color = viewBorderColor
+        // 画边框
+        if (viewBorderWidth > 0) {
+
+            if (viewBorderColor != 0) {
+                paint.color = viewBorderColor
+            }
+
+            if (viewBorderRadius > 0) {
+                canvas.drawRoundRect(viewRect, viewBorderRadius, viewBorderRadius, paint)
+            }
+            else {
+                canvas.drawRect(viewRect, paint)
+            }
+
         }
 
-        if (viewBorderWidth > 0) {
-            canvas.drawRoundRect(viewRect, viewBorderRadius, viewBorderRadius, paint)
+        // 画背景色
+        if (viewBgColor != 0) {
+
+            paint.color = viewBgColor
+
+            if (viewBorderRadius > 0) {
+                canvas.drawRoundRect(clipRect, viewBorderRadius, viewBorderRadius, paint)
+            }
+            else {
+                canvas.drawRect(clipRect, paint)
+            }
+
         }
 
         // 避免前面用了半透明颜色
@@ -150,14 +167,18 @@ internal class RoundImageView : ImageView {
 
         paint.xfermode = xfermode
 
-        val left = viewBorderWidth + (imageWidth - drawableWidth) / 2
-        val top = viewBorderWidth + (imageHeight - drawableHeight) / 2
+        val cacheDrawable = drawable
+        if (cacheDrawable != null) {
+            // gif 会不停的调 onDraw，因此只有在这里不停的 drawable.draw(drawableCanvas) 才会有动画
+            cacheDrawable.setBounds(0, 0, drawableWidth, drawableHeight)
+            cacheDrawable.draw(drawableCanvas)
 
-        // gif 会不停的调 onDraw，因此只有在这里不停的 drawable.draw(cacheCanvas) 才会有动画
-        drawable.setBounds(0, 0, drawableWidth, drawableHeight)
-        drawable.draw(cacheCanvas)
+            // 显示图片的中间区域
+            val left = viewBorderWidth + (imageWidth - drawableWidth) / 2
+            val top = viewBorderWidth + (imageHeight - drawableHeight) / 2
 
-        canvas.drawBitmap(cacheBitmap, left, top, paint)
+            canvas.drawBitmap(drawableBitmap, left, top, paint)
+        }
 
         paint.xfermode = null
 
@@ -165,13 +186,14 @@ internal class RoundImageView : ImageView {
 
     }
 
-    fun setImageInfo(width: Float, height: Float, borderWidth: Float, borderColor: Int, borderRadius: Float) {
+    fun setImageInfo(width: Float, height: Float, borderWidth: Float, borderColor: Int, borderRadius: Float, bgColor: Int) {
 
         viewWidth = width
         viewHeight = height
         viewBorderWidth = borderWidth
         viewBorderColor = borderColor
         viewBorderRadius = borderRadius
+        viewBgColor = bgColor
 
         if (viewBorderWidth > 0) {
             imageWidth = width - 2 * viewBorderWidth

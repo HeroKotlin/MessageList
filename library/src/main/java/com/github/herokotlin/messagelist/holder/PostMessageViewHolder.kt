@@ -50,8 +50,21 @@ internal class PostMessageViewHolder(view: View, val isRightMessage: Boolean): M
             configuration.loadImage(avatarView, postMessage.user.avatar)
             configuration.loadImage(thumbnailView, postMessage.thumbnail)
 
-            updateImageSize(avatarView, configuration.userAvatarWidth, configuration.userAvatarHeight, configuration.userAvatarBorderWidth, configuration.userAvatarBorderColor, configuration.userAvatarBorderRadius)
-            updateImageSize(thumbnailView, configuration.postMessageThumbnailWidth, configuration.postMessageThumbnailHeight, 0f, 0, configuration.postMessageThumbnailBorderRadius)
+            updateImageSize(avatarView,
+                configuration.userAvatarWidth,
+                configuration.userAvatarHeight,
+                configuration.userAvatarBorderWidth,
+                configuration.userAvatarBorderColor,
+                configuration.userAvatarBorderRadius,
+                configuration.userAvatarBgColor
+            )
+            updateImageSize(thumbnailView,
+                configuration.postMessageThumbnailWidth,
+                configuration.postMessageThumbnailHeight,
+                0f, 0,
+                configuration.postMessageThumbnailBorderRadius,
+                configuration.postMessageThumbnailBgColor
+            )
 
             nameView.text = postMessage.user.name
 

@@ -50,8 +50,21 @@ internal class CardMessageViewHolder(view: View, val isRightMessage: Boolean): M
             configuration.loadImage(avatarView, cardMessage.user.avatar)
             configuration.loadImage(thumbnailView, cardMessage.thumbnail)
 
-            updateImageSize(avatarView, configuration.userAvatarWidth, configuration.userAvatarHeight, configuration.userAvatarBorderWidth, configuration.userAvatarBorderColor, configuration.userAvatarBorderRadius)
-            updateImageSize(thumbnailView, configuration.cardMessageThumbnailWidth, configuration.cardMessageThumbnailHeight, 0f, 0, configuration.cardMessageThumbnailBorderRadius)
+            updateImageSize(avatarView,
+                configuration.userAvatarWidth,
+                configuration.userAvatarHeight,
+                configuration.userAvatarBorderWidth,
+                configuration.userAvatarBorderColor,
+                configuration.userAvatarBorderRadius,
+                configuration.userAvatarBgColor
+            )
+            updateImageSize(thumbnailView,
+                configuration.cardMessageThumbnailWidth,
+                configuration.cardMessageThumbnailHeight,
+                0f, 0,
+                configuration.cardMessageThumbnailBorderRadius,
+                configuration.cardMessageThumbnailBgColor
+            )
 
             nameView.text = cardMessage.user.name
 

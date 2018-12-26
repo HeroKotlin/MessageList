@@ -44,12 +44,26 @@ internal class ImageMessageViewHolder(view: View, val isRightMessage: Boolean): 
         with (itemView) {
 
             configuration.loadImage(avatarView, imageMessage.user.avatar)
-            updateImageSize(avatarView, configuration.userAvatarWidth, configuration.userAvatarHeight, configuration.userAvatarBorderWidth, configuration.userAvatarBorderColor, configuration.userAvatarBorderRadius)
+            updateImageSize(avatarView,
+                configuration.userAvatarWidth,
+                configuration.userAvatarHeight,
+                configuration.userAvatarBorderWidth,
+                configuration.userAvatarBorderColor,
+                configuration.userAvatarBorderRadius,
+                configuration.userAvatarBgColor
+            )
 
             nameView.text = imageMessage.user.name
 
             configuration.loadImage(imageView, imageMessage.url)
-            updateImageSize(imageView, imageMessage.width, imageMessage.height, configuration.imageMessageBorderWidth, configuration.imageMessageBorderColor, configuration.imageMessageBorderRadius)
+            updateImageSize(imageView,
+                imageMessage.width,
+                imageMessage.height,
+                configuration.imageMessageBorderWidth,
+                configuration.imageMessageBorderColor,
+                configuration.imageMessageBorderRadius,
+                configuration.imageMessageBgColor
+            )
 
             showTimeView(timeView, imageMessage.time)
             showStatusView(spinnerView, failureView)

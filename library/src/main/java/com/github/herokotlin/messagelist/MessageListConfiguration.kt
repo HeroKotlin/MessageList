@@ -37,12 +37,17 @@ abstract class MessageListConfiguration(val context: Context) {
     /**
      * 用户头像的边框颜色
      */
-    val userAvatarBorderColor = ContextCompat.getColor(context, R.color.message_list_user_avatar_border_color)
+    var userAvatarBorderColor = Color.parseColor("#CCCCCC")
 
     /**
      * 用户头像的圆角
      */
     var userAvatarBorderRadius = 4f
+
+    /**
+     * 用户头像的背景颜色
+     */
+    var userAvatarBgColor = Color.parseColor("#08000000")
 
     /**
      * 左侧用户名称是否显示
@@ -87,12 +92,17 @@ abstract class MessageListConfiguration(val context: Context) {
     /**
      * 图片边框颜色
      */
-    val imageMessageBorderColor = ContextCompat.getColor(context, R.color.message_list_image_message_border_color)
+    var imageMessageBorderColor = Color.parseColor("#88CCCCCC")
 
     /**
      * 图片圆角
      */
     var imageMessageBorderRadius = 4f
+
+    /**
+     * 图片背景色
+     */
+    var imageMessageBgColor = Color.parseColor("#08000000")
 
     /**
      * 视频缩略图边框大小
@@ -102,12 +112,17 @@ abstract class MessageListConfiguration(val context: Context) {
     /**
      * 视频缩略图边框颜色
      */
-    val videoMessageBorderColor = ContextCompat.getColor(context, R.color.message_list_video_message_border_color)
+    var videoMessageBorderColor = Color.parseColor("#88CCCCCC")
 
     /**
      * 视频缩略图圆角
      */
     var videoMessageBorderRadius = 4f
+
+    /**
+     * 视频缩略图背景色
+     */
+    var videoMessageBgColor = Color.parseColor("#08000000")
 
     /**
      * 名片消息的气泡宽度
@@ -130,6 +145,11 @@ abstract class MessageListConfiguration(val context: Context) {
     var cardMessageThumbnailBorderRadius = 0f
 
     /**
+     * 名片消息的缩略图背景色
+     */
+    var cardMessageThumbnailBgColor = 0
+
+    /**
      * 文章消息的气泡宽度
      */
     var postMessageBubbleWidth = 230
@@ -148,6 +168,11 @@ abstract class MessageListConfiguration(val context: Context) {
      * 文章消息的缩略图圆角
      */
     var postMessageThumbnailBorderRadius = 0f
+
+    /**
+     * 文章消息的缩略图背景色
+     */
+    var postMessageThumbnailBgColor = 0
 
     /**
      * 链接颜色

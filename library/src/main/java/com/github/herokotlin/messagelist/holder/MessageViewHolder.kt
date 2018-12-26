@@ -194,7 +194,7 @@ internal abstract class MessageViewHolder(view: View): RecyclerView.ViewHolder(v
 
     }
 
-    protected fun updateImageSize(imageView: RoundImageView, width: Int, height: Int, borderWidth: Float, borderColor: Int, borderRadius: Float) {
+    protected fun updateImageSize(imageView: RoundImageView, width: Int, height: Int, borderWidth: Float, borderColor: Int, borderRadius: Float, bgColor: Int) {
 
         var imageWidth = dp2px(width.toFloat())
         var imageHeight = dp2px(height.toFloat())
@@ -213,7 +213,7 @@ internal abstract class MessageViewHolder(view: View): RecyclerView.ViewHolder(v
             imageWidth = imageHeight * imageRatio
         }
 
-        imageView.setImageInfo(imageWidth, imageHeight, borderWidth, borderColor, dp2px(borderRadius))
+        imageView.setImageInfo(imageWidth, imageHeight, borderWidth, borderColor, dp2px(borderRadius), bgColor)
 
     }
 
