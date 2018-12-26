@@ -20,13 +20,14 @@ class MessageList : LinearLayout {
 
     lateinit var configuration: MessageListConfiguration
 
-    var hasMoreMessage = false
+    var hasMoreMessage = true
 
         set(value) {
-            if (field != value) {
-                field = value
-                refreshLayout.isEnabled = value
+            if (field == value) {
+                return
             }
+            field = value
+            refreshLayout.isEnabled = value
         }
 
     private lateinit var adapter: MessageListAdapter
