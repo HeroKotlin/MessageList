@@ -85,6 +85,9 @@ class MessageList : LinearLayout {
         val sensorManager = context.getSystemService(Context.SENSOR_SERVICE) as SensorManager
 
         configuration.audioPlayer.init(audioManager, sensorManager)
+        configuration.audioPlayer.onPlay = {
+            callback.onUseAudio()
+        }
 
         this.configuration = configuration
         this.callback = callback
@@ -145,6 +148,13 @@ class MessageList : LinearLayout {
 
     fun update(messageId: String, message: Message) {
         adapter.update(messageId, message)
+    }
+
+    /**
+     * 确保音频可用，通常是外部要用音频了
+     */
+    fun ensureAudioAvailable() {
+        stopAudio()
     }
 
     inner class MessageDecoration : RecyclerView.ItemDecoration() {

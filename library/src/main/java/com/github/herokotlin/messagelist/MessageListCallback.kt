@@ -40,4 +40,8 @@ interface MessageListCallback {
 
     }
 
+    fun onUseAudio() {
+
+    }
+
 }

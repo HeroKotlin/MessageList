@@ -11,6 +11,8 @@ import java.io.IOException
 
 internal class AudioPlayer: SensorEventListener {
 
+    var onPlay: (() -> Unit)? = null
+
     private var id = ""
     private var url = ""
 
@@ -51,6 +53,8 @@ internal class AudioPlayer: SensorEventListener {
     }
 
     fun play(id: String, url: String) {
+
+        onPlay?.invoke()
 
         stop()
 
