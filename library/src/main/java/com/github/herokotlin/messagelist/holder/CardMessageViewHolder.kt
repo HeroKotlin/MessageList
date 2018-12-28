@@ -47,8 +47,19 @@ internal class CardMessageViewHolder(view: View, val isRightMessage: Boolean): M
 
         with (itemView) {
 
-            configuration.loadImage(avatarView, cardMessage.user.avatar)
-            configuration.loadImage(thumbnailView, cardMessage.thumbnail)
+            configuration.loadImage(
+                avatarView,
+                message.user.avatar,
+                configuration.userAvatarWidth,
+                configuration.userAvatarHeight
+            )
+
+            configuration.loadImage(
+                thumbnailView,
+                cardMessage.thumbnail,
+                configuration.cardMessageThumbnailWidth,
+                configuration.cardMessageThumbnailHeight
+            )
 
             updateImageSize(avatarView,
                 configuration.userAvatarWidth,
@@ -58,6 +69,7 @@ internal class CardMessageViewHolder(view: View, val isRightMessage: Boolean): M
                 configuration.userAvatarBorderRadius,
                 configuration.userAvatarBgColor
             )
+
             updateImageSize(thumbnailView,
                 configuration.cardMessageThumbnailWidth,
                 configuration.cardMessageThumbnailHeight,

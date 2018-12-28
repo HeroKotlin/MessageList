@@ -47,8 +47,19 @@ internal class PostMessageViewHolder(view: View, val isRightMessage: Boolean): M
 
         with (itemView) {
 
-            configuration.loadImage(avatarView, postMessage.user.avatar)
-            configuration.loadImage(thumbnailView, postMessage.thumbnail)
+            configuration.loadImage(
+                avatarView,
+                message.user.avatar,
+                configuration.userAvatarWidth,
+                configuration.userAvatarHeight
+            )
+
+            configuration.loadImage(
+                thumbnailView,
+                postMessage.thumbnail,
+                configuration.postMessageThumbnailWidth,
+                configuration.postMessageThumbnailHeight
+            )
 
             updateImageSize(avatarView,
                 configuration.userAvatarWidth,

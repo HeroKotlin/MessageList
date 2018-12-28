@@ -7,6 +7,7 @@ import android.net.Uri
 import android.os.Build
 import android.util.AttributeSet
 import android.widget.ImageView
+import java.lang.ref.WeakReference
 
 internal class RoundImageView : ImageView {
 
@@ -29,7 +30,7 @@ internal class RoundImageView : ImageView {
 
     private val xfermode = PorterDuffXfermode(PorterDuff.Mode.SRC_IN)
 
-    private var drawableBitmap: Bitmap? = null
+    private var drawableBitmap: WeakReference<Bitmap>? = null
 
     private var drawableCanvas: Canvas? = null
 
@@ -96,9 +97,6 @@ internal class RoundImageView : ImageView {
 
                 drawableWidth = width.toInt()
                 drawableHeight = height.toInt()
-
-                drawableBitmap = Bitmap.createBitmap(drawableWidth, drawableHeight, Bitmap.Config.ARGB_8888)
-                drawableCanvas = Canvas(drawableBitmap)
 
             }
 
@@ -169,6 +167,15 @@ internal class RoundImageView : ImageView {
 
         val cacheDrawable = drawable
         if (cacheDrawable != null) {
+
+            // 用弱引用确保不会 OOM
+            var bitmap = drawableBitmap?.get()
+            if (bitmap == null) {
+                bitmap = Bitmap.createBitmap(drawableWidth, drawableHeight, Bitmap.Config.ARGB_8888)
+                drawableCanvas = Canvas(bitmap)
+                drawableBitmap = WeakReference(bitmap)
+            }
+
             // gif 会不停的调 onDraw，因此只有在这里不停的 drawable.draw(drawableCanvas) 才会有动画
             cacheDrawable.setBounds(0, 0, drawableWidth, drawableHeight)
             cacheDrawable.draw(drawableCanvas)
@@ -177,7 +184,8 @@ internal class RoundImageView : ImageView {
             val left = viewBorderWidth + (imageWidth - drawableWidth) / 2
             val top = viewBorderWidth + (imageHeight - drawableHeight) / 2
 
-            canvas.drawBitmap(drawableBitmap, left, top, paint)
+            canvas.drawBitmap(bitmap, left, top, paint)
+
         }
 
         paint.xfermode = null

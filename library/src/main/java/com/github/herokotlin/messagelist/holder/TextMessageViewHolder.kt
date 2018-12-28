@@ -57,7 +57,13 @@ internal class TextMessageViewHolder(view: View, val isRightMessage: Boolean): M
         val textMessage = message as TextMessage
         with (itemView) {
 
-            configuration.loadImage(avatarView, textMessage.user.avatar)
+            configuration.loadImage(
+                avatarView,
+                message.user.avatar,
+                configuration.userAvatarWidth,
+                configuration.userAvatarHeight
+            )
+
             updateImageSize(avatarView,
                 configuration.userAvatarWidth,
                 configuration.userAvatarHeight,

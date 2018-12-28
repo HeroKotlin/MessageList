@@ -44,7 +44,13 @@ internal class VideoMessageViewHolder(view: View, val isRightMessage: Boolean): 
 
         with (itemView) {
 
-            configuration.loadImage(avatarView, videoMessage.user.avatar)
+            configuration.loadImage(
+                avatarView,
+                message.user.avatar,
+                configuration.userAvatarWidth,
+                configuration.userAvatarHeight
+            )
+
             updateImageSize(avatarView,
                 configuration.userAvatarWidth,
                 configuration.userAvatarHeight,
@@ -61,7 +67,13 @@ internal class VideoMessageViewHolder(view: View, val isRightMessage: Boolean): 
             showTimeView(timeView, videoMessage.time)
             showStatusView(spinnerView, failureView)
 
-            configuration.loadImage(thumbnailView, videoMessage.thumbnail)
+            configuration.loadImage(
+                thumbnailView,
+                videoMessage.thumbnail,
+                videoMessage.width,
+                videoMessage.height
+            )
+
             updateImageSize(thumbnailView,
                 videoMessage.width,
                 videoMessage.height,

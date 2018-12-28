@@ -72,7 +72,12 @@ internal class AudioMessageViewHolder(view: View, val isRightMessage: Boolean): 
 
         with (itemView) {
 
-            configuration.loadImage(avatarView, audioMessage.user.avatar)
+            configuration.loadImage(
+                avatarView,
+                message.user.avatar,
+                configuration.userAvatarWidth,
+                configuration.userAvatarHeight
+            )
 
             updateImageSize(avatarView,
                 configuration.userAvatarWidth,
