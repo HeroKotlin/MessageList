@@ -32,7 +32,7 @@ internal class RoundImageView : ImageView {
 
     private var drawableBitmap: WeakReference<Bitmap>? = null
 
-    private var drawableCanvas: Canvas? = null
+    private var drawableCanvas: WeakReference<Canvas>? = null
 
     private var drawableWidth = 0
 
@@ -103,6 +103,7 @@ internal class RoundImageView : ImageView {
         }
 
         drawableBitmap?.clear()
+        drawableCanvas?.clear()
 
         invalidate()
 
@@ -171,22 +172,27 @@ internal class RoundImageView : ImageView {
         if (cacheDrawable != null) {
 
             // 用弱引用确保不会 OOM
-            var bitmap = drawableBitmap?.get()
-            if (bitmap == null) {
-                bitmap = Bitmap.createBitmap(drawableWidth, drawableHeight, Bitmap.Config.ARGB_8888)
-                drawableCanvas = Canvas(bitmap)
-                drawableBitmap = WeakReference(bitmap)
+            var cacheBitmap = drawableBitmap?.get()
+            if (cacheBitmap == null) {
+                cacheBitmap = Bitmap.createBitmap(drawableWidth, drawableHeight, Bitmap.Config.ARGB_8888)
+                drawableBitmap = WeakReference(cacheBitmap)
+            }
+
+            var cacheCanvas = drawableCanvas?.get()
+            if (cacheCanvas == null) {
+                cacheCanvas = Canvas(cacheBitmap)
+                drawableCanvas = WeakReference(cacheCanvas)
             }
 
             // gif 会不停的调 onDraw，因此只有在这里不停的 drawable.draw(drawableCanvas) 才会有动画
             cacheDrawable.setBounds(0, 0, drawableWidth, drawableHeight)
-            cacheDrawable.draw(drawableCanvas)
+            cacheDrawable.draw(cacheCanvas)
 
             // 显示图片的中间区域
             val left = viewBorderWidth + (imageWidth - drawableWidth) / 2
             val top = viewBorderWidth + (imageHeight - drawableHeight) / 2
 
-            canvas.drawBitmap(bitmap, left, top, paint)
+            canvas.drawBitmap(cacheBitmap, left, top, paint)
 
         }
 
