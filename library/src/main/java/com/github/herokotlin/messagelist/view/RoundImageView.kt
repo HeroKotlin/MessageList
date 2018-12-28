@@ -102,6 +102,8 @@ internal class RoundImageView : ImageView {
 
         }
 
+        drawableBitmap?.clear()
+
         invalidate()
 
     }
