@@ -36,9 +36,6 @@ internal abstract class MessageViewHolder(view: View): RecyclerView.ViewHolder(v
     lateinit var configuration: MessageListConfiguration
     lateinit var callback: MessageListCallback
 
-    open val menuItems = listOf<MenuItem>()
-
-
     open val onUserAvatarClick = { _: View? ->
         callback.onUserAvatarClick(message)
     }
@@ -52,6 +49,7 @@ internal abstract class MessageViewHolder(view: View): RecyclerView.ViewHolder(v
     }
 
     open val onContentLongPress = { view: View? ->
+        val menuItems = createMenuItems()
         if (view != null && menuItems.count() > 0) {
             val menu = MenuWindow()
 
@@ -225,8 +223,8 @@ internal abstract class MessageViewHolder(view: View): RecyclerView.ViewHolder(v
 
     }
 
-    protected fun createMenuItems(menuItems: List<MenuItem>): List<MenuItem> {
-        return menuItems.filter { it.text.isNotBlank() }
+    open fun createMenuItems(): List<MenuItem> {
+        return listOf()
     }
 
     abstract fun create()

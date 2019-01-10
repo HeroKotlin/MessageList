@@ -21,25 +21,6 @@ internal class AudioMessageViewHolder(view: View, val isRightMessage: Boolean): 
         }
     }
 
-    override val menuItems: List<MenuItem> by lazy {
-        val items = mutableListOf<MenuItem>()
-        if (message.canRecall) {
-            items.add(
-                MenuItem(configuration.menuItemRecall) {
-                    callback.onRecallClick(message)
-                }
-            )
-        }
-        if (message.canDelete) {
-            items.add(
-                MenuItem(configuration.menuItemDelete) {
-                    callback.onDeleteClick(message)
-                }
-            )
-        }
-        createMenuItems(items)
-    }
-
     override fun create() {
         with (itemView) {
 
@@ -133,6 +114,32 @@ internal class AudioMessageViewHolder(view: View, val isRightMessage: Boolean): 
                 stopAnimation()
             }
         }
+    }
+
+    override fun createMenuItems(): List<MenuItem> {
+        val items = mutableListOf<MenuItem>()
+        if (message.canShare) {
+            items.add(
+                MenuItem(configuration.menuItemShare) {
+                    callback.onShareClick(message)
+                }
+            )
+        }
+        if (message.canRecall) {
+            items.add(
+                MenuItem(configuration.menuItemRecall) {
+                    callback.onRecallClick(message)
+                }
+            )
+        }
+        if (message.canDelete) {
+            items.add(
+                MenuItem(configuration.menuItemDelete) {
+                    callback.onDeleteClick(message)
+                }
+            )
+        }
+        return items
     }
 
     private fun updateContentSize(duration: Int) {

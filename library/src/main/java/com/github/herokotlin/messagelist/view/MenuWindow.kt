@@ -25,7 +25,7 @@ internal class MenuWindow: PopupWindow() {
         contentView.resources.getDimensionPixelSize(R.dimen.message_list_menu_offset)
     }
 
-    fun measureSpec(spec: Int): Int {
+    private fun getMeasureSpec(spec: Int): Int {
         return View.MeasureSpec.makeMeasureSpec(
             View.MeasureSpec.getSize(spec),
             if (spec == ViewGroup.LayoutParams.WRAP_CONTENT) {
@@ -40,8 +40,8 @@ internal class MenuWindow: PopupWindow() {
     fun show(view: View, contentView: View) {
         this.contentView = contentView
         contentView.measure(
-            measureSpec(width),
-            measureSpec(height)
+            getMeasureSpec(width),
+            getMeasureSpec(height)
         )
         val offsetX = (view.width - contentView.measuredWidth) / 2
         val offsetY = -(contentView.measuredHeight + view.height + offset)

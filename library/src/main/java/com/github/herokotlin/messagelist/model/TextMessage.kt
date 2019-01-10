@@ -7,6 +7,7 @@ data class TextMessage(
     override var user: User,
     override var status: MessageStatus,
     override var time: String,
+    override var canShare: Boolean,
     override var canRecall: Boolean,
     override var canDelete: Boolean,
     var text: String

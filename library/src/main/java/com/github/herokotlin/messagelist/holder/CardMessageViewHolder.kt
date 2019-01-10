@@ -7,29 +7,6 @@ import kotlinx.android.synthetic.main.message_card_left.view.*
 
 internal class CardMessageViewHolder(view: View, val isRightMessage: Boolean): MessageViewHolder(view) {
 
-    override val menuItems: List<MenuItem> by lazy {
-        val items = mutableListOf(
-            MenuItem(configuration.menuItemShare) {
-                callback.onShareClick(message)
-            }
-        )
-        if (message.canRecall) {
-            items.add(
-                MenuItem(configuration.menuItemRecall) {
-                    callback.onRecallClick(message)
-                }
-            )
-        }
-        if (message.canDelete) {
-            items.add(
-                MenuItem(configuration.menuItemDelete) {
-                    callback.onDeleteClick(message)
-                }
-            )
-        }
-        createMenuItems(items)
-    }
-
     override fun create() {
         with (itemView) {
 
@@ -103,6 +80,32 @@ internal class CardMessageViewHolder(view: View, val isRightMessage: Boolean): M
             showStatusView(spinnerView, failureView)
 
         }
+    }
+
+    override fun createMenuItems(): List<MenuItem> {
+        val items = mutableListOf<MenuItem>()
+        if (message.canShare) {
+            items.add(
+                MenuItem(configuration.menuItemShare) {
+                    callback.onShareClick(message)
+                }
+            )
+        }
+        if (message.canRecall) {
+            items.add(
+                MenuItem(configuration.menuItemRecall) {
+                    callback.onRecallClick(message)
+                }
+            )
+        }
+        if (message.canDelete) {
+            items.add(
+                MenuItem(configuration.menuItemDelete) {
+                    callback.onDeleteClick(message)
+                }
+            )
+        }
+        return items
     }
 
 }
