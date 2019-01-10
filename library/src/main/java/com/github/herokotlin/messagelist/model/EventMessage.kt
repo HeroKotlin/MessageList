@@ -7,5 +7,7 @@ data class EventMessage(
     override var user: User,
     override var status: MessageStatus,
     override var time: String,
+    override var canRecall: Boolean,
+    override var canDelete: Boolean,
     var event: String
 ): Message

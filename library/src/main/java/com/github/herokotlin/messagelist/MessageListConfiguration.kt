@@ -186,6 +186,10 @@ abstract class MessageListConfiguration(val context: Context) {
 
     var menuItemShare = "转发"
 
+    var menuItemRecall = "撤回"
+
+    var menuItemDelete = "删除"
+
     /**
      * 格式化文本内容
      */

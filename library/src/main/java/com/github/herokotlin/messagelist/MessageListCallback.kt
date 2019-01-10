@@ -28,6 +28,14 @@ interface MessageListCallback {
 
     }
 
+    fun onRecallClick(message: Message) {
+
+    }
+
+    fun onDeleteClick(message: Message) {
+
+    }
+
     fun onFailureClick(message: Message) {
 
     }

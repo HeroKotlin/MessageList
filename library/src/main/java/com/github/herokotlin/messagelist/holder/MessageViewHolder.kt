@@ -225,7 +225,7 @@ internal abstract class MessageViewHolder(view: View): RecyclerView.ViewHolder(v
 
     }
 
-    protected fun createMenuItems(vararg menuItems: MenuItem): List<MenuItem> {
+    protected fun createMenuItems(menuItems: List<MenuItem>): List<MenuItem> {
         return menuItems.filter { it.text.isNotBlank() }
     }
 

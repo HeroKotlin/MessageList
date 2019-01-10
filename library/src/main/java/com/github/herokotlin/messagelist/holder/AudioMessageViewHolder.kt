@@ -4,6 +4,7 @@ import android.graphics.drawable.AnimationDrawable
 import android.view.View
 import com.github.herokotlin.messagelist.enum.MessageStatus
 import com.github.herokotlin.messagelist.model.AudioMessage
+import com.github.herokotlin.messagelist.model.MenuItem
 import com.github.herokotlin.messagelist.util.AudioPlayerCallback
 import kotlinx.android.synthetic.main.message_audio_left.view.*
 
@@ -18,6 +19,25 @@ internal class AudioMessageViewHolder(view: View, val isRightMessage: Boolean): 
             val audioMessage = message as AudioMessage
             player.play(audioMessage.id, audioMessage.url)
         }
+    }
+
+    override val menuItems: List<MenuItem> by lazy {
+        val items = mutableListOf<MenuItem>()
+        if (message.canRecall) {
+            items.add(
+                MenuItem(configuration.menuItemRecall) {
+                    callback.onRecallClick(message)
+                }
+            )
+        }
+        if (message.canDelete) {
+            items.add(
+                MenuItem(configuration.menuItemDelete) {
+                    callback.onDeleteClick(message)
+                }
+            )
+        }
+        createMenuItems(items)
     }
 
     override fun create() {
