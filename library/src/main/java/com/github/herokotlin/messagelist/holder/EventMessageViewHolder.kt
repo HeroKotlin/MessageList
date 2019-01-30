@@ -7,10 +7,6 @@ import kotlinx.android.synthetic.main.message_event.view.*
 
 internal class EventMessageViewHolder(view: View): MessageViewHolder(view) {
 
-    private val onLinkClick = { link: String ->
-        callback.onLinkClick(link)
-    }
-
     override fun create() {
         with (itemView) {
             eventView.maxWidth = getContentMaxWidth().toInt()
@@ -22,8 +18,14 @@ internal class EventMessageViewHolder(view: View): MessageViewHolder(view) {
         val eventMessage = message as EventMessage
         with (itemView) {
 
-            val spannable = formatLinks(eventMessage.event, configuration.linkTextColor, onLinkClick)
+            val spannable = formatLinks(
+                eventMessage.event,
+                configuration.linkTextColor,
+                onLinkClick,
+                onLinkLongPress
+            )
             configuration.formatText(eventView, spannable)
+
             eventView.text = spannable
 
         }

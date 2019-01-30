@@ -2,8 +2,6 @@ package com.github.herokotlin.messagelist
 
 import android.content.Context
 import android.graphics.Color
-import android.support.v4.content.ContextCompat
-import android.text.Spannable
 import android.text.SpannableString
 import android.widget.ImageView
 import android.widget.TextView

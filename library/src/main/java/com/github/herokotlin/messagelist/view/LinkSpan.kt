@@ -4,21 +4,20 @@ import android.graphics.Color
 import android.text.TextPaint
 import android.text.style.ClickableSpan
 import android.view.View
-import com.github.herokotlin.messagelist.MessageListCallback
 
-internal class LinkSpan(val link: String, val onClick: (String) -> Unit): ClickableSpan() {
+internal class LinkSpan(val link: String, val onClick: (String) -> Unit, val onLongPress: (String) -> Unit): ClickableSpan() {
 
-    var isPressed = false
+    var pressTime = 0L
 
     private val bgColorPressed = Color.parseColor("#15000000")
 
     override fun onClick(widget: View?) {
-        onClick(link)
+
     }
 
     override fun updateDrawState(ds: TextPaint?) {
         ds?.isUnderlineText = false
-        if (isPressed) {
+        if (pressTime > 0) {
             ds?.bgColor = bgColorPressed
         }
         else {

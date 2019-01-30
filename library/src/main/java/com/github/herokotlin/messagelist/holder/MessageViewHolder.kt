@@ -48,6 +48,14 @@ internal abstract class MessageViewHolder(view: View): RecyclerView.ViewHolder(v
         callback.onContentClick(message)
     }
 
+    open val onLinkClick: (String) -> Unit = {
+        callback.onLinkClick(it)
+    }
+
+    open val onLinkLongPress: (String) -> Unit = {
+        callback.onLinkClick(it)
+    }
+
     open val onContentLongPress = { view: View? ->
         val menuItems = createMenuItems()
         if (view != null && menuItems.count() > 0) {
@@ -139,7 +147,7 @@ internal abstract class MessageViewHolder(view: View): RecyclerView.ViewHolder(v
         return TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, value.toFloat(), itemView.resources.displayMetrics).toInt()
     }
 
-    protected fun formatLinks(text: String, linkColor: Int, onLinkClick: (String) -> Unit): SpannableString {
+    protected fun formatLinks(text: String, linkColor: Int, onLinkClick: (String) -> Unit, onLinkLongPress: (String) -> Unit): SpannableString {
 
         val links = mutableListOf<LinkToken>()
         var index = 0
@@ -184,7 +192,7 @@ internal abstract class MessageViewHolder(view: View): RecyclerView.ViewHolder(v
         for (item in links) {
             val start = item.position
             val end = item.position + item.text.length
-            spannable.setSpan(LinkSpan(item.link, onLinkClick), start, end, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
+            spannable.setSpan(LinkSpan(item.link, onLinkClick, onLinkLongPress), start, end, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
             spannable.setSpan(ForegroundColorSpan(linkColor), start, end, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
         }
 

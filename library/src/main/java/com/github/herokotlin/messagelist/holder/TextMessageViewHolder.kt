@@ -8,8 +8,8 @@ import kotlinx.android.synthetic.main.message_text_left.view.*
 
 internal class TextMessageViewHolder(view: View, val isRightMessage: Boolean): MessageViewHolder(view) {
 
-    private val onLinkClick = { link: String ->
-        callback.onLinkClick(link)
+    override val onLinkLongPress: (String) -> Unit = {
+        onContentLongPress(itemView.bubbleView)
     }
 
     override fun create() {
@@ -62,10 +62,15 @@ internal class TextMessageViewHolder(view: View, val isRightMessage: Boolean): M
                 configuration.userAvatarBgColor
             )
 
-            val spannable = formatLinks(textMessage.text, configuration.linkTextColor, onLinkClick)
+            val spannable = formatLinks(
+                textMessage.text,
+                configuration.linkTextColor,
+                onLinkClick,
+                onLinkLongPress
+            )
             configuration.formatText(textView, spannable)
-            textView.text = spannable
 
+            textView.text = spannable
             nameView.text = textMessage.user.name
 
             showTimeView(timeView, textMessage.time)

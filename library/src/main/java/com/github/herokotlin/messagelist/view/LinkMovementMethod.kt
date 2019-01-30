@@ -3,12 +3,23 @@ package com.github.herokotlin.messagelist.view
 import android.text.Selection
 import android.text.Spannable
 import android.text.method.BaseMovementMethod
+import android.util.Log
 import android.view.MotionEvent
 import android.widget.TextView
 
 internal object LinkMovementMethod: BaseMovementMethod() {
 
     private var linkSpan: LinkSpan? = null
+
+        set(value) {
+            if (value == null) {
+                field?.pressTime = 0
+            }
+            else {
+                value.pressTime = System.currentTimeMillis()
+            }
+            field = value
+        }
 
     private fun getLinkSpan(widget: TextView, text: Spannable, event: MotionEvent): LinkSpan? {
 
@@ -42,7 +53,6 @@ internal object LinkMovementMethod: BaseMovementMethod() {
             MotionEvent.ACTION_DOWN -> {
                 val span = getLinkSpan(widget, text, event)
                 if (span != null) {
-                    span.isPressed = true
                     Selection.setSelection(text, text.getSpanStart(span), text.getSpanEnd(span))
                 }
                 linkSpan = span
@@ -52,7 +62,6 @@ internal object LinkMovementMethod: BaseMovementMethod() {
             MotionEvent.ACTION_MOVE -> {
                 val span = getLinkSpan(widget, text, event)
                 if (linkSpan != null && span != linkSpan) {
-                    linkSpan?.isPressed = false
                     linkSpan = null
                     Selection.removeSelection(text)
                 }
@@ -61,10 +70,14 @@ internal object LinkMovementMethod: BaseMovementMethod() {
 
             MotionEvent.ACTION_UP -> {
                 var result = false
-                if (linkSpan != null) {
+                linkSpan?.let {
                     result = true
-                    linkSpan?.isPressed = false
-                    linkSpan?.onClick(widget)
+                    if (System.currentTimeMillis() - it.pressTime > 1000) {
+                        it.onLongPress(it.link)
+                    }
+                    else {
+                        it.onClick(it.link)
+                    }
                     linkSpan = null
                     Selection.removeSelection(text)
                 }
@@ -73,7 +86,6 @@ internal object LinkMovementMethod: BaseMovementMethod() {
 
             else -> {
                 if (linkSpan != null) {
-                    linkSpan?.isPressed = false
                     linkSpan = null
                     Selection.removeSelection(text)
                 }
