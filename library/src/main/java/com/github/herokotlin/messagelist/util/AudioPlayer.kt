@@ -24,19 +24,23 @@ internal class AudioPlayer: SensorEventListener {
 
     private lateinit var audioManager: AudioManager
     private lateinit var sensorManager: SensorManager
+    private lateinit var powerManager: PowerManager
 
     // 传感器实例
     private lateinit var sensor: Sensor
+
+    // 控制屏幕开关
+    private lateinit var wakeLock: PowerManager.WakeLock
 
     fun init(context: Context) {
 
         audioManager = context.getSystemService(Context.AUDIO_SERVICE) as AudioManager
         sensorManager = context.getSystemService(Context.SENSOR_SERVICE) as SensorManager
+        powerManager = context.getSystemService(Context.POWER_SERVICE) as PowerManager
 
-        this.audioManager = audioManager
-        this.sensorManager = sensorManager
+        wakeLock = powerManager.newWakeLock(PowerManager.PROXIMITY_SCREEN_OFF_WAKE_LOCK, "HeroKotlin:MessageList")
 
-        this.sensor = sensorManager.getDefaultSensor(Sensor.TYPE_PROXIMITY)
+        sensor = sensorManager.getDefaultSensor(Sensor.TYPE_PROXIMITY)
 
         player.setOnPreparedListener {
             player.start()
@@ -135,9 +139,12 @@ internal class AudioPlayer: SensorEventListener {
             // 但是某些安卓机的值比最大值还要大...
             if (event.values[0] >= sensor.maximumRange) {
                 useSpeaker()
+                // 随便写一个延时
+                wakeLock.acquire(100)
             }
             else {
                 useEar()
+                wakeLock.release()
             }
         }
     }
@@ -178,7 +185,6 @@ internal class AudioPlayer: SensorEventListener {
                 AudioManager.FX_KEY_CLICK
             )
         }
-
 
     }
 
