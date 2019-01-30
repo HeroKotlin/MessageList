@@ -3,7 +3,6 @@ package com.github.herokotlin.messagelist.view
 import android.text.Selection
 import android.text.Spannable
 import android.text.method.BaseMovementMethod
-import android.util.Log
 import android.view.MotionEvent
 import android.widget.TextView
 
@@ -11,15 +10,7 @@ internal object LinkMovementMethod: BaseMovementMethod() {
 
     private var linkSpan: LinkSpan? = null
 
-        set(value) {
-            if (value == null) {
-                field?.pressTime = 0
-            }
-            else {
-                value.pressTime = System.currentTimeMillis()
-            }
-            field = value
-        }
+    private var longPressTask: Runnable? = null
 
     private fun getLinkSpan(widget: TextView, text: Spannable, event: MotionEvent): LinkSpan? {
 
@@ -45,25 +36,48 @@ internal object LinkMovementMethod: BaseMovementMethod() {
 
     }
 
+    private fun setLinkSpan(widget: TextView, text: Spannable, span: LinkSpan?) {
+
+        if (span != null) {
+            span.isPressed = true
+            Selection.setSelection(text, text.getSpanStart(span), text.getSpanEnd(span))
+            longPressTask = Runnable {
+                linkSpan?.let {
+                    it.onLongPress(it.link)
+                    setLinkSpan(widget, text, null)
+                }
+            }
+            widget.postDelayed(longPressTask, 500)
+        }
+        else {
+            linkSpan?.isPressed = false
+            Selection.removeSelection(text)
+            longPressTask?.let {
+                widget.removeCallbacks(it)
+                longPressTask = null
+            }
+        }
+
+        linkSpan = span
+
+    }
+
     override fun onTouchEvent(widget: TextView, text: Spannable, event: MotionEvent?): Boolean {
 
         val action = event?.actionMasked
 
         return when (action) {
             MotionEvent.ACTION_DOWN -> {
-                val span = getLinkSpan(widget, text, event)
-                if (span != null) {
-                    Selection.setSelection(text, text.getSpanStart(span), text.getSpanEnd(span))
-                }
-                linkSpan = span
+                setLinkSpan(widget, text, getLinkSpan(widget, text, event))
                 linkSpan != null
             }
 
             MotionEvent.ACTION_MOVE -> {
-                val span = getLinkSpan(widget, text, event)
-                if (linkSpan != null && span != linkSpan) {
-                    linkSpan = null
-                    Selection.removeSelection(text)
+                linkSpan?.let {
+                    val span = getLinkSpan(widget, text, event)
+                    if (span != it) {
+                        setLinkSpan(widget, text, null)
+                    }
                 }
                 linkSpan != null
             }
@@ -72,22 +86,15 @@ internal object LinkMovementMethod: BaseMovementMethod() {
                 var result = false
                 linkSpan?.let {
                     result = true
-                    if (System.currentTimeMillis() - it.pressTime > 1000) {
-                        it.onLongPress(it.link)
-                    }
-                    else {
-                        it.onClick(it.link)
-                    }
-                    linkSpan = null
-                    Selection.removeSelection(text)
+                    it.onClick(it.link)
+                    setLinkSpan(widget, text, null)
                 }
                 result
             }
 
             else -> {
-                if (linkSpan != null) {
-                    linkSpan = null
-                    Selection.removeSelection(text)
+                linkSpan?.let {
+                    setLinkSpan(widget, text, null)
                 }
                 false
             }

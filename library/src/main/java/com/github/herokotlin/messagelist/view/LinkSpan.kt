@@ -7,7 +7,7 @@ import android.view.View
 
 internal class LinkSpan(val link: String, val onClick: (String) -> Unit, val onLongPress: (String) -> Unit): ClickableSpan() {
 
-    var pressTime = 0L
+    var isPressed = false
 
     private val bgColorPressed = Color.parseColor("#15000000")
 
@@ -17,7 +17,7 @@ internal class LinkSpan(val link: String, val onClick: (String) -> Unit, val onL
 
     override fun updateDrawState(ds: TextPaint?) {
         ds?.isUnderlineText = false
-        if (pressTime > 0) {
+        if (isPressed) {
             ds?.bgColor = bgColorPressed
         }
         else {
