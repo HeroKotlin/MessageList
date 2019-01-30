@@ -2,8 +2,6 @@ package com.github.herokotlin.messagelist
 
 import android.content.Context
 import android.graphics.Rect
-import android.hardware.SensorManager
-import android.media.AudioManager
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.util.AttributeSet
@@ -81,10 +79,7 @@ class MessageList : LinearLayout {
 
     fun init(configuration: MessageListConfiguration, callback: MessageListCallback) {
 
-        val audioManager = context.getSystemService(Context.AUDIO_SERVICE) as AudioManager
-        val sensorManager = context.getSystemService(Context.SENSOR_SERVICE) as SensorManager
-
-        configuration.audioPlayer.init(audioManager, sensorManager)
+        configuration.audioPlayer.init(context)
         configuration.audioPlayer.onPlay = {
             callback.onUseAudio()
         }

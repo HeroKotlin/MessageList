@@ -1,5 +1,6 @@
 package com.github.herokotlin.messagelist.util
 
+import android.content.Context
 import android.hardware.Sensor
 import android.hardware.SensorEvent
 import android.hardware.SensorEventListener
@@ -7,6 +8,7 @@ import android.hardware.SensorManager
 import android.media.AudioManager
 import android.media.MediaPlayer
 import android.os.Build
+import android.os.PowerManager
 import java.io.IOException
 
 internal class AudioPlayer: SensorEventListener {
@@ -26,10 +28,14 @@ internal class AudioPlayer: SensorEventListener {
     // 传感器实例
     private lateinit var sensor: Sensor
 
-    fun init(audioManager: AudioManager, sensorManager: SensorManager) {
+    fun init(context: Context) {
+
+        audioManager = context.getSystemService(Context.AUDIO_SERVICE) as AudioManager
+        sensorManager = context.getSystemService(Context.SENSOR_SERVICE) as SensorManager
 
         this.audioManager = audioManager
         this.sensorManager = sensorManager
+
         this.sensor = sensorManager.getDefaultSensor(Sensor.TYPE_PROXIMITY)
 
         player.setOnPreparedListener {
@@ -172,6 +178,7 @@ internal class AudioPlayer: SensorEventListener {
                 AudioManager.FX_KEY_CLICK
             )
         }
+
 
     }
 
