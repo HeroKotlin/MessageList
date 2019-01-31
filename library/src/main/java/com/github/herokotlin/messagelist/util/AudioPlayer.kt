@@ -17,6 +17,7 @@ internal class AudioPlayer: SensorEventListener {
 
     private var id = ""
     private var url = ""
+    private var maxDuration = 0
 
     private val player = MediaPlayer()
 
@@ -30,17 +31,21 @@ internal class AudioPlayer: SensorEventListener {
     private lateinit var sensor: Sensor
 
     // 控制屏幕开关
-    private lateinit var wakeLock: PowerManager.WakeLock
+    private var wakeLock: PowerManager.WakeLock? = null
 
-    fun init(context: Context) {
+    fun init(context: Context, maxDuration: Int) {
+
+        this.maxDuration = maxDuration
 
         audioManager = context.getSystemService(Context.AUDIO_SERVICE) as AudioManager
         sensorManager = context.getSystemService(Context.SENSOR_SERVICE) as SensorManager
         powerManager = context.getSystemService(Context.POWER_SERVICE) as PowerManager
 
-        wakeLock = powerManager.newWakeLock(PowerManager.PROXIMITY_SCREEN_OFF_WAKE_LOCK, "HeroKotlin:MessageList")
-
         sensor = sensorManager.getDefaultSensor(Sensor.TYPE_PROXIMITY)
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            wakeLock = powerManager.newWakeLock(PowerManager.PROXIMITY_SCREEN_OFF_WAKE_LOCK, "HeroKotlin:MessageList")
+        }
 
         player.setOnPreparedListener {
             player.start()
@@ -80,6 +85,7 @@ internal class AudioPlayer: SensorEventListener {
             this.url = url
 
             useSpeaker()
+
             sensorManager.registerListener(this, sensor, SensorManager.SENSOR_DELAY_NORMAL)
 
         }
@@ -113,7 +119,7 @@ internal class AudioPlayer: SensorEventListener {
 
         useSpeaker()
 
-        sensorManager.unregisterListener(this)
+        sensorManager.unregisterListener(this, sensor)
 
     }
 
@@ -134,56 +140,69 @@ internal class AudioPlayer: SensorEventListener {
     }
 
     override fun onSensorChanged(event: SensorEvent?) {
+
         if (event != null) {
             // 本来 == 就可以
             // 但是某些安卓机的值比最大值还要大...
             if (event.values[0] >= sensor.maximumRange) {
-                useSpeaker()
-                wakeLock.acquire()
+                if (useSpeaker()) {
+                    wakeLock?.release()
+                }
             }
-            else {
-                useEar()
-                wakeLock.release()
+            else if (useEar()) {
+                wakeLock?.acquire(maxDuration * 1000L)
             }
         }
     }
 
-    private fun useSpeaker() {
+    private fun useSpeaker(): Boolean {
 
-        audioManager.isSpeakerphoneOn = true
+        if (!audioManager.isSpeakerphoneOn) {
+            audioManager.isSpeakerphoneOn = true
 
-        audioManager.mode = AudioManager.MODE_NORMAL
+            audioManager.mode = AudioManager.MODE_NORMAL
 
-        // 设置音量，解决有些机型切换后没声音或者声音突然变大的问题
-        audioManager.setStreamVolume(
-            AudioManager.STREAM_MUSIC,
-            audioManager.getStreamVolume(AudioManager.STREAM_MUSIC),
-            AudioManager.FX_KEY_CLICK
-        )
-
-    }
-
-    private fun useEar() {
-
-        audioManager.isSpeakerphoneOn = false
-
-        // 5.0 以上
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            audioManager.mode = AudioManager.MODE_IN_COMMUNICATION
+            // 设置音量，解决有些机型切换后没声音或者声音突然变大的问题
             audioManager.setStreamVolume(
-                AudioManager.MODE_IN_COMMUNICATION,
-                audioManager.getStreamMaxVolume(AudioManager.MODE_IN_COMMUNICATION),
-                0
-            )
-        }
-        else {
-            audioManager.mode = AudioManager.MODE_IN_CALL
-            audioManager.setStreamVolume(
-                AudioManager.STREAM_VOICE_CALL,
-                audioManager.getStreamMaxVolume(AudioManager.STREAM_VOICE_CALL),
+                AudioManager.STREAM_MUSIC,
+                audioManager.getStreamVolume(AudioManager.STREAM_MUSIC),
                 AudioManager.FX_KEY_CLICK
             )
+            return true
         }
+
+        return false
+
+    }
+
+    private fun useEar(): Boolean {
+
+        if (audioManager.isSpeakerphoneOn) {
+
+            audioManager.isSpeakerphoneOn = false
+
+            // 5.0 以上
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                audioManager.mode = AudioManager.MODE_IN_COMMUNICATION
+                audioManager.setStreamVolume(
+                    AudioManager.MODE_IN_COMMUNICATION,
+                    audioManager.getStreamMaxVolume(AudioManager.MODE_IN_COMMUNICATION),
+                    0
+                )
+            }
+            else {
+                audioManager.mode = AudioManager.MODE_IN_CALL
+                audioManager.setStreamVolume(
+                    AudioManager.STREAM_VOICE_CALL,
+                    audioManager.getStreamMaxVolume(AudioManager.STREAM_VOICE_CALL),
+                    AudioManager.FX_KEY_CLICK
+                )
+            }
+
+            return true
+        }
+
+        return false
 
     }
 

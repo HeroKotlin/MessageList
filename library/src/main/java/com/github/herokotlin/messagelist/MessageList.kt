@@ -79,7 +79,8 @@ class MessageList : LinearLayout {
 
     fun init(configuration: MessageListConfiguration, callback: MessageListCallback) {
 
-        configuration.audioPlayer.init(context)
+        configuration.audioPlayer.init(context, configuration.audioMessageMaxDuration)
+
         configuration.audioPlayer.onPlay = {
             callback.onUseAudio()
         }
