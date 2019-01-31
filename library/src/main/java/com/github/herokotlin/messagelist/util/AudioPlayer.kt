@@ -139,8 +139,7 @@ internal class AudioPlayer: SensorEventListener {
             // 但是某些安卓机的值比最大值还要大...
             if (event.values[0] >= sensor.maximumRange) {
                 useSpeaker()
-                // 随便写一个延时
-                wakeLock.acquire(100)
+                wakeLock.acquire()
             }
             else {
                 useEar()
