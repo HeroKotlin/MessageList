@@ -1,6 +1,6 @@
 package com.github.herokotlin.messagelist.model
 
-data class MenuItem (
+internal data class MenuItem (
     var text: String,
     var onClick: () -> Unit
 )

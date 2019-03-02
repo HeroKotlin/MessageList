@@ -116,32 +116,6 @@ internal class AudioMessageViewHolder(view: View, val isRightMessage: Boolean): 
         }
     }
 
-    override fun createMenuItems(): List<MenuItem> {
-        val items = mutableListOf<MenuItem>()
-        if (message.canShare) {
-            items.add(
-                MenuItem(configuration.menuItemShare) {
-                    callback.onShareClick(message)
-                }
-            )
-        }
-        if (message.canRecall) {
-            items.add(
-                MenuItem(configuration.menuItemRecall) {
-                    callback.onRecallClick(message)
-                }
-            )
-        }
-        if (message.canDelete) {
-            items.add(
-                MenuItem(configuration.menuItemDelete) {
-                    callback.onDeleteClick(message)
-                }
-            )
-        }
-        return items
-    }
-
     private fun updateContentSize(duration: Int) {
 
         val durationRatio = duration.toFloat() / configuration.audioMessageMaxDuration

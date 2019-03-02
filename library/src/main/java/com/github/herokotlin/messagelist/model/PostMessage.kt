@@ -7,6 +7,7 @@ data class PostMessage(
     override var user: User,
     override var status: MessageStatus,
     override var time: String,
+    override var canCopy: Boolean,
     override var canShare: Boolean,
     override var canRecall: Boolean,
     override var canDelete: Boolean,

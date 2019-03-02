@@ -7,6 +7,7 @@ interface Message {
     var user: User
     var status: MessageStatus
     var time: String
+    var canCopy: Boolean
     var canShare: Boolean
     var canRecall: Boolean
     var canDelete: Boolean

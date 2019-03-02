@@ -34,7 +34,11 @@ internal class MessageListAdapter(private val configuration: MessageListConfigur
 
         private const val MESSAGE_TYPE_POST_RIGHT = 12
 
-        private const val MESSAGE_TYPE_EVENT = 13
+        private const val MESSAGE_TYPE_FILE_LEFT = 13
+
+        private const val MESSAGE_TYPE_FILE_RIGHT = 14
+
+        private const val MESSAGE_TYPE_EVENT = 15
 
     }
 
@@ -96,6 +100,14 @@ internal class MessageListAdapter(private val configuration: MessageListConfigur
                 val view = LayoutInflater.from(parent.context).inflate(R.layout.message_post_right, parent, false)
                 return PostMessageViewHolder(view, true)
             }
+            MESSAGE_TYPE_FILE_LEFT -> {
+                val view = LayoutInflater.from(parent.context).inflate(R.layout.message_file_left, parent, false)
+                return FileMessageViewHolder(view, false)
+            }
+            MESSAGE_TYPE_FILE_RIGHT -> {
+                val view = LayoutInflater.from(parent.context).inflate(R.layout.message_file_right, parent, false)
+                return FileMessageViewHolder(view, true)
+            }
             else -> {
                 val view = LayoutInflater.from(parent.context).inflate(R.layout.message_event, parent, false)
                 return EventMessageViewHolder(view)
@@ -124,6 +136,9 @@ internal class MessageListAdapter(private val configuration: MessageListConfigur
             }
             is PostMessage -> {
                 return if (isRight) MESSAGE_TYPE_POST_RIGHT else MESSAGE_TYPE_POST_LEFT
+            }
+            is FileMessage -> {
+                return if (isRight) MESSAGE_TYPE_FILE_RIGHT else MESSAGE_TYPE_FILE_LEFT
             }
             else -> {
                 return MESSAGE_TYPE_EVENT

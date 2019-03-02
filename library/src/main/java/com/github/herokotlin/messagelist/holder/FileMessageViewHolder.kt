@@ -1,11 +1,14 @@
 package com.github.herokotlin.messagelist.holder
 
 import android.view.View
+import com.github.herokotlin.messagelist.enum.FileType
+import com.github.herokotlin.messagelist.model.CardMessage
+import com.github.herokotlin.messagelist.model.FileMessage
 import com.github.herokotlin.messagelist.model.MenuItem
-import com.github.herokotlin.messagelist.model.PostMessage
-import kotlinx.android.synthetic.main.message_post_left.view.*
+import kotlinx.android.synthetic.main.message_file_left.view.*
+import com.github.herokotlin.messagelist.R
 
-internal class PostMessageViewHolder(view: View, val isRightMessage: Boolean): MessageViewHolder(view) {
+internal class FileMessageViewHolder(view: View, val isRightMessage: Boolean): MessageViewHolder(view) {
 
     override fun create() {
         with (itemView) {
@@ -20,7 +23,7 @@ internal class PostMessageViewHolder(view: View, val isRightMessage: Boolean): M
                 nameView.visibility = View.GONE
             }
 
-            bubbleView.layoutParams.width = dp2px(configuration.postMessageBubbleWidth)
+            bubbleView.layoutParams.width = dp2px(configuration.fileMessageBubbleWidth)
 
             avatarView.setOnClickListener(onUserAvatarClick)
 
@@ -35,7 +38,7 @@ internal class PostMessageViewHolder(view: View, val isRightMessage: Boolean): M
 
     override fun update() {
 
-        val postMessage = message as PostMessage
+        val fileMessage = message as FileMessage
 
         with (itemView) {
 
@@ -46,12 +49,23 @@ internal class PostMessageViewHolder(view: View, val isRightMessage: Boolean): M
                 configuration.userAvatarHeight
             )
 
-            configuration.loadImage(
-                thumbnailView,
-                postMessage.thumbnail,
-                configuration.postMessageThumbnailWidth,
-                configuration.postMessageThumbnailHeight
-            )
+            val resId: Int
+            when (fileMessage.type) {
+                FileType.WORD -> {
+                    resId = R.drawable.message_list_file_word
+                }
+                FileType.EXCEL -> {
+                    resId = R.drawable.message_list_file_excel
+                }
+                FileType.PPT -> {
+                    resId = R.drawable.message_list_file_ppt
+                }
+                else -> {
+                    resId = R.drawable.message_list_file_pdf
+                }
+            }
+
+            typeView.imageResource = resId
 
             updateImageSize(avatarView,
                 configuration.userAvatarWidth,
@@ -61,21 +75,21 @@ internal class PostMessageViewHolder(view: View, val isRightMessage: Boolean): M
                 configuration.userAvatarBorderRadius,
                 configuration.userAvatarBgColor
             )
-            updateImageSize(thumbnailView,
-                configuration.postMessageThumbnailWidth,
-                configuration.postMessageThumbnailHeight,
+
+            updateImageSize(typeView,
+                configuration.fileMessageTypeWidth,
+                configuration.fileMessageTypeHeight,
                 0f, 0,
-                configuration.postMessageThumbnailBorderRadius,
-                configuration.postMessageThumbnailBgColor
+                configuration.fileMessageTypeBorderRadius,
+                configuration.fileMessageTypeBgColor
             )
 
-            nameView.text = postMessage.user.name
+            nameView.text = fileMessage.user.name
 
-            titleView.text = postMessage.title
-            descView.text = postMessage.desc
-            labelView.text = postMessage.label
+            titleView.text = fileMessage.title
+            descView.text = fileMessage.desc
 
-            showTimeView(timeView, postMessage.time)
+            showTimeView(timeView, fileMessage.time)
             showStatusView(spinnerView, failureView)
 
         }

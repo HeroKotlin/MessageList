@@ -82,30 +82,4 @@ internal class CardMessageViewHolder(view: View, val isRightMessage: Boolean): M
         }
     }
 
-    override fun createMenuItems(): List<MenuItem> {
-        val items = mutableListOf<MenuItem>()
-        if (message.canShare) {
-            items.add(
-                MenuItem(configuration.menuItemShare) {
-                    callback.onShareClick(message)
-                }
-            )
-        }
-        if (message.canRecall) {
-            items.add(
-                MenuItem(configuration.menuItemRecall) {
-                    callback.onRecallClick(message)
-                }
-            )
-        }
-        if (message.canDelete) {
-            items.add(
-                MenuItem(configuration.menuItemDelete) {
-                    callback.onDeleteClick(message)
-                }
-            )
-        }
-        return items
-    }
-
 }

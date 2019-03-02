@@ -173,6 +173,31 @@ abstract class MessageListConfiguration(val context: Context) {
     var postMessageThumbnailBgColor = 0
 
     /**
+     * 文件消息的气泡宽度
+     */
+    var fileMessageBubbleWidth = 230
+
+    /**
+     * 文件消息的类型图标宽度
+     */
+    var fileMessageTypeWidth = 40
+
+    /**
+     * 文件消息的类型图标高度
+     */
+    var fileMessageTypeHeight = 40
+
+    /**
+     * 文件消息的类型图标圆角
+     */
+    var fileMessageTypeBorderRadius = 0f
+
+    /**
+     * 文件消息的类型图标背景色
+     */
+    var fileMessageTypeBgColor = 0
+
+    /**
      * 链接颜色
      */
     var linkTextColor = Color.parseColor("#1690E5")
