@@ -30,6 +30,23 @@ internal class FileMessageViewHolder(view: View, val isRightMessage: Boolean): M
 
             failureView.setOnClickListener(onFailureClick)
 
+            updateImageSize(avatarView,
+                configuration.userAvatarWidth,
+                configuration.userAvatarHeight,
+                configuration.userAvatarBorderWidth,
+                configuration.userAvatarBorderColor,
+                configuration.userAvatarBorderRadius,
+                configuration.userAvatarBgColor
+            )
+
+            updateImageSize(typeView,
+                configuration.fileMessageTypeWidth,
+                configuration.fileMessageTypeHeight,
+                0f, 0,
+                configuration.fileMessageTypeBorderRadius,
+                configuration.fileMessageTypeBgColor
+            )
+
         }
 
     }
@@ -47,39 +64,21 @@ internal class FileMessageViewHolder(view: View, val isRightMessage: Boolean): M
                 configuration.userAvatarHeight
             )
 
-            val resId: Int
-            when (fileMessage.type) {
-                FileType.WORD -> {
-                    resId = R.drawable.message_list_file_word
+            typeView.setImageResource(
+                when (fileMessage.type) {
+                    FileType.WORD -> {
+                        R.drawable.message_list_file_word
+                    }
+                    FileType.EXCEL -> {
+                        R.drawable.message_list_file_excel
+                    }
+                    FileType.PPT -> {
+                        R.drawable.message_list_file_ppt
+                    }
+                    else -> {
+                        R.drawable.message_list_file_pdf
+                    }
                 }
-                FileType.EXCEL -> {
-                    resId = R.drawable.message_list_file_excel
-                }
-                FileType.PPT -> {
-                    resId = R.drawable.message_list_file_ppt
-                }
-                else -> {
-                    resId = R.drawable.message_list_file_pdf
-                }
-            }
-
-            typeView.setImageResource(resId)
-
-            updateImageSize(avatarView,
-                configuration.userAvatarWidth,
-                configuration.userAvatarHeight,
-                configuration.userAvatarBorderWidth,
-                configuration.userAvatarBorderColor,
-                configuration.userAvatarBorderRadius,
-                configuration.userAvatarBgColor
-            )
-
-            updateImageSize(typeView,
-                configuration.fileMessageTypeWidth,
-                configuration.fileMessageTypeHeight,
-                0f, 0,
-                configuration.fileMessageTypeBorderRadius,
-                configuration.fileMessageTypeBgColor
             )
 
             nameView.text = fileMessage.user.name

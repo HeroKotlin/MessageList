@@ -38,6 +38,15 @@ internal class TextMessageViewHolder(view: View, val isRightMessage: Boolean): M
 
             failureView.setOnClickListener(onFailureClick)
 
+            updateImageSize(avatarView,
+                configuration.userAvatarWidth,
+                configuration.userAvatarHeight,
+                configuration.userAvatarBorderWidth,
+                configuration.userAvatarBorderColor,
+                configuration.userAvatarBorderRadius,
+                configuration.userAvatarBgColor
+            )
+
         }
     }
 
@@ -50,15 +59,6 @@ internal class TextMessageViewHolder(view: View, val isRightMessage: Boolean): M
                 message.user.avatar,
                 configuration.userAvatarWidth,
                 configuration.userAvatarHeight
-            )
-
-            updateImageSize(avatarView,
-                configuration.userAvatarWidth,
-                configuration.userAvatarHeight,
-                configuration.userAvatarBorderWidth,
-                configuration.userAvatarBorderColor,
-                configuration.userAvatarBorderRadius,
-                configuration.userAvatarBgColor
             )
 
             val spannable = formatLinks(

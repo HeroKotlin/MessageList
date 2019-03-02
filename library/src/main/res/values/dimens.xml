@@ -214,6 +214,7 @@
 
 
     <dimen name="message_list_left_file_message_margin_left">5dp</dimen>
+    <dimen name="message_list_left_file_message_padding_vertical">10dp</dimen>
     <dimen name="message_list_left_file_message_type_margin_top">11dp</dimen>
     <dimen name="message_list_left_file_message_type_margin_left">16dp</dimen>
     <dimen name="message_list_left_file_message_title_margin_top">13dp</dimen>

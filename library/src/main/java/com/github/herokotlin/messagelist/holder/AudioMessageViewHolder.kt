@@ -40,6 +40,15 @@ internal class AudioMessageViewHolder(view: View, val isRightMessage: Boolean): 
 
             failureView.setOnClickListener(onFailureClick)
 
+            updateImageSize(avatarView,
+                configuration.userAvatarWidth,
+                configuration.userAvatarHeight,
+                configuration.userAvatarBorderWidth,
+                configuration.userAvatarBorderColor,
+                configuration.userAvatarBorderRadius,
+                configuration.userAvatarBgColor
+            )
+
         }
 
         configuration.audioPlayer.addListener(object : AudioPlayerCallback {
@@ -77,15 +86,6 @@ internal class AudioMessageViewHolder(view: View, val isRightMessage: Boolean): 
                 message.user.avatar,
                 configuration.userAvatarWidth,
                 configuration.userAvatarHeight
-            )
-
-            updateImageSize(avatarView,
-                configuration.userAvatarWidth,
-                configuration.userAvatarHeight,
-                configuration.userAvatarBorderWidth,
-                configuration.userAvatarBorderColor,
-                configuration.userAvatarBorderRadius,
-                configuration.userAvatarBgColor
             )
 
             nameView.text = audioMessage.user.name

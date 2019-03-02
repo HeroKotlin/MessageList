@@ -28,6 +28,23 @@ internal class CardMessageViewHolder(view: View, val isRightMessage: Boolean): M
 
             failureView.setOnClickListener(onFailureClick)
 
+            updateImageSize(avatarView,
+                configuration.userAvatarWidth,
+                configuration.userAvatarHeight,
+                configuration.userAvatarBorderWidth,
+                configuration.userAvatarBorderColor,
+                configuration.userAvatarBorderRadius,
+                configuration.userAvatarBgColor
+            )
+
+            updateImageSize(thumbnailView,
+                configuration.cardMessageThumbnailWidth,
+                configuration.cardMessageThumbnailHeight,
+                0f, 0,
+                configuration.cardMessageThumbnailBorderRadius,
+                configuration.cardMessageThumbnailBgColor
+            )
+
         }
 
     }
@@ -50,23 +67,6 @@ internal class CardMessageViewHolder(view: View, val isRightMessage: Boolean): M
                 cardMessage.thumbnail,
                 configuration.cardMessageThumbnailWidth,
                 configuration.cardMessageThumbnailHeight
-            )
-
-            updateImageSize(avatarView,
-                configuration.userAvatarWidth,
-                configuration.userAvatarHeight,
-                configuration.userAvatarBorderWidth,
-                configuration.userAvatarBorderColor,
-                configuration.userAvatarBorderRadius,
-                configuration.userAvatarBgColor
-            )
-
-            updateImageSize(thumbnailView,
-                configuration.cardMessageThumbnailWidth,
-                configuration.cardMessageThumbnailHeight,
-                0f, 0,
-                configuration.cardMessageThumbnailBorderRadius,
-                configuration.cardMessageThumbnailBgColor
             )
 
             nameView.text = cardMessage.user.name

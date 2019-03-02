@@ -27,6 +27,15 @@ internal class ImageMessageViewHolder(view: View, val isRightMessage: Boolean): 
 
             failureView.setOnClickListener(onFailureClick)
 
+            updateImageSize(avatarView,
+                configuration.userAvatarWidth,
+                configuration.userAvatarHeight,
+                configuration.userAvatarBorderWidth,
+                configuration.userAvatarBorderColor,
+                configuration.userAvatarBorderRadius,
+                configuration.userAvatarBgColor
+            )
+
         }
     }
 
@@ -39,15 +48,6 @@ internal class ImageMessageViewHolder(view: View, val isRightMessage: Boolean): 
                 message.user.avatar,
                 configuration.userAvatarWidth,
                 configuration.userAvatarHeight
-            )
-
-            updateImageSize(avatarView,
-                configuration.userAvatarWidth,
-                configuration.userAvatarHeight,
-                configuration.userAvatarBorderWidth,
-                configuration.userAvatarBorderColor,
-                configuration.userAvatarBorderRadius,
-                configuration.userAvatarBgColor
             )
 
             nameView.text = imageMessage.user.name

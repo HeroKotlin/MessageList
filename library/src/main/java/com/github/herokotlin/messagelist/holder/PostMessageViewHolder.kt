@@ -28,6 +28,23 @@ internal class PostMessageViewHolder(view: View, val isRightMessage: Boolean): M
 
             failureView.setOnClickListener(onFailureClick)
 
+            updateImageSize(avatarView,
+                configuration.userAvatarWidth,
+                configuration.userAvatarHeight,
+                configuration.userAvatarBorderWidth,
+                configuration.userAvatarBorderColor,
+                configuration.userAvatarBorderRadius,
+                configuration.userAvatarBgColor
+            )
+
+            updateImageSize(thumbnailView,
+                configuration.postMessageThumbnailWidth,
+                configuration.postMessageThumbnailHeight,
+                0f, 0,
+                configuration.postMessageThumbnailBorderRadius,
+                configuration.postMessageThumbnailBgColor
+            )
+
         }
 
     }
@@ -50,22 +67,6 @@ internal class PostMessageViewHolder(view: View, val isRightMessage: Boolean): M
                 postMessage.thumbnail,
                 configuration.postMessageThumbnailWidth,
                 configuration.postMessageThumbnailHeight
-            )
-
-            updateImageSize(avatarView,
-                configuration.userAvatarWidth,
-                configuration.userAvatarHeight,
-                configuration.userAvatarBorderWidth,
-                configuration.userAvatarBorderColor,
-                configuration.userAvatarBorderRadius,
-                configuration.userAvatarBgColor
-            )
-            updateImageSize(thumbnailView,
-                configuration.postMessageThumbnailWidth,
-                configuration.postMessageThumbnailHeight,
-                0f, 0,
-                configuration.postMessageThumbnailBorderRadius,
-                configuration.postMessageThumbnailBgColor
             )
 
             nameView.text = postMessage.user.name
