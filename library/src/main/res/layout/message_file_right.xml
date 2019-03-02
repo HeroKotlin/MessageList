@@ -48,10 +48,10 @@
         android:layout_below="@id/nameView"
         android:layout_toLeftOf="@id/avatarView"
         android:layout_marginRight="@dimen/message_list_right_file_message_margin_right"
-        android:paddingTop="0dp"
-        android:paddingBottom="0dp"
-        android:paddingLeft="0dp"
-        android:paddingRight="0dp"
+        android:paddingTop="@dimen/message_list_right_file_message_padding_vertical"
+        android:paddingBottom="@dimen/message_list_right_file_message_padding_vertical"
+        android:paddingLeft="@dimen/message_list_right_file_message_padding_horizontal"
+        android:paddingRight="@dimen/message_list_right_file_message_padding_right"
         android:background="@drawable/message_list_bubble_right_state">
 
         <com.github.herokotlin.messagelist.view.RoundImageView
@@ -59,19 +59,17 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
-            android:layout_alignParentTop="true"
-            android:layout_marginTop="@dimen/message_list_right_file_message_type_margin_top"
-            android:layout_marginLeft="@dimen/message_list_right_file_message_type_margin_left"/>
+            android:layout_alignParentTop="true"/>
 
         <TextView
             android:id="@+id/titleView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
+            android:layout_alignTop="@id/typeView"
             android:layout_toRightOf="@id/typeView"
             android:layout_marginTop="@dimen/message_list_right_file_message_title_margin_top"
             android:layout_marginLeft="@dimen/message_list_right_file_message_title_margin_left"
-            android:layout_marginRight="@dimen/message_list_right_file_message_title_margin_right"
+            android:gravity="left"
             android:maxLines="2"
             android:ellipsize="end"
             android:textSize="@dimen/message_list_right_file_message_title_text_size"
@@ -83,10 +81,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/titleView"
-            android:layout_toRightOf="@id/typeView"
+            android:layout_alignLeft="@id/titleView"
             android:layout_marginTop="@dimen/message_list_right_file_message_desc_margin_top"
-            android:layout_marginLeft="@dimen/message_list_right_file_message_desc_margin_left"
-            android:layout_marginRight="@dimen/message_list_right_file_message_desc_margin_right"
+            android:gravity="left"
             android:maxLines="1"
             android:ellipsize="end"
             android:textSize="@dimen/message_list_right_file_message_desc_text_size"
