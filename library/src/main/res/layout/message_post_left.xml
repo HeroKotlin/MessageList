@@ -60,9 +60,9 @@
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
             android:layout_alignParentTop="true"
-            android:layout_marginTop="@dimen/message_list_left_post_message_title_margin_top"
-            android:layout_marginLeft="@dimen/message_list_left_post_message_title_margin_left"
-            android:layout_marginRight="@dimen/message_list_left_post_message_title_margin_right"
+            android:layout_marginTop="@dimen/message_list_left_post_message_padding_vertical"
+            android:layout_marginLeft="@dimen/message_list_left_post_message_padding_left"
+            android:layout_marginRight="@dimen/message_list_left_post_message_padding_horizontal"
             android:maxLines="2"
             android:ellipsize="end"
             android:textSize="@dimen/message_list_left_post_message_title_text_size"
@@ -77,18 +77,17 @@
             android:layout_below="@id/titleView"
             android:layout_alignParentRight="true"
             android:layout_marginTop="@dimen/message_list_left_post_message_thumbnail_margin_top"
-            android:layout_marginRight="@dimen/message_list_left_post_message_thumbnail_margin_right"/>
+            android:layout_marginRight="@dimen/message_list_left_post_message_padding_horizontal"/>
 
         <TextView
             android:id="@+id/descView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/titleView"
-            android:layout_alignParentLeft="true"
+            android:layout_alignLeft="@id/titleView"
             android:layout_toLeftOf="@id/thumbnailView"
             android:layout_marginTop="@dimen/message_list_left_post_message_desc_margin_top"
-            android:layout_marginLeft="@dimen/message_list_left_post_message_desc_margin_left"
-            android:layout_marginRight="@dimen/message_list_left_post_message_thumbnail_margin_left"
+            android:layout_marginRight="@dimen/message_list_left_post_message_desc_margin_right"
             android:maxLines="3"
             android:ellipsize="end"
             android:textSize="@dimen/message_list_left_post_message_desc_text_size"
@@ -102,7 +101,7 @@
             android:layout_height="@dimen/message_list_post_message_divider_width"
             android:layout_below="@id/thumbnailView"
             android:layout_alignParentLeft="true"
-            android:layout_marginTop="@dimen/message_list_left_post_message_divider_margin_top"
+            android:layout_marginTop="@dimen/message_list_left_post_message_padding_vertical"
             android:layout_marginLeft="@dimen/message_list_left_post_message_divider_margin_left"
             android:layout_marginRight="@dimen/message_list_left_post_message_divider_margin_right"
             android:background="@color/message_list_left_post_message_divider_color"/>
@@ -113,11 +112,11 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/dividerView"
             android:layout_alignParentLeft="true"
-            android:layout_marginTop="@dimen/message_list_left_post_message_brand_margin_top"
-            android:layout_marginBottom="@dimen/message_list_left_post_message_brand_margin_bottom"
-            android:layout_marginLeft="@dimen/message_list_left_post_message_brand_margin_left"
-            android:textSize="@dimen/message_list_left_post_message_brand_text_size"
-            android:textColor="@color/message_list_left_post_message_brand_text_color"
+            android:layout_marginTop="@dimen/message_list_left_post_message_label_margin_top"
+            android:layout_marginBottom="@dimen/message_list_left_post_message_label_margin_bottom"
+            android:layout_marginLeft="@dimen/message_list_left_post_message_padding_left"
+            android:textSize="@dimen/message_list_left_post_message_label_text_size"
+            android:textColor="@color/message_list_left_post_message_label_text_color"
             tools:text="musicode"/>
 
     </RelativeLayout>
