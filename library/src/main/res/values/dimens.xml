@@ -118,41 +118,31 @@
     <dimen name="message_list_card_message_divider_width">1px</dimen>
 
     <dimen name="message_list_left_card_message_margin_left">5dp</dimen>
-    <dimen name="message_list_left_card_message_thumbnail_margin_top">11dp</dimen>
-    <dimen name="message_list_left_card_message_thumbnail_margin_left">16dp</dimen>
-    <dimen name="message_list_left_card_message_title_margin_top">13dp</dimen>
+    <dimen name="message_list_left_card_message_padding_vertical">10dp</dimen>
+    <dimen name="message_list_left_card_message_padding_horizontal">12dp</dimen>
+    <dimen name="message_list_left_card_message_padding_left">16dp</dimen>
+    <dimen name="message_list_left_card_message_title_margin_top">0dp</dimen>
     <dimen name="message_list_left_card_message_title_margin_left">10dp</dimen>
-    <dimen name="message_list_left_card_message_title_margin_right">10dp</dimen>
     <dimen name="message_list_left_card_message_title_text_size">14dp</dimen>
     <dimen name="message_list_left_card_message_desc_margin_top">4dp</dimen>
-    <dimen name="message_list_left_card_message_desc_margin_left">10dp</dimen>
-    <dimen name="message_list_left_card_message_desc_margin_right">10dp</dimen>
     <dimen name="message_list_left_card_message_desc_text_size">12dp</dimen>
-    <dimen name="message_list_left_card_message_divider_margin_top">10dp</dimen>
     <dimen name="message_list_left_card_message_divider_margin_left">5dp</dimen>
     <dimen name="message_list_left_card_message_divider_margin_right">0dp</dimen>
-
-    <dimen name="message_list_left_card_message_label_margin_left">16dp</dimen>
     <dimen name="message_list_left_card_message_label_margin_top">3dp</dimen>
     <dimen name="message_list_left_card_message_label_margin_bottom">4dp</dimen>
     <dimen name="message_list_left_card_message_label_text_size">10dp</dimen>
 
     <dimen name="message_list_right_card_message_margin_right">5dp</dimen>
-    <dimen name="message_list_right_card_message_thumbnail_margin_top">11dp</dimen>
-    <dimen name="message_list_right_card_message_thumbnail_margin_left">10dp</dimen>
-    <dimen name="message_list_right_card_message_title_margin_top">13dp</dimen>
+    <dimen name="message_list_right_card_message_padding_vertical">10dp</dimen>
+    <dimen name="message_list_right_card_message_padding_horizontal">12dp</dimen>
+    <dimen name="message_list_right_card_message_padding_right">16dp</dimen>
+    <dimen name="message_list_right_card_message_title_margin_top">0dp</dimen>
     <dimen name="message_list_right_card_message_title_margin_left">10dp</dimen>
-    <dimen name="message_list_right_card_message_title_margin_right">16dp</dimen>
     <dimen name="message_list_right_card_message_title_text_size">14dp</dimen>
     <dimen name="message_list_right_card_message_desc_margin_top">4dp</dimen>
-    <dimen name="message_list_right_card_message_desc_margin_left">10dp</dimen>
-    <dimen name="message_list_right_card_message_desc_margin_right">16dp</dimen>
     <dimen name="message_list_right_card_message_desc_text_size">12dp</dimen>
-    <dimen name="message_list_right_card_message_divider_margin_top">10dp</dimen>
     <dimen name="message_list_right_card_message_divider_margin_left">0dp</dimen>
     <dimen name="message_list_right_card_message_divider_margin_right">5dp</dimen>
-
-    <dimen name="message_list_right_card_message_label_margin_left">10dp</dimen>
     <dimen name="message_list_right_card_message_label_margin_top">3dp</dimen>
     <dimen name="message_list_right_card_message_label_margin_bottom">4dp</dimen>
     <dimen name="message_list_right_card_message_label_text_size">10dp</dimen>
