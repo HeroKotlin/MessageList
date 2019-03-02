@@ -2,7 +2,6 @@ package com.github.herokotlin.messagelist.holder
 
 import android.view.View
 import com.github.herokotlin.messagelist.model.CardMessage
-import com.github.herokotlin.messagelist.model.MenuItem
 import kotlinx.android.synthetic.main.message_card_left.view.*
 
 internal class CardMessageViewHolder(view: View, val isRightMessage: Boolean): MessageViewHolder(view) {

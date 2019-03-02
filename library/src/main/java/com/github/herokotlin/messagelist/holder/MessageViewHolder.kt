@@ -231,7 +231,7 @@ internal abstract class MessageViewHolder(view: View): RecyclerView.ViewHolder(v
 
     }
 
-    open fun createMenuItems(): List<MenuItem> {
+    fun createMenuItems(): List<MenuItem> {
 
         val items = mutableListOf<MenuItem>()
         if (message.canCopy) {

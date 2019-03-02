@@ -2,7 +2,6 @@ package com.github.herokotlin.messagelist.holder
 
 import android.view.View
 import com.github.herokotlin.messagelist.model.ImageMessage
-import com.github.herokotlin.messagelist.model.MenuItem
 import kotlinx.android.synthetic.main.message_image_left.view.*
 
 internal class ImageMessageViewHolder(view: View, val isRightMessage: Boolean): MessageViewHolder(view) {

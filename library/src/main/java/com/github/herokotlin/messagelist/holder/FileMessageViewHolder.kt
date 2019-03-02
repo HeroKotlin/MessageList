@@ -2,9 +2,7 @@ package com.github.herokotlin.messagelist.holder
 
 import android.view.View
 import com.github.herokotlin.messagelist.enum.FileType
-import com.github.herokotlin.messagelist.model.CardMessage
 import com.github.herokotlin.messagelist.model.FileMessage
-import com.github.herokotlin.messagelist.model.MenuItem
 import kotlinx.android.synthetic.main.message_file_left.view.*
 import com.github.herokotlin.messagelist.R
 
@@ -65,7 +63,7 @@ internal class FileMessageViewHolder(view: View, val isRightMessage: Boolean): M
                 }
             }
 
-            typeView.imageResource = resId
+            typeView.setImageResource(resId)
 
             updateImageSize(avatarView,
                 configuration.userAvatarWidth,

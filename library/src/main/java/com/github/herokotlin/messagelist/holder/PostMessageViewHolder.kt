@@ -1,7 +1,6 @@
 package com.github.herokotlin.messagelist.holder
 
 import android.view.View
-import com.github.herokotlin.messagelist.model.MenuItem
 import com.github.herokotlin.messagelist.model.PostMessage
 import kotlinx.android.synthetic.main.message_post_left.view.*
 
