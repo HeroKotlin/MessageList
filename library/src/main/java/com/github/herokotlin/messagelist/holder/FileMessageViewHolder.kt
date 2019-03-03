@@ -75,8 +75,11 @@ internal class FileMessageViewHolder(view: View, val isRightMessage: Boolean): M
                     FileType.PPT -> {
                         R.drawable.message_list_file_ppt
                     }
-                    else -> {
+                    FileType.PDF -> {
                         R.drawable.message_list_file_pdf
+                    }
+                    else -> {
+                        R.drawable.message_list_file_txt
                     }
                 }
             )

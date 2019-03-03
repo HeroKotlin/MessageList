@@ -8,6 +8,8 @@ enum class FileType {
 
     PPT,
 
-    PDF
+    PDF,
+
+    TXT
 
 }
