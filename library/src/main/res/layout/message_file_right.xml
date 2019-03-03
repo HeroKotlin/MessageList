@@ -55,7 +55,7 @@
         android:background="@drawable/message_list_bubble_right_state">
 
         <com.github.herokotlin.messagelist.view.RoundImageView
-            android:id="@+id/typeView"
+            android:id="@+id/iconView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
@@ -65,8 +65,8 @@
             android:id="@+id/titleView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignTop="@id/typeView"
-            android:layout_toRightOf="@id/typeView"
+            android:layout_alignTop="@id/iconView"
+            android:layout_toRightOf="@id/iconView"
             android:layout_marginTop="@dimen/message_list_right_file_message_title_margin_top"
             android:layout_marginLeft="@dimen/message_list_right_file_message_title_margin_left"
             android:maxLines="2"

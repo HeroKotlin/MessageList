@@ -1,7 +1,7 @@
 package com.github.herokotlin.messagelist.model
 
 import com.github.herokotlin.messagelist.enum.MessageStatus
-import com.github.herokotlin.messagelist.enum.FileType
+import com.github.herokotlin.messagelist.enum.FileIcon
 
 data class FileMessage(
     override var id: String,
@@ -12,7 +12,7 @@ data class FileMessage(
     override var canShare: Boolean,
     override var canRecall: Boolean,
     override var canDelete: Boolean,
-    var type: FileType,
+    var icon: FileIcon,
     var title: String,
     var desc: String,
     var link: String

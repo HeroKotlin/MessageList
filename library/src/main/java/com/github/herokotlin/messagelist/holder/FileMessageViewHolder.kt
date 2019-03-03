@@ -1,7 +1,7 @@
 package com.github.herokotlin.messagelist.holder
 
 import android.view.View
-import com.github.herokotlin.messagelist.enum.FileType
+import com.github.herokotlin.messagelist.enum.FileIcon
 import com.github.herokotlin.messagelist.model.FileMessage
 import kotlinx.android.synthetic.main.message_file_left.view.*
 import com.github.herokotlin.messagelist.R
@@ -39,12 +39,12 @@ internal class FileMessageViewHolder(view: View, val isRightMessage: Boolean): M
                 configuration.userAvatarBgColor
             )
 
-            updateImageSize(typeView,
-                configuration.fileMessageTypeWidth,
-                configuration.fileMessageTypeHeight,
+            updateImageSize(iconView,
+                configuration.fileMessageIconWidth,
+                configuration.fileMessageIconHeight,
                 0f, 0,
-                configuration.fileMessageTypeBorderRadius,
-                configuration.fileMessageTypeBgColor
+                configuration.fileMessageIconBorderRadius,
+                configuration.fileMessageIconBgColor
             )
 
         }
@@ -64,18 +64,18 @@ internal class FileMessageViewHolder(view: View, val isRightMessage: Boolean): M
                 configuration.userAvatarHeight
             )
 
-            typeView.setImageResource(
-                when (fileMessage.type) {
-                    FileType.WORD -> {
+            iconView.setImageResource(
+                when (fileMessage.icon) {
+                    FileIcon.WORD -> {
                         R.drawable.message_list_file_word
                     }
-                    FileType.EXCEL -> {
+                    FileIcon.EXCEL -> {
                         R.drawable.message_list_file_excel
                     }
-                    FileType.PPT -> {
+                    FileIcon.PPT -> {
                         R.drawable.message_list_file_ppt
                     }
-                    FileType.PDF -> {
+                    FileIcon.PDF -> {
                         R.drawable.message_list_file_pdf
                     }
                     else -> {

@@ -180,22 +180,22 @@ abstract class MessageListConfiguration(val context: Context) {
     /**
      * 文件消息的类型图标宽度
      */
-    var fileMessageTypeWidth = 40
+    var fileMessageIconWidth = 40
 
     /**
      * 文件消息的类型图标高度
      */
-    var fileMessageTypeHeight = 40
+    var fileMessageIconHeight = 40
 
     /**
      * 文件消息的类型图标圆角
      */
-    var fileMessageTypeBorderRadius = 0f
+    var fileMessageIconBorderRadius = 0f
 
     /**
      * 文件消息的类型图标背景色
      */
-    var fileMessageTypeBgColor = 0
+    var fileMessageIconBgColor = 0
 
     /**
      * 链接颜色
