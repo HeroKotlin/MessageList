@@ -103,7 +103,7 @@ class MessageList : LinearLayout {
     }
 
     fun scrollToBottom(animated: Boolean) {
-        val position = recyclerView.adapter.itemCount
+        val position = adapter.itemCount
         if (position > 0) {
             if (animated) {
                 recyclerView.smoothScrollToPosition(position - 1)
@@ -155,26 +155,26 @@ class MessageList : LinearLayout {
 
     inner class MessageDecoration : RecyclerView.ItemDecoration() {
 
-        override fun getItemOffsets(rect: Rect, view: View,
-                                    parent: RecyclerView, state: RecyclerView.State?) {
+        override fun getItemOffsets(outRect: Rect, view: View, parent: RecyclerView, state: RecyclerView.State) {
 
             val index = parent.getChildAdapterPosition(view)
 
             if (index == 0) {
-                rect.top = messageListPaddingVertical
+                outRect.top = messageListPaddingVertical
             }
             else {
-                rect.top = messageItemMarginTop
+                outRect.top = messageItemMarginTop
             }
 
             if (index == adapter.itemCount - 1) {
-                rect.bottom = messageListPaddingVertical
+                outRect.bottom = messageListPaddingVertical
             }
             else {
-                rect.bottom = 0
+                outRect.bottom = 0
             }
 
         }
+
     }
 
 }
