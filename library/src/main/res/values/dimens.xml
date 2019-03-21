@@ -16,8 +16,8 @@
 
     <dimen name="message_list_time_text_size">11dp</dimen>
     <dimen name="message_list_time_border_radius">5dp</dimen>
-    <dimen name="message_list_time_padding_horizontal">5dp</dimen>
-    <dimen name="message_list_time_padding_vertical">3dp</dimen>
+    <dimen name="message_list_time_padding_horizontal">4dp</dimen>
+    <dimen name="message_list_time_padding_vertical">2dp</dimen>
 
     <dimen name="message_list_left_user_name_text_size">12dp</dimen>
     <dimen name="message_list_left_user_name_margin_left">10dp</dimen>
