@@ -1,8 +1,8 @@
 package com.github.herokotlin.messagelist
 
-import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.recyclerview.widget.RecyclerView
 import com.github.herokotlin.messagelist.holder.*
 import com.github.herokotlin.messagelist.model.*
 

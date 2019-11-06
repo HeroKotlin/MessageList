@@ -1,7 +1,7 @@
 package com.github.herokotlin.messagelist.view
 
 import android.graphics.drawable.ColorDrawable
-import android.support.v4.widget.PopupWindowCompat
+import androidx.core.widget.PopupWindowCompat
 import android.view.Gravity
 import android.view.View
 import android.view.ViewGroup

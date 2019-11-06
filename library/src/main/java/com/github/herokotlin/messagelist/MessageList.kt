@@ -2,13 +2,13 @@ package com.github.herokotlin.messagelist
 
 import android.content.Context
 import android.graphics.Rect
-import android.support.v7.widget.LinearLayoutManager
-import android.support.v7.widget.RecyclerView
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.view.MotionEvent
 import android.view.View
 import android.widget.LinearLayout
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.github.herokotlin.messagelist.model.Message
 import kotlinx.android.synthetic.main.message_list.view.*
 
