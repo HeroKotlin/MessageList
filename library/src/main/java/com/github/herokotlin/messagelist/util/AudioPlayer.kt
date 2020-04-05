@@ -28,7 +28,7 @@ internal class AudioPlayer: SensorEventListener {
     private lateinit var powerManager: PowerManager
 
     // 传感器实例
-    private lateinit var sensor: Sensor
+    private var sensor: Sensor? = null
 
     // 控制屏幕开关
     private var wakeLock: PowerManager.WakeLock? = null
@@ -86,7 +86,9 @@ internal class AudioPlayer: SensorEventListener {
 
             useSpeaker()
 
-            sensorManager.registerListener(this, sensor, SensorManager.SENSOR_DELAY_NORMAL)
+            sensor?.let {
+                sensorManager.registerListener(this, it, SensorManager.SENSOR_DELAY_NORMAL)
+            }
 
         }
         catch (e: IllegalArgumentException) {
@@ -119,7 +121,9 @@ internal class AudioPlayer: SensorEventListener {
 
         useSpeaker()
 
-        sensorManager.unregisterListener(this, sensor)
+        sensor?.let {
+            sensorManager.unregisterListener(this, it)
+        }
 
     }
 
@@ -140,11 +144,10 @@ internal class AudioPlayer: SensorEventListener {
     }
 
     override fun onSensorChanged(event: SensorEvent?) {
-
         if (event != null) {
             // 本来 == 就可以
             // 但是某些安卓机的值比最大值还要大...
-            if (event.values[0] >= sensor.maximumRange) {
+            if (event.values[0] >= event.sensor.maximumRange) {
                 if (useSpeaker()) {
                     wakeLock?.release()
                 }
