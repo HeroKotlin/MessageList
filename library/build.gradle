@@ -34,11 +34,11 @@ dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 
     implementation "androidx.appcompat:appcompat:${safeExtGet('androidxVersion', '1.1.0')}"
-    implementation "androidx.recyclerview:recyclerview:1.0.0"
+    implementation "androidx.recyclerview:recyclerview:${safeExtGet('androidxRecyclerviewVersion', '1.1.0')}"
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:${safeExtGet('kotlinVersion', '1.3.40')}"
-    implementation 'com.github.herokotlin:Permission:0.0.5'
+    implementation "com.github.ybq:Android-SpinKit:${safeExtGet('spinkitVersion', '1.2.0')}"
 
-    implementation 'com.github.ybq:Android-SpinKit:1.2.0'
+    implementation 'com.github.herokotlin:Permission:0.0.5'
 
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test:runner:1.2.0'
